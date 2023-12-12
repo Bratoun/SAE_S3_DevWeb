@@ -1,8 +1,7 @@
-.idea
+/.metadata/
+Bin
+.classpath
+.project
+.settings
 .DS_Store
-
-composer.phar
-vendor
-*.cache
-
-reports
+/bin/
