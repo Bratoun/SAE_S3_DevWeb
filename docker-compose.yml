@@ -13,9 +13,9 @@ services:
     image: mysql:8
     container_name: SAE_S3_DevWeb-db
     environment:
-      - MYSQL_USER=root
-      - MYSQL_DATABASE=Festiplan
-      - MYSQL_PASSWORD=root
+      - MYSQL_RANDOM_ROOT_PASSWORD
+      - MYSQL_DATABASE=sae_s3_devweb-1 
+      - MYSQL_PASSWORD=sae_s3_devweb-1 
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - "65432:3306"
