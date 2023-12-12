@@ -21,6 +21,10 @@ Product Owner : Nathan Girardin
 Scrum Master : IBRAHIME Rayan
 Equipe de developpement : Mateo Faussurier, Nathan Girardin, Rayan Ibrahime, Alix Brugier
 
+commande docker
+$ docker-compose up -d 
+$ docker-compose exec Festiplan composer update
+
 ## Liens : 
 Lien github : https://github.com/Bratoun/SAE_S3_DevWeb.git
 

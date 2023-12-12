@@ -1,7 +1,8 @@
-/.metadata/
-Bin
-.classpath
-.project
-.settings
+.idea
 .DS_Store
-/bin/
+
+composer.phar
+vendor
+*.cache
+
+reports
