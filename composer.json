@@ -1,5 +1,5 @@
 {
-  "name": "festiplan/Festiplan",
+  "name": "festiplan/SAE_S3_DevWeb",
   "config": {
     "vendor-dir": "festiplan/lib/vendor"
   },
@@ -11,8 +11,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "controllers\\": "festiplan/controleurs",
-      "services\\": "festiplan/modeles",
+      "controleurs\\": "festiplan/controleurs",
+      "modeles\\": "festiplan/modeles",
       "application\\": "festiplan/application"
     }
   },
