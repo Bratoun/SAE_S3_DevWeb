@@ -1,0 +1,87 @@
+body {
+    background-color: #4D4D4D;
+    color: #FFF;
+}
+
+input.form-control {
+    height: 50px; /* Ajustez la hauteur des champs de saisie */
+    line-height: 50px; /* Ajustez la hauteur de ligne pour centrer le texte verticalement */
+    margin-bottom: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cadreConnexion {
+    width: 450px;
+    height: 550px;
+    background: #FFF;
+    padding: 20px;
+    text-align: center;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.btn-secondary {
+    background: #FFF;
+}
+
+.texteCentre {
+    text-align: center;
+}
+
+.texteGauche {
+    text-align: left;
+}
+
+.ligneEnBas {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Change the background color of text input fields */
+.form-control {
+    background-color: #D2D2D2;
+}
+
+/* Increase the size of the submit button */
+.btn-primary {
+    border-radius: 25px;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+/* Decrease the size of the FontAwesome icon inside the submit button */
+.btn-primary .fas {
+    font-size: 1.5em; /* Ajustez la taille selon vos besoins */
+}
+
+.petit {
+    font-size: 80%;
+}
+
+.grand {
+    font-size: 250%;
+    font-weight: bolder;
+}
+
+:placeholder-shown {
+    font-weight: bold;
+}
+
+label {
+    font-weight: bold;
+    opacity: 0.5;
+}
