@@ -4,6 +4,7 @@ namespace application;
 
 use controleurs\HomeController;
 use controleurs\AccueilControleur;
+use controleurs\InscriptionControleur;
 use yasmf\ComponentFactory;
 use yasmf\NoControllerAvailableForNameException;
 use yasmf\NoServiceAvailableForNameException;
@@ -14,6 +15,7 @@ class DefaultComponentFactory implements ComponentFactory
         return match ($controller_name) {
             "Home" => $this->buildHomeController(),
             "Accueil" => $this->buildAccueilController(),
+            "Inscription" => $this->buildInscriptionController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };
     }
@@ -31,5 +33,10 @@ class DefaultComponentFactory implements ComponentFactory
     private function buildAccueilController(): AccueilControleur
     {
         return new AccueilControleur();
+    }
+
+    private function buildInscriptionController(): InscriptionControleur
+    {
+        return new InscriptionControleur();
     }
 }
