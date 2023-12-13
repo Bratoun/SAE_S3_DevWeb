@@ -9,14 +9,11 @@
 </head>
 <!--En tête-->
 <header>
-        <div class="header"><i class="fa-solid fa-user"></i></div>
+    <div class="header"><i class="fa-solid fa-user"></i></div>
 </header>
 <body id="body-blanc">
-
-    
-    
-
-    <button type="submit" class="btn_creer_spectacle">Créer un spectacle</button>
-    <button type="submit" class="btn_creer_festival">Créer un festival</button>  
+    <h1> Liste des festivals/spectacles </h1>
+    <a href="/festiplan?controller=CreerSpectacle"><button type="submit" class="btn-creer-spectacle">Créer un spectacle</button></a>
+    <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn-creer-festival">Créer un festival</button></a>
 </body>
 </html>
