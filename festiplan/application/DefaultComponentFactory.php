@@ -16,14 +16,6 @@ class DefaultComponentFactory implements ComponentFactory
         };
     }
 
-    private function buildUsersService(): UsersService
-    {
-        if ($this->usersService == null) {
-            $this->usersService = new UsersService();
-        }
-        return $this->usersService;
-    }
-
     public function buildServiceByName(string $service_name): mixed
     {
         throw new NoServiceAvailableForNameException($service_name);
@@ -31,6 +23,6 @@ class DefaultComponentFactory implements ComponentFactory
 
     private function buildHomeController(): HomeController
     {
-        return new HomeController($this->buildUsersService());
+        return new HomeController();
     }
 }
