@@ -30,7 +30,11 @@
                 </div>
                 <br><br>
             </form>
+<<<<<<< HEAD
             <form action="index.php" method="post">
+=======
+            <form action="vueInscription.php" method="post">
+>>>>>>> 0b1de11f5f59c08e654497175f62afea2e3db5ba
                 <p class="texteCentre petit">Vous n'avez pas de compte ? <button class="btn petit">CREER UN COMPTE</button></p>
             </form>
         </div>
