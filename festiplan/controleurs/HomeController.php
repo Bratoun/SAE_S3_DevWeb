@@ -12,6 +12,6 @@ class HomeController {
     }
 
     public function index() {
-        return new View("vue/connexion");
+        return new View("vues/vueConnexion");
     }
 }
