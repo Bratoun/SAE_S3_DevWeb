@@ -10,6 +10,8 @@ class CreationCompteControleur
 
     public function __construct() {
 
+    }
+    
     public function index($pdo)
     {
         return new View("vues/vueInscription");
