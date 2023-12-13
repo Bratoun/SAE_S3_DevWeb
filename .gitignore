@@ -5,3 +5,4 @@ Bin
 .settings
 .DS_Store
 /bin/
+vendor

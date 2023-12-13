@@ -23,7 +23,7 @@ Equipe de developpement : Mateo Faussurier, Nathan Girardin, Rayan Ibrahime, Ali
 
 commande docker
 $ docker-compose up -d 
-$ docker-compose exec Festiplan composer update
+$ docker-compose exec SAE_S3_DevWeb composer update
 
 ## Liens : 
 Lien github : https://github.com/Bratoun/SAE_S3_DevWeb.git
