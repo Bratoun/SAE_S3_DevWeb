@@ -32,10 +32,14 @@
             </form>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <form action="index.php" method="post">
 =======
             <form action="vueInscription.php" method="post">
 >>>>>>> 0b1de11f5f59c08e654497175f62afea2e3db5ba
+=======
+            <form action="vueInscription.php" method="post">
+>>>>>>> 3c3b2ec96bf95963ef3e087fb30cd7754791d0ae
 =======
             <form action="vueInscription.php" method="post">
 >>>>>>> 3c3b2ec96bf95963ef3e087fb30cd7754791d0ae
