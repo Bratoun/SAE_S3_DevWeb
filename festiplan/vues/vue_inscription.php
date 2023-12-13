@@ -14,13 +14,13 @@
             <h2 class="grand">Inscription</h2>
             <br><br>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="NOM" required>
+                    <input name="nom" type="text" class="form-control" placeholder="NOM" required>
                 </div>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="PRENOM" required>
+                    <input name="prenom" type="text" class="form-control" placeholder="PRENOM" required>
                 </div>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="ADRESSE MAIL" required>
+                    <input name="email" type="text" class="form-control" placeholder="ADRESSE MAIL" required>
                 </div>
                 <br>
                 <div class="texteCentre">

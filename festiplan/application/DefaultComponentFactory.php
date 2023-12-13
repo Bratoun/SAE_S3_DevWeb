@@ -16,13 +16,18 @@ class DefaultComponentFactory implements ComponentFactory
             "Home" => $this->buildHomeController(),
             "Accueil" => $this->buildAccueilController(),
             "Inscription" => $this->buildInscriptionController(),
+            "CreationCompte" => $this->buildCreationCompteController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };
     }
 
     public function buildServiceByName(string $service_name): mixed
     {
-        throw new NoServiceAvailableForNameException($service_name);
+        return match ($service_name){
+            "User" => $this->buildUserModele(),
+            default => throw new NoServiceAvailableForNameException($service_name)
+        };
+        
     }
 
     private function buildHomeController(): HomeController
@@ -38,5 +43,18 @@ class DefaultComponentFactory implements ComponentFactory
     private function buildInscriptionController(): InscriptionControleur
     {
         return new InscriptionControleur();
+    }
+
+    private function buildCreationCompteController() : CreationCompteControleur
+    {
+        return new CreationCompteControleur($this->buildServiceByName("User"));
+    }
+
+    private function buildUserModele() : UserModele
+    {
+        if ($this->userModele == null) {
+            $this->userModele = new UserModele();
+        }
+        return $this->userModele;
     }
 }
