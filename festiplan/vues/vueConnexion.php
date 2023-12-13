@@ -10,14 +10,14 @@
 <body>
     <div class="container">
         <div class="cadreConnexion">
-            <form>
+            <form action="index.php" method="post">
             <h2 class="grand">Connexion</h2>
-            <br><br>
+                <br><br>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR">
+                    <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR" required>
                 </div>
                 <div class="form-group texteGauche">
-                    <input type="password" class="form-control" placeholder="MOT DE PASSE">
+                    <input type="password" class="form-control" placeholder="MOT DE PASSE" required>
                 </div>
                 <br>
                 <div class="form-check texteGauche">
@@ -29,7 +29,9 @@
                     <button type="submit" class="btn btn-primary"><span class="fas fa-arrow-right"></span></button>
                 </div>
                 <br><br>
-            <p class="texteCentre petit">Vous n'avez pas de compte ? <button href="pages/inscription.php" class="btn petit">CREER UN COMPTE</button></p>
+            </form>
+            <form action="index.php" method="post">
+                <p class="texteCentre petit">Vous n'avez pas de compte ? <button class="btn petit">CREER UN COMPTE</button></p>
             </form>
         </div>
     </div>

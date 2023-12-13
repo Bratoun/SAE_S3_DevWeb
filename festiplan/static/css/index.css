@@ -89,3 +89,28 @@ label {
     font-weight: bold;
     opacity: 0.5;
 }
+
+
+.btn_creer_spectacle {
+    width: 400px;
+    height: 57px;
+    flex-shrink: 0;
+    background-color: #A1FC76;
+    color: #000;
+}
+.btn_creer_festival {
+    width: 400px;
+    height: 57px;
+    flex-shrink: 0;
+    background-color: #4EB2F9;
+    color: #FFFFFF;
+}
+
+.header {
+    width: 100%; 
+    height: 100%; 
+    background-color: #4D4D4D
+}
+
+
+

@@ -5,7 +5,7 @@ namespace controleurs;
 use modeles\UserModele;
 use yasmf\View;
 
-class ConnexionControleur
+class ConnexionControleurs
 {
     private UserModele $userModele;
 
@@ -15,6 +15,7 @@ class ConnexionControleur
 
     public function index($pdo)
     {
-        // $searchStmt = $this->userModele->findUserByLoginAndPWD($pdo)
+
+        // $searchStmt = $this->userModele->trouverCompteUtilisateurParLoginMdp($pdo);
     }
 }

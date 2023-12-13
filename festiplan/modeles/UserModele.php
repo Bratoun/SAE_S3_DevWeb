@@ -15,11 +15,33 @@ class ConnexionModele
      * @return searchStmt les données trouvées par rapport au login et mot de
      * passe.
      */
-    public function findUserByLoginAndPWD(PDO $pdo, $login, $pwd)
+    public function trouverCompteUtilisateurParLoginMdp(PDO $pdo, $login, $pwd)
     {
-        $sql = "SELECT * FROM Utilisateur WHERE pseudo = :login AND mdp = :pwd";
+        $sql = "SELECT * FROM Utilisateur WHERE login pseudo = ? AND mdp = ?";
         $searchStmt = $pdo->prepare($sql);
-        $searchStmt->execute([$codeCategorie]);
+        $searchStmt->execute([$login, $mdp]);
         return $searchStmt;
+    }
+
+    /**
+    * @param pdo
+    * @param login le login choisi par l'utilisateur, doit être unique dans la
+    * base de données.
+    * @param mdp mot de passe entré par l'utilisateur.
+    * @param nom nom entré par l'utilisateur.
+    * @param prenom prenom entré par l'utilisateur.
+    * @param email mail entré par l'utilisateur, doit être unique dans la base
+    * de données.
+    * Insert un utilisateur dans la base de données afin de créer un compte.
+    */
+    public function creerCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom, $email)
+    {
+        $sql = "START TRANSACTION;
+        INSERT INTO Utilisateur (login, mdp, nom, prenom, mail)
+        SELECT :login, :mdp, :nom, :prenom, :email
+        WHERE NOT EXISTS (SELECT 1 FROM Utilisateur WHERE login = :login OR mail = :email);
+        COMMIT;";
+        $serachStmt = $pdo->prepare($sql);
+        $searchStmt->execute(["login"]);
     }
 }
