@@ -29,7 +29,9 @@
                     <button type="submit" class="btn btn-primary"><span class="fas fa-arrow-right"></span></button>
                 </div>
                 <br><br>
-            <p class="texteCentre petit">Vous n'avez pas de compte ? <button href="pages/inscription.php" class="btn petit">CREER UN COMPTE</button></p>
+            </form>
+            <form action="vueInscription.php" method="post">
+                <p class="texteCentre petit">Vous n'avez pas de compte ? <button class="btn petit">CREER UN COMPTE</button></p>
             </form>
         </div>
     </div>
