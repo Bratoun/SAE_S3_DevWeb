@@ -14,10 +14,10 @@
             <h2 class="grand">Connexion</h2>
             <br><br>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR">
+                    <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR" required>
                 </div>
                 <div class="form-group texteGauche">
-                    <input type="password" class="form-control" placeholder="MOT DE PASSE">
+                    <input type="password" class="form-control" placeholder="MOT DE PASSE" required>
                 </div>
                 <br>
                 <div class="form-check texteGauche">
