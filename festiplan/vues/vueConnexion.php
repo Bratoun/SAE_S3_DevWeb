@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="cadreConnexion">
-            <form action="index.php" method="post">
+            <form action="/festiplan?controller=Accueil" method="post">
             <h2 class="grand">Connexion</h2>
                 <br><br>
                 <div class="form-group texteGauche">
@@ -30,9 +30,7 @@
                 </div>
                 <br><br>
             </form>
-            <form action="index.php" method="post">
-                <p class="texteCentre petit">Vous n'avez pas de compte ? <button class="btn petit">CREER UN COMPTE</button></p>
-            </form>
+            <a href="/mezabi?controller=Articles">Voir les articles</a></td>
         </div>
     </div>
 </body>

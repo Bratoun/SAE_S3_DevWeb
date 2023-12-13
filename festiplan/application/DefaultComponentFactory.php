@@ -28,8 +28,8 @@ class DefaultComponentFactory implements ComponentFactory
         return new HomeController();
     }
 
-    private function buildAccueilController(): AccueilController
+    private function buildAccueilController(): AccueilControleur
     {
-        return new AccueilController();
+        return new AccueilControleur();
     }
 }
