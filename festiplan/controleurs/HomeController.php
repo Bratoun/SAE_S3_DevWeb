@@ -3,7 +3,7 @@
 namespace controleurs;
 
 use PDO;
-use yamsf\View;
+use yasmf\View;
 
 class HomeController {
 

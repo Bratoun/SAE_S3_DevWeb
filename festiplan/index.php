@@ -7,11 +7,11 @@ use yasmf\DataSource;
 use yasmf\Router;
 
 $dataSource = new DataSource(
-    $host = 'SAE_S3_DevWeb-db',
+    $host = 'SAE_S3_DevWeb_db',
     $port = '3306', 
-    $db = 'sae_s3_devweb-1', 
-    $user = 'sae_s3_devweb-1', 
-    $pass = 'sae_s3_devweb-1', 
+    $db = 'Festiplan', 
+    $user = 'users', 
+    $pass = 'sae', 
     $charset = 'utf8mb4'
 );
 
