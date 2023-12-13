@@ -5,7 +5,7 @@ namespace controleurs;
 use PDO;
 use yasmf\View;
 
-class AccueilController {
+class AccueilControleur {
 
     public function __construct() {
     }
