@@ -15,7 +15,7 @@ class ConnexionModele
      * @return searchStmt les données trouvées par rapport au login et mot de
      * passe.
      */
-    public function trouverCompteUtilisateurParLoginMdp(PDO $pdo, $login, $pwd)
+    public function trouverCompteUtilisateurParLoginMdp(PDO $pdo, $login, $mdp)
     {
         $sql = "SELECT * FROM Utilisateur WHERE login = ? AND mdp = ?";
         $searchStmt = $pdo->prepare($sql);
