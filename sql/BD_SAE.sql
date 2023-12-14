@@ -8,7 +8,8 @@ CREATE TABLE Utilisateur (
     idUtilisateur INT PRIMARY KEY AUTO_INCREMENT,
     prenom VARCHAR(30) NOT NULL,
     nom VARCHAR(35) NOT NULL,
-    mail VARCHAR(50) NOT NULL,
+    mail VARCHAR(50) NOT NULL UNIQUE,
+    login VARCHAR(35) NOT NULL UNIQUE,
     mdp VARCHAR(30) NOT NULL
 );
 
@@ -153,3 +154,11 @@ ALTER TABLE Grij
 ADD FOREIGN KEY (idFestival) REFERENCES Festival(idFestival);
 ALTER TABLE Grij
 ADD FOREIGN KEY (idJour) REFERENCES Jour(idJour);
+
+CREATE TABLE SpectaclesJour (
+    idJour INT(11) NOT NULL,
+    idSpectacle INT(11) NOT NULL,
+    PRIMARY KEY (idJour, idSpectacle),
+    FOREIGN KEY (idJour) REFERENCES Jour(idJour),
+    FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle)
+);

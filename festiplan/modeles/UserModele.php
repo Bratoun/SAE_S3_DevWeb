@@ -17,7 +17,7 @@ class ConnexionModele
      */
     public function trouverCompteUtilisateurParLoginMdp(PDO $pdo, $login, $pwd)
     {
-        $sql = "SELECT * FROM Utilisateur WHERE login pseudo = ? AND mdp = ?";
+        $sql = "SELECT * FROM Utilisateur WHERE login = ? AND mdp = ?";
         $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute([$login, $mdp]);
         return $searchStmt;
@@ -42,6 +42,6 @@ class ConnexionModele
         WHERE NOT EXISTS (SELECT 1 FROM Utilisateur WHERE login = :login OR mail = :email);
         COMMIT;";
         $serachStmt = $pdo->prepare($sql);
-        $searchStmt->execute(["login"]);
+        $searchStmt->execute(["login"=>$login, "mdp"=>$mdp, "nom"=>$nom,"prenom"=>$prenom,"email"=>$email]);
     }
 }

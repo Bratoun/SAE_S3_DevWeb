@@ -2,13 +2,17 @@
 
 namespace controleurs;
 
-use modeles\UserModele;
+use PDO;
 use yasmf\View;
 
 class InscriptionControleur
 {
-    public function index()
-    {
-        
+
+    public function __construct() {
+
+    }
+
+    public function index() {
+        return new View("vues/vue_inscription");
     }
 }

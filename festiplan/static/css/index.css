@@ -19,7 +19,7 @@ input.form-control {
 .cadreConnexion {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 500px;
-    height: 575px;
+    height: 600px;
     background: #FFF;
     padding: 20px;
     text-align: center;
@@ -27,13 +27,9 @@ input.form-control {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 70px;
+    padding-top: 30px;
     padding-right: 70px;
     padding-left: 70px;
-}
-
-.btn-secondary {
-    background: #FFF;
 }
 
 .texteCentre {
@@ -123,4 +119,8 @@ label {
     flex-shrink: 0;
     background-color: #D9D9D9;
     color: #000000;
+}
+img {
+    width: 80px; 
+    height: 40px;  
 }

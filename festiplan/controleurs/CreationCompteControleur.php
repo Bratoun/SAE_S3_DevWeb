@@ -4,16 +4,28 @@ namespace controleurs;
 
 use modeles\UserModele;
 use yasmf\View;
+use yasmf\HttpHelper;
 
 class CreationCompteControleur
 {
+    private UserModele $userModele;
 
-    public function __construct() {
-
+    public function __construct(UserModele $userModele) {
+        $this->userModele = $userModele;
     }
     
-    public function index($pdo)
+    public function index(PDO $pdo)
     {
-        return new View("vues/vueInscription");
+        // $login = HttpHelper::getParam('login');
+        // $mdp = HttpHelper::getParam('mdp');
+        $nom = HttpHelper::getParam('nom');
+        $prenom = HttpHelper::getParam('prenom');
+        $email = HttpHelper::getParam('email');
+        try {
+            // $searchStmt = creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
+            return new View("vues/vue_connexion");
+        } catch (PDOException $e) {
+            return new View("vues/vue_inscription");
+        }
     }
 }
