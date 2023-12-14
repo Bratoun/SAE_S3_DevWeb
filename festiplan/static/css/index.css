@@ -98,7 +98,7 @@ label {
     background-color: #A1FC76;
     color: #000;
 }
-.btn-creer-festival {
+.btn-bleu {
     width: 400px;
     height: 57px;
     flex-shrink: 0;
@@ -117,4 +117,10 @@ label {
     color: #000;
 }
 
-
+.btn-gris {
+    width: 163px;
+    height: 54px;
+    flex-shrink: 0;
+    background-color: #D9D9D9;
+    color: #000000;
+}

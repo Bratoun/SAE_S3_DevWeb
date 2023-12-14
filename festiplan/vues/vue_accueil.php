@@ -14,6 +14,6 @@
 <body id="body-blanc">
     <h1> Liste des festivals/spectacles </h1>
     <a href="/festiplan?controller=CreerSpectacle"><button type="submit" class="btn-creer-spectacle">Créer un spectacle</button></a>
-    <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn-creer-festival">Créer un festival</button></a>
+    <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn-bleu">Créer un festival</button></a>
 </body>
 </html>
