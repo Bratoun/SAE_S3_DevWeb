@@ -3,6 +3,7 @@
 namespace controleurs;
 
 use modeles\UserModele;
+use yasmf\HttpHelper;
 use yasmf\View;
 
 class ConnexionControleurs
@@ -13,9 +14,11 @@ class ConnexionControleurs
         $this->userModele = $userModele;
     }
 
-    public function index($pdo, $login, $pwd)
+    public function index($pdo)
     {
-        $searchStmt = $this->userModele->trouverCompteUtilisateurParLoginMdp($pdo);
+    $login = HttpHelper::getParam('login');
+    $mdp = HttpHelper::getParam('mdp');
+        $searchStmt = $this->userModele->trouverCompteUtilisateurParLoginMdp($pdo, $login, $mdp);
         $user = $searchStmt->fetch();
         if (!$user){
             return new View("vues/vue_connexion");

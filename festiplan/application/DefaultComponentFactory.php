@@ -7,12 +7,16 @@ use controleurs\CreerFestivalControleur;
 use controleurs\CreerSpectacleControleur;
 use controleurs\AccueilControleur;
 use controleurs\InscriptionControleur;
+use modeles\UserModele;
 use yasmf\ComponentFactory;
 use yasmf\NoControllerAvailableForNameException;
 use yasmf\NoServiceAvailableForNameException;
 
 class DefaultComponentFactory implements ComponentFactory 
 {
+
+    private ?UserModele $userModele = null;
+
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
             "Home" => $this->buildHomeController(),
