@@ -11,7 +11,7 @@ use yasmf\ComponentFactory;
 use yasmf\NoControllerAvailableForNameException;
 use yasmf\NoServiceAvailableForNameException;
 
-class DefaultComponentFactory implements ComponentFactory
+class DefaultComponentFactory implements ComponentFactory 
 {
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
@@ -21,6 +21,7 @@ class DefaultComponentFactory implements ComponentFactory
             "CreerFestival" => $this->buildCreerFestivalController(),
             "Inscription" => $this->buildInscriptionController(),
             "CreationCompte" => $this->buildCreationCompteController(),
+            "Connexion" => $this->buildConnexionController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };
     }
@@ -31,7 +32,6 @@ class DefaultComponentFactory implements ComponentFactory
             "User" => $this->buildUserModele(),
             default => throw new NoServiceAvailableForNameException($service_name)
         };
-        
     }
 
     private function buildHomeController(): HomeController
@@ -52,6 +52,7 @@ class DefaultComponentFactory implements ComponentFactory
     private function buildCreerFestivalController(): CreerFestivalControleur
     {
         return new CreerFestivalControleur();
+    }
 
     private function buildInscriptionController(): InscriptionControleur
     {
@@ -61,6 +62,11 @@ class DefaultComponentFactory implements ComponentFactory
     private function buildCreationCompteController() : CreationCompteControleur
     {
         return new CreationCompteControleur($this->buildServiceByName("User"));
+    }
+
+    private function buildConnexionController() : buildConnexionControleur
+    {
+        return new ConnexionControleur($this->buildServiceByName("User"));
     }
 
     private function buildUserModele() : UserModele
