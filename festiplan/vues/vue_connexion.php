@@ -11,13 +11,25 @@
     <div class="container">
         <div class="cadreConnexion">
             <form action="/festiplan?controller=Accueil" method="post">
-            <h2 class="grand">Connexion</h2>
+                <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
+                <br><br>
+                <h2 class="grand">Connexion</h2>
                 <br><br>
                 <div class="form-group texteGauche">
-                    <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR" required>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="NOM D'UTILISATEUR" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><span class="fas fa-solid fa-user"></span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group texteGauche">
-                    <input type="password" class="form-control" placeholder="MOT DE PASSE" required>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="MOT DE PASSE" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><span class="fas fa-solid fa-lock"></span></span>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="form-check texteGauche">

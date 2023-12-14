@@ -16,5 +16,11 @@ class ConnexionControleurs
     public function index($pdo, $login, $pwd)
     {
         $searchStmt = $this->userModele->trouverCompteUtilisateurParLoginMdp($pdo);
+        $user = $searchStmt->fetch();
+        if (!$user){
+            return new View("vues/vue_connexion");
+        } else {
+            return new View("vues/vue_accueil");
+        }
     }
 }

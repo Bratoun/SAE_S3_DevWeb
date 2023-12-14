@@ -16,11 +16,11 @@ class CreationCompteControleur
     
     public function index(PDO $pdo)
     {
-        // $login = HttpHelper::getParam();
-        // $mdp = HttpHelper::getParam();
+        // $login = HttpHelper::getParam('login');
+        // $mdp = HttpHelper::getParam('mdp');
         $nom = HttpHelper::getParam('nom');
         $prenom = HttpHelper::getParam('prenom');
-        $email = HttpHelper::getParam('email');        
+        $email = HttpHelper::getParam('email');
         try {
             // $searchStmt = creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
             return new View("vues/vue_connexion");
