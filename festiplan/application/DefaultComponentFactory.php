@@ -6,8 +6,6 @@ use controleurs\HomeController;
 use controleurs\CreerFestivalControleur;
 use controleurs\CreerSpectacleControleur;
 use controleurs\AccueilControleur;
-use controleurs\InscriptionControleur;
-use controleurs\ConnexionControleur;
 use controleurs\UtilisateurCompteControleur;
 use modeles\UserModele;
 use modeles\SpectacleModele;
@@ -31,9 +29,6 @@ class DefaultComponentFactory implements ComponentFactory
             "Accueil" => $this->buildAccueilController(),
             "CreerSpectacle" => $this->buildCreerSpectacleController(),
             "CreerFestival" => $this->buildCreerFestivalController(),
-            // "Inscription" => $this->buildInscriptionController(),
-            // "CreationCompte" => $this->buildCreationCompteController(),
-            // "Connexion" => $this->buildConnexionController(),
             "UtilisateurCompte" => $this->buildUtilisateurCompteController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };

@@ -13,25 +13,29 @@
 </header>
 
 <body id="body-blanc">
-    <form action="/festiplan?controller=Accueil" method="post">
+    <form action="index.php" method="post">
+
+        <input type="hidden" name="controller" value="CreerFestival">
+        <input type="hidden" name="action" value="nouveauFestival">
+
         <div class="form-group texteGauche">
-            Nom :<input type="text"  placeholder="(max 35 caractére)" required>
+            Nom :<input name="nom" type="text"  placeholder="(max 35 caractére)" required>
         </div>
         <div class="form-group texteGauche">
-            Description :<input type="textarea"  placeholder="(max 1000 caractére)" required>
+            Description :<input name="description" type="textarea"  placeholder="(max 1000 caractére)" required>
         </div>
         <div class="form-group texteGauche">
-            Date de début :<input type="date"  required>
+            Date de début :<input name="dateDebut" type="date"  required>
         </div>
         <div class="form-group texteGauche">
-            Date de fin: <input type="date"  required>
+            Date de fin: <input name="dateFin" type="date"  required>
         </div>
         <div class="form-group texteGauche">
             Liste categorie :
-            <select required>
+            <select name="cate" required>
                 <?php
-                while ($row = $categorie) {?>
-                    <option value=""><?php echo $row['nomCategorie'];?></option>
+                while ($row = $searchStmt -> fetch()) {?>
+                    <option value="<?php echo $row['idCategorie'];?>"><?php echo $row['nom'];?></option>
                 <?php
                 }
                 ?>

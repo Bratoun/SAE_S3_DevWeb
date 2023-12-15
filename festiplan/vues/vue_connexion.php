@@ -42,11 +42,11 @@
                 </div>
                 <br><br>
                 <div class="texteCentre">
-                    <button type="submit" class="btn btn-primary"><span class="fas fa-arrow-right"></span></button>
+                    <button type="submit" class="btn btn-primary boutonFleche"><span class="fas fa-arrow-right"></span></button>
                 </div>
                 <br><br>
             </form>
-            <p class="petit">Vous n'avez pas de compte <a class="petit" href="/festiplan?controller=Inscription">CREER UN COMPTE</a></p>
+            <p class="petit">Vous n'avez pas de compte <a class="petit" href="/festiplan?controller=UtilisateurCompte&action=creerCompteUtilisateur">CREER UN COMPTE</a></p>
         </div>
     </div>
 </body>

@@ -11,7 +11,9 @@
     <div class="header">Créer un spectacle<i class="fa-solid fa-user"></i></div>
 </header>
 <body id="body-blanc">
-    <form action="/festiplan?controller=Accueil" method="post">
+    <form action="index.php" method="post">
+        <input type="hidden" name="controller" value="CreerSpectacleControleur">
+        <input type="hidden" name="action" value="connexion">
         <div>
             Nom du spectacle:<br>
             <input type="text" placeholder="(35 caractères maximum)" required/>
