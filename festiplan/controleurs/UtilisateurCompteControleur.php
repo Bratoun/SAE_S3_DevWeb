@@ -3,6 +3,7 @@
 namespace controleurs;
 
 use modeles\UserModele;
+use PDO;
 use yasmf\HttpHelper;
 use yasmf\View;
 
@@ -28,20 +29,38 @@ class UtilisateurCompteControleur
     }
     public function creerCompteUtilisateur(PDO $pdo)
     {
-        if (true){ // faire un hidden avec une variable qui est true dans le form TRUST
-            // $login = HttpHelper::getParam('login');
-            // $mdp = HttpHelper::getParam('mdp');
+        $editer = (bool)HttpHelper::getParam('edition');
+        $premierePage = (bool)HttpHelper::getParam('premierePage');
+        if($premierePage ==NULL) {
+            $premierePage = true;
+        }
+        $noRefresh = (bool)HttpHelper::getParam('noRefresh');
+        if ($editer){
+            $login = HttpHelper::getParam('login');
+            $mdp = HttpHelper::getParam('mdp');
             $nom = HttpHelper::getParam('nom');
             $prenom = HttpHelper::getParam('prenom');
             $email = HttpHelper::getParam('email');
             try {
-                // $searchStmt = creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
+                $searchStmt = creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
                 return new View("vues/vue_connexion");
             } catch (PDOException $e) {
                 return new View("vues/vue_inscription");
             }
         } else {
-            return new View("vues/vue_inscription");
+            $view = new View("vues/vue_inscription");
+            if($noRefresh){
+                if ($premierePage){
+                    $view->setVar('premierePage', false);
+                } else {
+                    $view->setVar('premierePage', true);
+                }
+                
+            } else {
+                $view->setVar('premierePage', $premierePage);
+            }
+            // $view->setVar('noRefresh', false);
+            return $view;
         }
     }
 }

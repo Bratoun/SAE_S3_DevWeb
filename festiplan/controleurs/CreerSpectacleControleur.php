@@ -4,6 +4,7 @@ namespace controleurs;
 
 use PDO;
 use yasmf\View;
+use yasmf\HttpHelper;
 use modeles\SpectacleModele;
 
 class CreerSpectacleControleur {

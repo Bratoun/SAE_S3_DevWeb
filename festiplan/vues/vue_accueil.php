@@ -9,7 +9,7 @@
 </head>
 <!--En tête-->
 <header>
-    <div class="header"><i class="fa-solid fa-user"></i></div>
+    <div class="header"><button class="btn btn-primary"><span class="fas fa-solid fa-user"><button></span></div>
 </header>
 <body id="body-blanc">
     <h1> Liste des festivals/spectacles </h1>

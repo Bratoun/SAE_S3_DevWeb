@@ -4,7 +4,8 @@ namespace controleurs;
 
 use PDO;
 use yasmf\View;
-use modeles\FesitvalModele;
+use yasmf\HttpHelper;
+use modeles\FestivalModele;
 
 class CreerFestivalControleur {
 
@@ -14,11 +15,25 @@ class CreerFestivalControleur {
         $this->festivalModele = $festivalModele;
     }
 
-    public function index() {
-        $searchStmt = $this->FestivalModele->listeCategorieSpectacle($pdo);
-        $categorie = $searchStmt->fetch();
+    public function index(PDO $pdo) : View {
+        $searchStmt = $this->festivalModele->listeCategorieFestival($pdo);
         $vue = new View("vues/vue_creer_festival");
-        $vue->setVar("categorie",$categorie);
+        $vue->setVar("searchStmt",$searchStmt);
+        return $vue;
+    }
+
+    public function nouveauFestival(PDO $pdo) : View {
+        // Récupere tout les parametre d'un festival
+        $nom = HttpHelper::getParam('nom');
+        $description = HttpHelper::getParam('description');
+        $dateDebut = HttpHelper::getParam('dateDebut');
+        $dateFin = HttpHelper::getParam('dateFin');
+        $cate = HttpHelper::getParam('cate');
+        $img = "aaa";
+        // Insere ce festival dans la base de données
+        $searchStmt = $this->festivalModele->insertionFestival($pdo, $nom, $description, $dateDebut, $dateFin, $cate, $img);
+
+        $vue = new View("vues/vue_accueil");
         return $vue;
     }
 }

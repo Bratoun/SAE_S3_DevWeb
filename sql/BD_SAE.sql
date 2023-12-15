@@ -180,20 +180,28 @@ CREATE TABLE ScenesJour (
 -- Données insérées
 
 
-INSERT INTO CategorieSpectacle (idCategorie,nomCategorie)
+INSERT INTO CategorieFestival (nom)
 VALUES
-('1','Musique'),
-('2','Sport');
+('Musique'),
+('Théatre'),
+('Cirque'),
+('Danse'),
+('Projection de film');
 
-INSERT INTO Taille (idTaille,nom)
+INSERT INTO CategorieSpectacle (nomCategorie)
 VALUES
-('1','Petite'),
-('2','Moyenne'),
-('3','Grande');
+('Musique'),
+('Sport');
 
-INSERT INTO Utilisateur (idUtilisateur,prenom,nom,mail,login,mdp)
+INSERT INTO Taille (nom)
 VALUES
-('1','Nathan','Girardin','n@sfr.fr','nathan','123'),
-('2','Mateo','Faussurier','M@sfr.fr','mateo','123'),
-('3','Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
-('4','Alix','BRUGIER','a@sfr.fr','alix','123');
+('Petite'),
+('Moyenne'),
+('Grande');
+
+INSERT INTO Utilisateur (prenom,nom,mail,login,mdp)
+VALUES
+('Nathan','Girardin','n@sfr.fr','nathan','123'),
+('Mateo','Faussurier','M@sfr.fr','mateo','123'),
+('Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
+('Alix','BRUGIER','a@sfr.fr','alix','123');
