@@ -31,6 +31,7 @@
                 }
             ?>
             <form action="/festiplan?controller=Inscription" method="post">
+            </input name="editer" type="hidden" value="true">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
                 <br><br>
                 <h2 class="grand">Inscription</h2>

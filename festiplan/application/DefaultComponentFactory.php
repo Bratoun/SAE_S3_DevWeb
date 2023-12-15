@@ -7,8 +7,11 @@ use controleurs\CreerFestivalControleur;
 use controleurs\CreerSpectacleControleur;
 use controleurs\AccueilControleur;
 use controleurs\InscriptionControleur;
+use controleurs\ConnexionControleur;
+use controleurs\UtilisateurCompteControleur;
 use modeles\UserModele;
 use modeles\SpectacleModele;
+use modeles\FestivalModele;
 use yasmf\ComponentFactory;
 use yasmf\NoControllerAvailableForNameException;
 use yasmf\NoServiceAvailableForNameException;
@@ -20,6 +23,7 @@ class DefaultComponentFactory implements ComponentFactory
 
     private ?SpectacleModele $spectacleModele = null;
 
+    private ?FestivalModele $festivalModele = null;
 
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
@@ -27,9 +31,10 @@ class DefaultComponentFactory implements ComponentFactory
             "Accueil" => $this->buildAccueilController(),
             "CreerSpectacle" => $this->buildCreerSpectacleController(),
             "CreerFestival" => $this->buildCreerFestivalController(),
-            "Inscription" => $this->buildInscriptionController(),
-            "CreationCompte" => $this->buildCreationCompteController(),
-            "Connexion" => $this->buildConnexionController(),
+            // "Inscription" => $this->buildInscriptionController(),
+            // "CreationCompte" => $this->buildCreationCompteController(),
+            // "Connexion" => $this->buildConnexionController(),
+            "UtilisateurCompte" => $this->buildUtilisateurCompteController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };
     }
@@ -39,6 +44,7 @@ class DefaultComponentFactory implements ComponentFactory
         return match ($service_name){
             "User" => $this->buildUserModele(),
             "CreerSpectacle" => $this->buildSpectacleModele(),
+            "CreerFestival" => $this->buildFestivalModele(),
             default => throw new NoServiceAvailableForNameException($service_name)
         };
     }
@@ -60,7 +66,7 @@ class DefaultComponentFactory implements ComponentFactory
     
     private function buildCreerFestivalController(): CreerFestivalControleur
     {
-        return new CreerFestivalControleur();
+        return new CreerFestivalControleur($this->buildServiceByName("CreerFestival"));
     }
 
     private function buildInscriptionController(): InscriptionControleur
@@ -73,11 +79,16 @@ class DefaultComponentFactory implements ComponentFactory
         return new CreationCompteControleur($this->buildServiceByName("User"));
     }
 
-    private function buildConnexionController() : buildConnexionControleur
+    private function buildConnexionController() : ConnexionControleur
     {
         return new ConnexionControleur($this->buildServiceByName("User"));
     }
 
+    private function buildUtilisateurCompteController() : UtilisateurCompteControleur
+    {
+        return new UtilisateurCompteControleur($this->buildServiceByName("User"));
+    }
+    
     private function buildUserModele() : UserModele
     {
         if ($this->userModele == null) {
@@ -92,5 +103,13 @@ class DefaultComponentFactory implements ComponentFactory
             $this->spectacleModele = new SpectacleModele();
         }
         return $this->spectacleModele;
+    }
+
+    private function buildFestivalModele() : FestivalModele
+    {
+        if ($this->festivalModele == null) {
+            $this->festivalModele = new FestivalModele();
+        }
+        return $this->festivalModele;
     }
 }

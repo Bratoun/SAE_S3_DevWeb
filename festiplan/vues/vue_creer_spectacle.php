@@ -38,9 +38,12 @@
         <div>
         Taille de surface requise : <br>
             <select required>
-                <option value="petit">Petite</option>
-                <option value="moyenne">Moyenne</option>
-                <option value="grande">Grande</option>
+                <?php
+                while ($row = $search_stmt->fetch()) {?>
+                    <option value=""><?php echo $row['nom'];?></option>
+                <?php
+                }
+                ?>
             </select>
         </div>
         <button type="submit" class="btn-bleu">Terminer</button>

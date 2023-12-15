@@ -6,7 +6,7 @@ use modeles\UserModele;
 use yasmf\HttpHelper;
 use yasmf\View;
 
-class ConnexionControleurs
+class ConnexionControleur
 {
     private UserModele $userModele;
 
@@ -14,10 +14,10 @@ class ConnexionControleurs
         $this->userModele = $userModele;
     }
 
-    public function index($pdo)
+    public function connexion($pdo)
     {
-    $login = HttpHelper::getParam('login');
-    $mdp = HttpHelper::getParam('mdp');
+        $login = HttpHelper::getParam('login');
+        $mdp = HttpHelper::getParam('mdp');
         $searchStmt = $this->userModele->trouverCompteUtilisateurParLoginMdp($pdo, $login, $mdp);
         $user = $searchStmt->fetch();
         if (!$user){
