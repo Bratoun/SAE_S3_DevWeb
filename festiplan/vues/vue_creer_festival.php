@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
 </head>
+
 <header>
     <div class="header"><a href="/festiplan?controller=Accueil"><i class="fa-solid fa-user"></i></a> Créer un Festival</div>
 </header>
+
 <body id="body-blanc">
     <form action="/festiplan?controller=Accueil" method="post">
         <div class="form-group texteGauche">
@@ -24,9 +26,16 @@
         <div class="form-group texteGauche">
             Date de fin: <input type="date"  required>
         </div>
-        <php $categorie ?>
         <div class="form-group texteGauche">
-            Liste categorie :<select required></select>
+            Liste categorie :
+            <select required>
+                <?php
+                while ($row = $categorie) {?>
+                    <option value=""><?php echo $row['nomCategorie'];?></option>
+                <?php
+                }
+                ?>
+            </select>
         </div>
         <button type="submit" class="btn-bleu">Terminer</button>
     </form>

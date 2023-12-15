@@ -13,6 +13,7 @@ CREATE TABLE Utilisateur (
     mdp VARCHAR(30) NOT NULL
 );
 
+
 -- Création de la table CategorieFestival
 CREATE TABLE CategorieFestival (
     idCategorie INT(11) NOT NULL AUTO_INCREMENT,
@@ -74,10 +75,7 @@ CREATE TABLE CategorieSpectacle (
 ALTER TABLE Spectacle
 ADD FOREIGN KEY (categorie) REFERENCES CategorieSpectacle(idCategorie);
 
-INSERT INTO CategorieSpectacle (idCategorie,nomCategorie)
-VALUES
-('1','Musique'),
-('2','Sport');
+
 
 -- Création de la table Intervenant
 CREATE TABLE Intervenant (
@@ -126,6 +124,7 @@ CREATE TABLE Taille (
     PRIMARY KEY (idTaille)
 );
 
+
 ALTER TABLE Scene
 ADD FOREIGN KEY (taille) REFERENCES Taille(idTaille);
 ALTER TABLE Spectacle
@@ -163,7 +162,38 @@ ADD FOREIGN KEY (idJour) REFERENCES Jour(idJour);
 CREATE TABLE SpectaclesJour (
     idJour INT(11) NOT NULL,
     idSpectacle INT(11) NOT NULL,
+    ordre INT(3) NOT NULL DEFAULT 0,
     PRIMARY KEY (idJour, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle)
 );
+
+CREATE TABLE ScenesJour (
+    idJour INT(11) NOT NULL,
+    idScene INT(11) NOT NULL,
+    PRIMARY KEY (idJour, idScene),
+    FOREIGN KEY (idJour) REFERENCES Jour(idJour),
+    FOREIGN KEY (idScene) REFERENCES Scene(idScene)
+);
+
+
+-- Données insérées
+
+
+INSERT INTO CategorieSpectacle (idCategorie,nomCategorie)
+VALUES
+('1','Musique'),
+('2','Sport');
+
+INSERT INTO Taille (idTaille,nom)
+VALUES
+('1','Petite'),
+('2','Moyenne'),
+('3','Grande');
+
+INSERT INTO Utilisateur (idUtilisateur,prenom,nom,mail,login,mdp)
+VALUES
+('1','Nathan','Girardin','n@sfr.fr','nathan','123'),
+('2','Mateo','Faussurier','M@sfr.fr','mateo','123'),
+('3','Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
+('4','Alix','BRUGIER','a@sfr.fr','alix','123');

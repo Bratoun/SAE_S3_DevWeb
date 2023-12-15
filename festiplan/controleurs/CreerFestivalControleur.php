@@ -4,12 +4,14 @@ namespace controleurs;
 
 use PDO;
 use yasmf\View;
+use modeles\FesitvalModele;
 
 class CreerFestivalControleur {
 
-    private FestivalModele $FestivalModele;
+    private FestivalModele $festivalModele;
 
-    public function __construct() {
+    public function __construct(FestivalModele $festivalModele) {
+        $this->festivalModele = $festivalModele;
     }
 
     public function index() {

@@ -10,11 +10,15 @@
 <body>
     <div class="container">
         <div class="cadreConnexion">
-            <form action="/festiplan?controller=Accueil" method="post">
+            <form action="index.php" method="post">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
                 <br><br>
                 <h2 class="grand">Connexion</h2>
                 <br><br>
+                
+                <input type="hidden" name="controller" value="UtilisateurCompte">
+                <input type="hidden" name="action" value="connexion">
+
                 <div class="form-group texteGauche">
                     <div class="input-group">
                         <input name="login" type="text" class="form-control" placeholder="NOM D'UTILISATEUR" required>

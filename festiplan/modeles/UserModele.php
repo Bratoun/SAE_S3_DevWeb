@@ -2,9 +2,10 @@
 
 namespace modeles;
 
+use PDO;
 use PDOException;
 
-class ConnexionModele
+class UserModele
 {
     /**
      * Cherche un compte Festiplan dans la base de données par rapport au login
@@ -41,7 +42,7 @@ class ConnexionModele
         SELECT :login, :mdp, :nom, :prenom, :email
         WHERE NOT EXISTS (SELECT 1 FROM Utilisateur WHERE login = :login OR mail = :email);
         COMMIT;";
-        $serachStmt = $pdo->prepare($sql);
+        $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute(["login"=>$login, "mdp"=>$mdp, "nom"=>$nom,"prenom"=>$prenom,"email"=>$email]);
     }
 }
