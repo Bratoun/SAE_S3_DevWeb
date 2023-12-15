@@ -12,7 +12,7 @@
   "autoload": {
     "psr-4": {
       "controleurs\\": "festiplan/controleurs",
-      "services\\": "festiplan/modeles",
+      "modeles\\": "festiplan/modeles",
       "application\\": "festiplan/application"
     }
   },

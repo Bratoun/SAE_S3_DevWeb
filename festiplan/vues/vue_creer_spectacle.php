@@ -25,8 +25,15 @@
             <input type="number"/>
         </div>
         <div>
-        liste categorie <br>    
-            <select required></select>
+        liste categorie :<br>    
+            <select required>
+                <?php
+                while ($row = $searchStmt->fetch()) {?>
+                    <option value=""><?php echo $row['nomCategorie'];?></option>
+                <?php
+                }
+                ?>
+            </select>
         </div>
         <div>
         Taille de surface requise : <br>

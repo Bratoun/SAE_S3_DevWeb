@@ -74,6 +74,11 @@ CREATE TABLE CategorieSpectacle (
 ALTER TABLE Spectacle
 ADD FOREIGN KEY (categorie) REFERENCES CategorieSpectacle(idCategorie);
 
+INSERT INTO CategorieSpectacle (idCategorie,nomCategorie)
+VALUES
+('1','Musique'),
+('2','Sport');
+
 -- Création de la table Intervenant
 CREATE TABLE Intervenant (
   idIntervenant INT(11) NOT NULL AUTO_INCREMENT,

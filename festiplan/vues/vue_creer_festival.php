@@ -24,6 +24,7 @@
         <div class="form-group texteGauche">
             Date de fin: <input type="date"  required>
         </div>
+        <php $categorie ?>
         <div class="form-group texteGauche">
             Liste categorie :<select required></select>
         </div>
