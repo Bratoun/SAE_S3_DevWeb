@@ -18,7 +18,7 @@ class UserModele
      */
     public function trouverCompteUtilisateurParLoginMdp(PDO $pdo, $login, $mdp)
     {
-        $sql = "SELECT * FROM Utilisateur WHERE login = ? AND mdp = ?";
+        $sql = "SELECT idUtilisateur FROM Utilisateur WHERE login = ? AND mdp = ?";
         $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute([$login, $mdp]);
         return $searchStmt;
@@ -37,12 +37,25 @@ class UserModele
     */
     public function creerCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom, $email)
     {
-        $sql = "START TRANSACTION;
-        INSERT INTO Utilisateur (login, mdp, nom, prenom, mail)
-        SELECT :login, :mdp, :nom, :prenom, :email
-        WHERE NOT EXISTS (SELECT 1 FROM Utilisateur WHERE login = :login OR mail = :email);
-        COMMIT;";
-        $searchStmt = $pdo->prepare($sql);
-        $searchStmt->execute(["login"=>$login, "mdp"=>$mdp, "nom"=>$nom,"prenom"=>$prenom,"email"=>$email]);
+        try {
+            // Début de la transaction
+            var_dump($login);
+            var_dump($mdp);
+            var_dump($nom);
+            var_dump($prenom);
+            var_dump($email);
+            $pdo->beginTransaction();
+            // Requête d'insertion
+            $sql = "INSERT INTO Utilisateur (login, mdp, nom, prenom, mail) VALUES (?,?,?,?,?)";
+            $searchStmt = $pdo->prepare($sql);
+            $searchStmt->execute([$login, $mdp, $nom, $prenom, $email]);
+        
+            // Fin de la transaction (enregistrement des modifications)
+            $pdo->commit();
+        } catch (PDOException $e) {
+            // En cas d'erreur, annuler la transaction
+            $pdo->rollBack();
+            echo "Erreur : " . $e->getMessage();
+        }
     }
 }

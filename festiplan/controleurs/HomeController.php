@@ -11,6 +11,12 @@ class HomeController {
     }
 
     public function index() {
-        return new View("vues/vue_connexion");
+        // Vérifier si l'utilisateur est connecté
+        session_start();
+        if (isset($_SESSION['utilisateur_connecte']) && $_SESSION['utilisateur_connecte'] === true) {
+            return new View("vues/vue_accueil");
+        } else {
+            return new View("vues/vue_connexion");
+        }
     }
 }

@@ -15,5 +15,6 @@
     <h1> Liste des festivals/spectacles </h1>
     <a href="/festiplan?controller=CreerSpectacle"><button type="submit" class="btn-creer-spectacle">Créer un spectacle</button></a>
     <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn-bleu">Créer un festival</button></a>
+    <button type="submit" class="btn-bleu">Deconnexion</button>
 </body>
 </html>

@@ -24,30 +24,30 @@ class UtilisateurCompteControleur
         if (!$user){
             return new View("vues/vue_connexion");
         } else {
+            session_start();
+            $_SESSION['utilisateur_connecte'] = true;
+            $_SESSION['id_utilisateur'] = $user['idUtilisateur'];;
             return new View("vues/vue_accueil");
         }
     }
     public function creerCompteUtilisateur(PDO $pdo)
     {
-        $editer = (bool)HttpHelper::getParam('edition');
-        $premierePage = (bool)HttpHelper::getParam('premierePage');
-        if($premierePage ==NULL) {
-            $premierePage = true;
-        }
+        $editer = (bool)HttpHelper::getParam('editer');
         $noRefresh = (bool)HttpHelper::getParam('noRefresh');
         if ($editer){
-            $login = HttpHelper::getParam('login');
-            $mdp = HttpHelper::getParam('mdp');
             $nom = HttpHelper::getParam('nom');
             $prenom = HttpHelper::getParam('prenom');
             $email = HttpHelper::getParam('email');
+            $login = HttpHelper::getParam('login');
+            $mdp = HttpHelper::getParam('mdp');
             try {
-                $searchStmt = creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
+                $searchStmt = $this->userModele->creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
                 return new View("vues/vue_connexion");
             } catch (PDOException $e) {
                 return new View("vues/vue_inscription");
             }
         } else {
+            $premierePage = HttpHelper::getParam('premierePage');
             $view = new View("vues/vue_inscription");
             if($noRefresh){
                 if ($premierePage){
@@ -57,9 +57,8 @@ class UtilisateurCompteControleur
                 }
                 
             } else {
-                $view->setVar('premierePage', $premierePage);
+                $view->setVar('premierePage', true);
             }
-            // $view->setVar('noRefresh', false);
             return $view;
         }
     }

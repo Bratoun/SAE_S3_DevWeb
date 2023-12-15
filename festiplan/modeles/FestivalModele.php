@@ -31,7 +31,7 @@ class FestivalModele
      * @param illustration illustration du festival.
      * @return stmt true si cela a marché
      */
-    public function insertionFestival(PDO $pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $illustration)
+    public function insertionFestival(PDO $pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $illustration, $idOrganisateur)
     {
         $sql = "INSERT INTO Festival (nom,categorie,description,dateDebut,dateFin,illustration) VALUES (:leNom,:laCate,:laDesc,:leDeb,:laFin,:lIllu)";
         $stmt = $pdo->prepare($sql);
@@ -44,7 +44,6 @@ class FestivalModele
         $stmt->execute();
         // Enregistre le créateur du festival en temps qu'organisateur
         $idFestival = $pdo->lastInsertId();
-        $idOrganisateur = ;
         $sql2 = "INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival) VALUES (:idOrg,:idFestival)";
         $stmt2 = $pdo->prepare($sql2);
         $stmt2->bindParam("idOrg",$idOrganisateur);
