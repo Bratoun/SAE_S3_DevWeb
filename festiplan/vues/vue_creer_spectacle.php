@@ -16,19 +16,19 @@
         <input type="hidden" name="action" value="connexion">
         <div>
             Nom du spectacle:<br>
-            <input type="text" placeholder="(35 caractères maximum)" required/>
+            <input type="text" name="titre" placeholder="(35 caractères maximum)" required/>
         </div>
         <div>
             Description :<br>   
-            <textarea placeholder="(1000 caractères maximum)" required></textarea>
+            <textarea name="description" placeholder="(1000 caractères maximum)" required></textarea>
         </div>
         <div>
             Durée du spectacle :<br> <br>  
-            <input type="number"/>
+            <input name="duree" type="number"/>
         </div>
         <div>
         liste categorie :<br>    
-            <select required>
+            <select name="categorie" required>
                 <?php
                 while ($row = $searchStmt->fetch()) {?>
                     <option value=""><?php echo $row['nomCategorie'];?></option>
@@ -39,7 +39,7 @@
         </div>
         <div>
         Taille de surface requise : <br>
-            <select required>
+            <select name="taille" required>
                 <?php
                 while ($row = $search_stmt->fetch()) {?>
                     <option value=""><?php echo $row['nom'];?></option>

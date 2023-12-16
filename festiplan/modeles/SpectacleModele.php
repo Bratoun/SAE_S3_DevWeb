@@ -38,11 +38,24 @@ class SpectacleModele
     /**
      * Insèrer un spectacle dans la base de données
      * @param pdo un objet PDO connecté à la base de données.
+     * @param nom nom du spectalce
+     * @param description description du spectacle
+     * @param duree temps du spectacle
+     * @param illustration image du spectacle
+     * @param categorie du spectacle
+     * @param taille de la scène dont le spectacle à besoin
      * @return searchStmt
      */
-    public function insertionspectacle(PDO $pdo)
+    public function insertionspectacle(PDO $pdo, $nom, $description, $duree, $illustration, $categorie, $taille)
     {
-        $sql = "INSERT INTO Spectacle (idSpectacle,titre,description,duree,illustration,categorie,tailleSceneRequise) VALUES ('1',)"
+        $sql = "INSERT INTO Spectacle (titre,description,duree,illustration,categorie,tailleSceneRequise) VALUES (:leTitre,:laDesc,:leTemps,:illu,:laCate,:tailleScene)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("leTitre",$titre);
+        $stmt->bindParam("laDesc",$description);
+        $stmt->bindParam("leTemps",$duree);
+        $stmt->bindParam("illu",$illustration);
+        $stmt->bindParam("laCate",$categorie);
+        $stmt->bindParam("tailleScene",$taille);
+        $stmt->execute();
     }
-
 }

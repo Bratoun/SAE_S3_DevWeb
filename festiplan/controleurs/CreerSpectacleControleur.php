@@ -29,4 +29,20 @@ class CreerSpectacleControleur {
             return new View("vues/vue_connexion");
         }
     }
+
+    public function nouveauSpectacle(PDO $pdo) : View
+    {
+        //Récupère tous les paramètres d'un spectacle
+        $nom = HttpHelper::getParam('titre');
+        $description = HttpHelper::getParam('description');
+        $duree = HttpHelper::getParam('duree');
+        $categorie = HttpHelper::getParam('categorie');
+        $taille = HttpHelper::getParam('taille');
+        $illustration = 'aaa';
+        // Insere ce festival dans la base de données
+        $search = $this->spectacleModele->insertionspectacle($pdo, $nom, $description, $duree, $illustration, $categorie, $taille);
+        $vue = new View("vues/vue_accueil");
+        return $vue;
+
+    }
 }
