@@ -29,6 +29,7 @@ class FestivalModele
      * @param dateFin date de fin du festival.
      * @param categorie categorie du festival.
      * @param illustration illustration du festival.
+     * @param idOrganisateur l'id de l'utilisateur courant.
      * @return stmt true si cela a marché
      */
     public function insertionFestival(PDO $pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $illustration, $idOrganisateur)
@@ -51,4 +52,18 @@ class FestivalModele
         $stmt2->execute();
     }
 
+
+    /**
+     * Recherche la liste des festivals de l'utilisateur
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idOrganisateur l'id de l'utilisateur courant.
+     * @return searchStmt l'ensemble des festivals.
+     */
+    public function listeMesFestivals(PDO $pdo, $idOrganisateur)
+    {
+        $sql = "SELECT * FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival WHERE idUtilisateur = :id ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idOrganisateur);
+        return $stmt;
+    }
 }

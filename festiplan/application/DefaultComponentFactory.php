@@ -39,7 +39,7 @@ class DefaultComponentFactory implements ComponentFactory
         return match ($service_name){
             "User" => $this->buildUserModele(),
             "CreerSpectacle" => $this->buildSpectacleModele(),
-            "CreerFestival" => $this->buildFestivalModele(),
+            "Festival" => $this->buildFestivalModele(),
             default => throw new NoServiceAvailableForNameException($service_name)
         };
     }
@@ -61,22 +61,7 @@ class DefaultComponentFactory implements ComponentFactory
     
     private function buildCreerFestivalController(): CreerFestivalControleur
     {
-        return new CreerFestivalControleur($this->buildServiceByName("CreerFestival"));
-    }
-
-    private function buildInscriptionController(): InscriptionControleur
-    {
-        return new InscriptionControleur();
-    }
-
-    private function buildCreationCompteController() : CreationCompteControleur
-    {
-        return new CreationCompteControleur($this->buildServiceByName("User"));
-    }
-
-    private function buildConnexionController() : ConnexionControleur
-    {
-        return new ConnexionControleur($this->buildServiceByName("User"));
+        return new CreerFestivalControleur($this->buildServiceByName("Festival"));
     }
 
     private function buildUtilisateurCompteController() : UtilisateurCompteControleur

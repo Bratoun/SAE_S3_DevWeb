@@ -26,7 +26,7 @@ class UtilisateurCompteControleur
         } else {
             session_start();
             $_SESSION['utilisateur_connecte'] = true;
-            $_SESSION['id_utilisateur'] = $user['idUtilisateur'];;
+            $_SESSION['id_utilisateur'] = $user['idUtilisateur'];
             return new View("vues/vue_accueil");
         }
     }
