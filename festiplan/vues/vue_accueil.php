@@ -1,5 +1,6 @@
 <?php
 // Vérifier si l'utilisateur est connecté
+session_start();
 if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == false) {
     header("Location: ../index.php");
 }
@@ -16,16 +17,25 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 </head>
 <!--En tête-->
 <header>
-    <div class="header"><button class="btn btn-primary"><span class="fas fa-solid fa-user"><button></span></div>
+    <div class="container-fluid">
+        <div class="row header">
+            <div class="col-2">
+                <img src="static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
+            </div>
+            <div class="col-8">
+                <h1 class="texteCentre blanc"> Mes festivals/spectacles : </h1>
+            </div>
+            <div class="col-2">
+                <button class="btn font-awesome-user"><span class="fas fa-solid fa-user"></span></button>
+            </div>
+        </div>
+    </div>
 </header>
 <body id="body-blanc">
-    <h1> Mes festivals/spectacles  <?php
-                // while ($row = $mesFestivals -> fetch()) {
-                //      echo $row['nom'];
-                // }
-                ?></h1>
-    <a href="/festiplan?controller=CreerSpectacle"><button type="submit" class="btn-creer-spectacle">Créer un spectacle</button></a>
-    <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn-bleu">Créer un festival</button></a>
-    <button type="submit" class="btn-bleu">Deconnexion</button>
+    <div class="footer">
+            <a href="/festiplan?controller=CreerSpectacle"><button type="submit" class="btn btn-gris">Créer un spectacle</button></a>
+            <a href="/festiplan?controller=CreerFestival"><button type="submit" class="btn btn-bleu">Créer un festival</button></a>
+            <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion"><button type="submit" class="btn btn-danger">Deconnexion</button></a>
+    </div>
 </body>
 </html>

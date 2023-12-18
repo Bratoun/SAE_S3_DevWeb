@@ -162,24 +162,15 @@ ADD FOREIGN KEY (idJour) REFERENCES Jour(idJour);
 CREATE TABLE SpectaclesJour (
     idJour INT(11) NOT NULL,
     idSpectacle INT(11) NOT NULL,
+    idScene INT(11) NOT NULL DEFAULT 0,
     ordre INT(3) NOT NULL DEFAULT 0,
     PRIMARY KEY (idJour, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
-    FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle)
+    FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
+    FOREIGN KEY (idScene) REFERENCES Scene(idScene),
 );
-
-CREATE TABLE ScenesJour (
-    idJour INT(11) NOT NULL,
-    idScene INT(11) NOT NULL,
-    PRIMARY KEY (idJour, idScene),
-    FOREIGN KEY (idJour) REFERENCES Jour(idJour),
-    FOREIGN KEY (idScene) REFERENCES Scene(idScene)
-);
-
 
 -- Données insérées
-
-
 INSERT INTO CategorieFestival (nom)
 VALUES
 ('Musique'),

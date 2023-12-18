@@ -7,9 +7,11 @@ use controleurs\CreerFestivalControleur;
 use controleurs\CreerSpectacleControleur;
 use controleurs\AccueilControleur;
 use controleurs\UtilisateurCompteControleur;
+use controleurs\GrijControleur;
 use modeles\UserModele;
 use modeles\SpectacleModele;
 use modeles\FestivalModele;
+use modeles\GrijModele;
 use yasmf\ComponentFactory;
 use yasmf\NoControllerAvailableForNameException;
 use yasmf\NoServiceAvailableForNameException;
@@ -23,6 +25,8 @@ class DefaultComponentFactory implements ComponentFactory
 
     private ?FestivalModele $festivalModele = null;
 
+    private ?GrijModele $grijModele = null;
+
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
             "Home" => $this->buildHomeController(),
@@ -30,6 +34,7 @@ class DefaultComponentFactory implements ComponentFactory
             "CreerSpectacle" => $this->buildCreerSpectacleController(),
             "CreerFestival" => $this->buildCreerFestivalController(),
             "UtilisateurCompte" => $this->buildUtilisateurCompteController(),
+            "Grij" => $this->buildGrijController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
         };
     }
@@ -40,6 +45,7 @@ class DefaultComponentFactory implements ComponentFactory
             "User" => $this->buildUserModele(),
             "CreerSpectacle" => $this->buildSpectacleModele(),
             "Festival" => $this->buildFestivalModele(),
+            "Grij" => $this->buildGrijModele(),
             default => throw new NoServiceAvailableForNameException($service_name)
         };
     }
@@ -69,6 +75,11 @@ class DefaultComponentFactory implements ComponentFactory
         return new UtilisateurCompteControleur($this->buildServiceByName("User"));
     }
     
+    private function buildGrijController() : GrijControleur
+    {
+        return new GrijControleur($this->buildServiceByName("Grij"));
+    }
+
     private function buildUserModele() : UserModele
     {
         if ($this->userModele == null) {
@@ -91,5 +102,14 @@ class DefaultComponentFactory implements ComponentFactory
             $this->festivalModele = new FestivalModele();
         }
         return $this->festivalModele;
+    }
+
+    private function buildGrijModele() : GrijModele
+    {
+        if ($this->grijModele == null)
+        {
+            $this->grijModele = new GrijModele();
+        }
+        return $this->grijModele;
     }
 }

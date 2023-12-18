@@ -101,7 +101,7 @@ label {
 .header {
     width: 100%; 
     height: 70px; 
-    background-color: #4D4D4D
+    background-color: #4D4D4D;
 }
 
 #body-blanc {
@@ -120,4 +120,49 @@ label {
 img {
     width: 80px; 
     height: 40px;  
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #EDEDED;
+    padding: 10px;
+    text-align: right;
+}
+
+.font-awesome-user {
+    padding-right: 15px;
+    font-size: 2em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logo-festiplan {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    position: absolute;
+    background-color: #4D4D4D;
+    color: #000000;
+}
+
+.blanc {
+    color: #FFFFFF;
+}
+
+@media (min-width: 768px) {
+    .logo-festiplan {
+        float: left;
+    }
+
+    .texteCentre {
+        text-align: left;
+    }
+
+    .font-awesome-user {
+        float: right;
+        margin-top: 10px;
+    }
 }
