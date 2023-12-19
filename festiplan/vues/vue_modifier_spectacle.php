@@ -26,7 +26,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </a>
             </div>
             <div class="col-8">
-                <h2 class="texteCentre blanc bas"> Créer un spectacle : </h2>
+                <h2 class="texteCentre blanc bas"> Modifier un spectacle : </h2>
             </div>
             <div class="col-2">
                 <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <label for="taille">Taille de surface requise :</label><br>
             <select id="taille" name="taille" required>
                 <?php
-                while ($row = $search_stmt->fetch()) {?>
+                while ($row = $searchStmt2->fetch()) {?>
                     <option value="<?php echo $row['idTaille'];?>"  <?php if ($row['idTaille'] == $ancienneTaille) { echo 'selected';}?>  ><?php echo $row['nom'];?></option>
                 <?php
                 }

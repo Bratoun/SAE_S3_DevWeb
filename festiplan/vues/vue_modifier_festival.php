@@ -24,7 +24,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </a>
             </div>
             <div class="col-8">
-                <h2 class="texteCentre blanc bas"> Créer un festival : </h2>
+                <h2 class="texteCentre blanc bas"> Modifier un festival : </h2>
             </div>
             <div class="col-2">
                 <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>
@@ -37,7 +37,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 
         <input type="hidden" name="controller" value="Festival">
         <input type="hidden" name="action" value="nouveauOuModificationFestival">
-        <input type="hidden" name="modifier" value="false">
+        <input type="hidden" name="modifier" value="true">
+        <input type="hidden" name="idFestival" value="<?php echo $idFestival?>">
 
         <div class="form-group texteGauche">
             <label id="<?php if(!$nomOk){echo 'invalide';}?>">Nom :</label>
@@ -66,9 +67,25 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 ?>
             </select>
         </div>
+        <div class="form-group texteGauche">
+            Organisateur :
+            <?php
+                while ($row = $listeOrganisateur-> fetch()) {
+                    echo $row['nom'];
+                
+                }
+            if($estResponsable) {?>
+                <a href="/festiplan?controller=Festival&action=ajouterOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">ajouter des Organisateur</button></a>  
+            <?php } ?>
+        </div>
         <div class="footer">
-            <button type="submit" class="btn btn-bleu">Terminer</button>   
+            <button type="submit" class="btn btn-bleu">Confirmer</button>   
             <a href="/festiplan?controller=Home"><button type="button" class="btn btn-gris">Annuler</button></a>  
+            <?php if($estResponsable) {?>
+                <a href="/festiplan?controller=Festival&action=supprimerFestival&idFestival=<?php echo $idFestival;?>"> <button type="button" class="btn btn-rouge">Supprimer</button></a>
+            <?php } ?>
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-bleu">Consulter la planification</button></a>
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-bleu">Modifier la liste des spectacles</button></a>
         </div>
     </form>
 </body>

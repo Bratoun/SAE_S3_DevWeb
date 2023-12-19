@@ -13,7 +13,6 @@ CREATE TABLE Utilisateur (
     mdp VARCHAR(30) NOT NULL
 );
 
-
 -- Création de la table CategorieFestival
 CREATE TABLE CategorieFestival (
     idCategorie INT(11) NOT NULL AUTO_INCREMENT,
@@ -24,7 +23,7 @@ CREATE TABLE CategorieFestival (
 CREATE TABLE Festival (
     idFestival INT(11) NOT NULL AUTO_INCREMENT,
     categorie INT(11) NOT NULL,
-    nom VARCHAR(35) NULL,
+    titre VARCHAR(35) NULL,
     description VARCHAR(1000) NULL,
     dateDebut DATE NOT NULL,
     dateFin DATE NOT NULL,
@@ -55,6 +54,16 @@ CREATE TABLE Spectacle (
     tailleSceneRequise INT(11),
     PRIMARY KEY (idSpectacle)
 );
+
+CREATE TABLE SpectacleOrganisateur (
+    idUtilisateur INT(11) NOT NULL,
+    idSpectacle INT(11) NOT NULL,
+    PRIMARY KEY (idUtilisateur, idSpectacle)
+);
+ALTER TABLE SpectacleOrganisateur
+ADD FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur);
+ALTER TABLE SpectacleOrganisateur
+ADD FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle);
 
 CREATE TABLE SpectacleDeFestival (
     idSpectacle INT(11) NOT NULL,
@@ -152,12 +161,11 @@ CREATE TABLE Jour (
 CREATE TABLE Grij (
     idFestival INT(11) NOT NULL,
     idJour INT(11) NOT NULL,
-    PRIMARY KEY (idFestival,idJour)
+    dateDuJour DATE NOT NULL,
+    PRIMARY KEY (idFestival,idJour),
+    FOREIGN KEY (idFestival) REFERENCES Festival(idFestival),
+    FOREIGN KEY (idJour) REFERENCES Jour(idJour)
 );
-ALTER TABLE Grij
-ADD FOREIGN KEY (idFestival) REFERENCES Festival(idFestival);
-ALTER TABLE Grij
-ADD FOREIGN KEY (idJour) REFERENCES Jour(idJour);
 
 CREATE TABLE SpectaclesJour (
     idJour INT(11) NOT NULL,
@@ -167,7 +175,7 @@ CREATE TABLE SpectaclesJour (
     PRIMARY KEY (idJour, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
-    FOREIGN KEY (idScene) REFERENCES Scene(idScene),
+    FOREIGN KEY (idScene) REFERENCES Scene(idScene)
 );
 
 -- Données insérées
@@ -181,8 +189,12 @@ VALUES
 
 INSERT INTO CategorieSpectacle (nomCategorie)
 VALUES
-('Musique'),
-('Sport');
+('Concert'),
+('Piece de theatre'),
+('Cirque'),
+('Danse'),
+('Projection de film');
+
 
 INSERT INTO Taille (nom)
 VALUES

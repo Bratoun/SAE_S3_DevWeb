@@ -3,8 +3,8 @@
 namespace application;
 
 use controleurs\HomeController;
-use controleurs\CreerFestivalControleur;
-use controleurs\CreerSpectacleControleur;
+use controleurs\FestivalControleur;
+use controleurs\SpectacleControleur;
 use controleurs\AccueilControleur;
 use controleurs\UtilisateurCompteControleur;
 use controleurs\GrijControleur;
@@ -31,8 +31,8 @@ class DefaultComponentFactory implements ComponentFactory
         return match ($controller_name) {
             "Home" => $this->buildHomeController(),
             "Accueil" => $this->buildAccueilController(),
-            "CreerSpectacle" => $this->buildCreerSpectacleController(),
-            "CreerFestival" => $this->buildCreerFestivalController(),
+            "Spectacle" => $this->buildSpectacleController(),
+            "Festival" => $this->buildFestivalController(),
             "UtilisateurCompte" => $this->buildUtilisateurCompteController(),
             "Grij" => $this->buildGrijController(),
             default => throw new NoControllerAvailableForNameException($controller_name)
@@ -43,7 +43,7 @@ class DefaultComponentFactory implements ComponentFactory
     {
         return match ($service_name){
             "User" => $this->buildUserModele(),
-            "CreerSpectacle" => $this->buildSpectacleModele(),
+            "Spectacle" => $this->buildSpectacleModele(),
             "Festival" => $this->buildFestivalModele(),
             "Grij" => $this->buildGrijModele(),
             default => throw new NoServiceAvailableForNameException($service_name)
@@ -52,27 +52,27 @@ class DefaultComponentFactory implements ComponentFactory
 
     private function buildHomeController(): HomeController
     {
-        return new HomeController();
+        return new HomeController($this->buildServiceByName("Spectacle"),$this->buildServiceByName("Festival"));
     }
 
     private function buildAccueilController(): AccueilControleur
     {
-        return new AccueilControleur();
+        return new AccueilControleur($this->buildServiceByName("Spectacle"),$this->buildServiceByName("Festival"));
     }
     
-    private function buildCreerSpectacleController(): CreerSpectacleControleur
+    private function buildSpectacleController(): SpectacleControleur
     {
-        return new CreerSpectacleControleur($this->buildServiceByName("CreerSpectacle"));
+        return new SpectacleControleur($this->buildServiceByName("Spectacle"),$this->buildServiceByName("Festival"));
     }
     
-    private function buildCreerFestivalController(): CreerFestivalControleur
+    private function buildFestivalController(): FestivalControleur
     {
-        return new CreerFestivalControleur($this->buildServiceByName("Festival"));
+        return new FestivalControleur($this->buildServiceByName("Spectacle"),$this->buildServiceByName("Festival"));
     }
 
     private function buildUtilisateurCompteController() : UtilisateurCompteControleur
     {
-        return new UtilisateurCompteControleur($this->buildServiceByName("User"));
+        return new UtilisateurCompteControleur($this->buildServiceByName("User"),$this->buildServiceByName("Spectacle"),$this->buildServiceByName("Festival"));
     }
     
     private function buildGrijController() : GrijControleur
