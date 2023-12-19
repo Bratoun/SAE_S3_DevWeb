@@ -138,11 +138,15 @@ class GrijControleur
             $listeFinaleDate[] = new DateTime($date);
         }
 
-        $vue->setVar('listeDatesSauvegardees', $listeDatesSauvegardees);
+        $listeHeureDebut = explode(',', $row['heureDebut']);
+        $listeHeureFin = explode(',', $row['heureFin']);
+        $listeEcart = explode(',', $row['tempsEntreSpectacle']);
+
+        $vue->setVar('listeDatesSauvegardees', $listeFinaleDate);
         $vue->setVar('dateDebut', new DateTime($row['dateDebut']));
         $vue->setVar('dateFin', new DateTime($row['dateFin']));
-        $vue->setVar('listeHeureDebut', $row['heureDebut']);
-        $vue->setVar('listeHeureFin', $row['heureFin']);
-        $vue->setVar('listeEcartEntreSpectacles', $row['tempsEntreSpectacle']);
+        $vue->setVar('listeHeureDebut', $listeHeureDebut);
+        $vue->setVar('listeHeureFin', $listeHeureFin);
+        $vue->setVar('listeEcartEntreSpectacles', $listeEcart);
     }
 }

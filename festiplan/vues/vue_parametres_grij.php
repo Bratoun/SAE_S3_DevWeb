@@ -50,8 +50,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     <?php
                                     echo $dateCourrante->format('d/m/Y');
                                     if ($estDefini) {
-                                        echo "Début : ".$listeHeureDebut[$i];
-                                        echo "Fin : ".$listeHeureFin[$i];
+                                        echo "<br>Début : ".$listeHeureDebut[$i]."<br>";
+                                        echo "Fin : ".$listeHeureFin[$i]."<br>";
                                         echo "Espacement : ".$listeEcartEntreSpectacles[$i];
                                     }?>
                                 </div>
