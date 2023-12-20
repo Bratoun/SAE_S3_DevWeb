@@ -39,11 +39,6 @@ class UserModele
     {
         try {
             // Début de la transaction
-            var_dump($login);
-            var_dump($mdp);
-            var_dump($nom);
-            var_dump($prenom);
-            var_dump($email);
             $pdo->beginTransaction();
             // Requête d'insertion
             $sql = "INSERT INTO Utilisateur (login, mdp, nom, prenom, mail) VALUES (?,?,?,?,?)";

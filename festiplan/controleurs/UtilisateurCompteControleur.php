@@ -46,94 +46,84 @@ class UtilisateurCompteControleur
         }
     }
     
-    public function creerCompteUtilisateur(PDO $pdo)
-    {
+    public function pageInscription() {
         $verifNom = true;
         $verifPrenom = true;
         $verifEmail = true;
         $verifLogin = true;
         $verifMdp = true;
         $verifConfirmMdp = true;
-        $editer = (bool)HttpHelper::getParam('editer');
-        $noRefresh = (bool)HttpHelper::getParam('noRefresh');
-        var_dump($editer);
-        if ($editer){
-            $nom = HttpHelper::getParam('nom');
-            $prenom = HttpHelper::getParam('prenom');
-            $email = HttpHelper::getParam('email');
-            $login = HttpHelper::getParam('login');
-            $mdp = HttpHelper::getParam('mdp');
-            $confirmMdp = HttpHelper::getParam('confirmMdp');
-            if (strlen($nom) > 35) {
-                $verifNom = false;
-            }
-            if (strlen($prenom) > 30) {
-                $verifPrenom = false;
-            }
-            if (strlen($email) > 50) {
-                $verifEmail = false;
-            }
-            if (strlen($login) > 35) {
-                $verifLogin = false;
-            }
-            if (strlen($mdp) > 30) {
-                $verifMdp = false;
-            }
-            if (strlen($confirmMdp) > 30) {
-                $verifConfirmMdp = false;
-            }
-            try {
-                $estOk = $verifConfirmMdp && $verifEmail && $verifLogin && $verifMdp && $verifNom && $verifPrenom && $mdp == $confirmMdp;
-                if ($estOk) {
-                    $searchStmt = $this->userModele->creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
-                    return new View("vues/vue_connexion");
-                } else {
-                    $vue = new View("vues/vue_inscription");
-                    $vue->setVar("nomOk", $verifNom);
-                    $vue->setVar("ancienNom", $nom);
-                    $vue->setVar("prenomOk", $verifPrenom);
-                    $vue->setVar("ancienPrenom", $prenom);
-                    $vue->setVar("emailOk", $verifEmail);
-                    $vue->setVar("ancienEmail", $email);
-                    $vue->setVar("loginOk", $verifLogin);
-                    $vue->setVar("ancienLogin", $login);
-                    $vue->setVar("mdpOk", $verifMdp);
-                    $vue->setVar("confirmMdpOk", $verifConfirmMdp);
-                    return $vue;
-                }
-            } catch (PDOException $e) {
-                return new View("vues/vue_inscription");
-            }
-        } else {
-            $verifNom = true;
-            $verifPrenom = true;
-            $verifEmail = true;
-            $verifLogin = true;
-            $verifMdp = true;
-            $verifConfirmMdp = true;
-            $premierePage = HttpHelper::getParam('premierePage');
-            $vue = new View("vues/vue_inscription");
-            $vue->setVar("nomOk", $verifNom);
-            $vue->setVar("ancienNom", $nom);
-            $vue->setVar("prenomOk", $verifPrenom);
-            $vue->setVar("ancienPrenom", $prenom);
-            $vue->setVar("emailOk", $verifEmail);
-            $vue->setVar("ancienEmail", $email);
-            $vue->setVar("loginOk", $verifLogin);
-            $vue->setVar("ancienLogin", $login);
-            $vue->setVar("mdpOk", $verifMdp);
-            $vue->setVar("confirmMdpOk", $verifConfirmMdp);
-            if($noRefresh){
-                if ($premierePage){
-                    $vue->setVar('premierePage', false);
-                } else {
-                    $vue->setVar('premierePage', true);
-                }
-                
+        $vue = new View("vues/vue_inscription");
+        $vue->setVar("nomOk", $verifNom);
+        $vue->setVar("prenomOk", $verifPrenom);
+        $vue->setVar("emailOk", $verifEmail);
+        $vue->setVar("loginOk", $verifLogin);
+        $vue->setVar("mdpOk", $verifMdp);
+        $vue->setVar("confirmMdpOk", $verifConfirmMdp);
+        return $vue;
+    }
+
+    public function creerCompteUtilisateur(PDO $pdo) {
+        $nom = HttpHelper::getParam('nom');
+        $prenom = HttpHelper::getParam('prenom');
+        $email = HttpHelper::getParam('email');
+        $login = HttpHelper::getParam('login');
+        $mdp = HttpHelper::getParam('mdp');
+        $confirmMdp = HttpHelper::getParam('confirmMdp');
+
+        // Initialisez les variables à true
+        $verifNom = true;
+        $verifPrenom = true;
+        $verifEmail = true;
+        $verifLogin = true;
+        $verifMdp = true;
+        $verifConfirmMdp = true;
+
+        if (strlen($nom) > 35) {
+            $verifNom = false;
+        }
+        if (strlen($prenom) > 30) {
+            $verifPrenom = false;
+        }
+        if (strlen($email) > 50) {
+            $verifEmail = false;
+        }
+        if (strlen($login) > 35) {
+            $verifLogin = false;
+        }
+        if (strlen($mdp) > 30) {
+            $verifMdp = false;
+        }
+        if (strlen($confirmMdp) > 30) {
+            $verifConfirmMdp = false;
+        }
+        if ($mdp != $confirmMdp) {
+            $verifConfirmMdp = false;
+            $verifMdp = false;
+        }
+
+        try {
+            $estOk = $verifConfirmMdp && $verifEmail && $verifLogin && $verifMdp && $verifNom && $verifPrenom;
+            var_dump($estOk);
+            if ($estOk) {
+                $searchStmt = $this->userModele->creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
+                return new View("vues/vue_connexion");
             } else {
-                $vue->setVar('premierePage', true);
+                $vue = new View("vues/vue_inscription");
+                $vue->setVar("nomOk", $verifNom);
+                $vue->setVar("ancienNom", $nom);
+                $vue->setVar("prenomOk", $verifPrenom);
+                $vue->setVar("ancienPrenom", $prenom);
+                $vue->setVar("emailOk", $verifEmail);
+                $vue->setVar("ancienEmail", $email);
+                $vue->setVar("loginOk", $verifLogin);
+                $vue->setVar("ancienLogin", $login);
+                $vue->setVar("mdpOk", $verifMdp);
+                $vue->setVar("confirmMdpOk", $verifConfirmMdp);
+                return $vue;
             }
-            return $vue;
+        } catch (PDOException $e) {
+            return new View("vues/vue_inscription");
         }
     }
 

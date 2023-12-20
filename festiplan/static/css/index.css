@@ -1,12 +1,18 @@
 body {
     background-color: #4D4D4D;
-    color: #FFF;
 }
 
 input.form-control {
     height: 50px; /* Ajustez la hauteur des champs de saisie */
     line-height: 50px; /* Ajustez la hauteur de ligne pour centrer le texte verticalement */
     margin-bottom: 20px;
+}
+
+.boutonTerminerAnnuler {
+    height: 50px; /* Ajustez la hauteur des champs de saisie */
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    width: 240px;
 }
 
 .container {
@@ -27,6 +33,18 @@ input.form-control {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-top: 30px;
+    padding-right: 70px;
+    padding-left: 70px;
+}
+
+.cadreInscription {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 500px;
+    height: auto;
+    background: #FFF;
+    text-align: center;
+    color: #000;
     padding-top: 30px;
     padding-right: 70px;
     padding-left: 70px;

@@ -158,6 +158,5 @@ class FestivalControleur {
         $idOrganisateur = $_SESSION['id_utilisateur'];
         $idFestival = HttpHelper::getParam('idFestival');
 
-        $vue = new View("vues/vue_ajouter_organisateur");
     }
 }

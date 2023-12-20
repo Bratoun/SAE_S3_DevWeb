@@ -46,7 +46,7 @@
                 </div>
                 <br><br>
             </form>
-            <p class="petit">Vous n'avez pas de compte ?  <a class="petit" href="/festiplan?controller=UtilisateurCompte&action=CompteUtilisateur"> UN COMPTE</a></p>
+            <p class="petit">Vous n'avez pas de compte ?  <a class="petit" href="/festiplan?controller=UtilisateurCompte&action=pageInscription">CREER UN COMPTE</a></p>
         </div>
     </div>
 </body>

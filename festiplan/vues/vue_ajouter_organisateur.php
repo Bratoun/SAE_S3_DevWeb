@@ -39,7 +39,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="action" value="nouveauOuModificationFestival">
         <input type="hidden" name="modifier" value="true">
         <input type="hidden" name="idFestival" value="<?php echo $idFestival?>">
-
+        <?php
+            echo  $nomFestival;
+        ?>
         <div class="footer">
             <button type="submit" class="btn btn-bleu">Confirmer</button>   
             <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  
