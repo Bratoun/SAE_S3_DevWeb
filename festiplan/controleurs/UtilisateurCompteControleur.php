@@ -24,7 +24,21 @@ class UtilisateurCompteControleur
         if (!$user){
             return new View("vues/vue_connexion");
         } else {
+<<<<<<< Updated upstream
             return new View("vues/vue_accueil");
+=======
+            session_start();
+            $_SESSION['utilisateur_connecte'] = true;
+            $_SESSION['id_utilisateur'] = $user['idUtilisateur'];
+            $idUtilisateur = $_SESSION['id_utilisateur'];
+            $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur     );
+            $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur);
+            $vue = new View("vues/vue_accueil");
+            $vue->setVar("mesSpectacles", $mesSpectacles);
+            $vue->setVar("mesFestivals", $mesFestivals);
+            $vue->setVar("afficher", false);
+            return $vue;
+>>>>>>> Stashed changes
         }
     }
     public function creerCompteUtilisateur(PDO $pdo)

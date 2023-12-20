@@ -23,6 +23,13 @@ class DefaultComponentFactory implements ComponentFactory
 
     private ?FestivalModele $festivalModele = null;
 
+<<<<<<< Updated upstream
+=======
+    private ?GrijModele $grijModele = null;
+
+    private ?IntervenantModele $intervenantModele = null;
+
+>>>>>>> Stashed changes
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
             "Home" => $this->buildHomeController(),
@@ -84,6 +91,14 @@ class DefaultComponentFactory implements ComponentFactory
         return new UtilisateurCompteControleur($this->buildServiceByName("User"));
     }
     
+<<<<<<< Updated upstream
+=======
+    private function buildGrijController() : GrijControleur
+    {
+        return new GrijControleur($this->buildServiceByName("Grij"));
+    }
+    
+>>>>>>> Stashed changes
     private function buildUserModele() : UserModele
     {
         if ($this->userModele == null) {

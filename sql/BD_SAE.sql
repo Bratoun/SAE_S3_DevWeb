@@ -84,18 +84,18 @@ CREATE TABLE Intervenant (
   prenom VARCHAR(35) NOT NULL,
   mail VARCHAR(50) NOT NULL,
   surScene BOOLEAN NOT NULL,
-  typeIntervenant INT(11) NOT NULL,
+  metierIntervenant INT(11) NOT NULL,
   PRIMARY KEY (idIntervenant)
 );
 
 CREATE TABLE MetierIntervenant (
-    idMetierIntervenant INT(11) NOT NULL,
+    idMetierIntervenant INT(11) NOT NULL AUTO_INCREMENT,
     metier VARCHAR(50) NOT NULL,
     PRIMARY KEY (idMetierIntervenant)
 );
 
 ALTER TABLE Intervenant
-ADD FOREIGN KEY (typeIntervenant) REFERENCES MetierIntervenant(idMetierIntervenant);
+ADD FOREIGN KEY (metierIntervenant) REFERENCES MetierIntervenant(idMetierIntervenant);
 
 CREATE TABLE IntervenantSpectacle (
     idSpectacle INT(11) NOT NULL,
@@ -204,4 +204,60 @@ VALUES
 ('Nathan','Girardin','n@sfr.fr','nathan','123'),
 ('Mateo','Faussurier','M@sfr.fr','mateo','123'),
 ('Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
+<<<<<<< Updated upstream
 ('Alix','BRUGIER','a@sfr.fr','alix','123');
+=======
+('Alix','BRUGIER','a@sfr.fr','alix','123');
+
+ INSERT INTO MetierIntervenant (metier) VALUES 
+ ('Comedien'),
+ ('Musicien'),
+ ('Artiste'),
+ ('Acteur'),
+ ('Danseur'),
+ ('Scenographe'),
+ ('Realisateur'),
+ ('Eclairagiste'),
+ ('Regissuer'),
+ ('Maquilleur'),
+ ('Figurant');
+
+
+-- DELIMITER //
+
+-- CREATE PROCEDURE InsertOuUpdateGrij(idFesti INT(11), heureDebutSpec TIME, heureFinSpec TIME, ecart TIME)
+-- BEGIN
+--     DECLARE f_dateDebut DATE;
+--     DECLARE f_dateFin DATE;
+
+--     START TRANSACTION;
+
+--     -- Vérifier si l'ID du festival existe dans la table Grij
+--     IF EXISTS (SELECT 1 FROM Grij WHERE idGrij = idFesti) THEN
+--         -- Si l'ID existe, effectuer une mise à jour
+--         UPDATE Grij
+--         SET heureDebut = heureDebutSpec, heureFin = heureFinSpec, tempsEntreSpectacle = ecart
+--         WHERE idGrij = idFesti;
+
+--         -- suppression des jours déjà générés
+--         DELETE FROM Jour WHERE idGrij = idFesti;
+--     ELSE
+--         -- Si l'ID n'existe pas, effectuer une insertion
+--         INSERT INTO Grij (idGrij, heureDebut, heureFin, tempsEntreSpectacle)
+--         VALUES (idFesti, heureDebutSpec, heureFinSpec, ecart);
+--     END IF;
+
+--     -- Récupérer les dates du Festival
+--     SELECT dateDebut, dateFin INTO f_dateDebut, f_dateFin FROM Festival WHERE idFestival = idFesti;
+
+--     -- Insérer les jours dans la table Jour
+--     WHILE f_dateDebut <= f_dateFin DO
+--         INSERT INTO Jour (idGrij, dateDuJour) VALUES (idFesti, f_dateDebut);
+--         SET f_dateDebut = DATE_ADD(f_dateDebut, INTERVAL 1 DAY);
+--     END WHILE;
+
+--     COMMIT;
+-- END //
+
+-- DELIMITER ;
+>>>>>>> Stashed changes

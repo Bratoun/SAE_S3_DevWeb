@@ -48,7 +48,14 @@
                 ?>
             </select>
         </div>
+<<<<<<< Updated upstream
         <button type="submit" class="btn-bleu">Terminer</button>
+=======
+        <div class="footer">
+            <button type="submit" class="btn btn-bleu">Terminer</button>
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-gris">Annuler</button></a>
+        </div>
+>>>>>>> Stashed changes
     </form>
     <a href="/festiplan?controller=Accueil"><button class="btn-gris">Annuler</button></a>
 </body>
