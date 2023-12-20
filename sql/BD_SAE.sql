@@ -178,36 +178,43 @@ CREATE TABLE SpectaclesJour (
     FOREIGN KEY (idScene) REFERENCES Scene(idScene)
 );
 
-CREATE FUNCTION InsertOuUpdateGrij(idFesti INT(11), heureDebutSpec TIME, heureFinSpec TIME, ecart TIME)
-BEGIN
+DELIMITER //
 
+CREATE PROCEDURE InsertOuUpdateGrij(idFesti INT(11), heureDebutSpec TIME, heureFinSpec TIME, ecart TIME)
+BEGIN
     DECLARE f_dateDebut DATE;
     DECLARE f_dateFin DATE;
 
-    BEGIN TRANSACTION;
-        -- Vérifier si l'ID du festival existe dans la table Grij
-        IF EXISTS (SELECT 1 FROM Grij WHERE idFestival = idFesti) THEN
-            -- Si l'ID existe, effectuer une mise à jour
-            UPDATE Grij
-            SET heureDebut = heureDebutSpec, heureFin = heureFinSpec, tempsEntreSpectacle = ecart
-            WHERE idGrij = idFesti;
+    START TRANSACTION;
 
-            -- suppression des jours déjà générés
-            DELETE FROM Jour where idGrij = idFesti;
-        ELSE
-            -- Si l'ID n'existe pas, effectuer une insertion
-            INSERT INTO Grij (idFestival, heureDebut, heureFin, tempsEntreSpectacle)
-            VALUES (idFesti, heureDebutSpec, heureFinSpec, ecart);
-        END IF;
-        SELECT f_dateDebut = dateDebut, f_dateFin = dateFin FROM Festival WHERE idFestival = idFesti;
+    -- Vérifier si l'ID du festival existe dans la table Grij
+    IF EXISTS (SELECT 1 FROM Grij WHERE idGrij = idFesti) THEN
+        -- Si l'ID existe, effectuer une mise à jour
+        UPDATE Grij
+        SET heureDebut = heureDebutSpec, heureFin = heureFinSpec, tempsEntreSpectacle = ecart
+        WHERE idGrij = idFesti;
 
-        WHILE f_dateDebut <= f_dateFin DO
-            INSERT INTO Jour (idGrij, dateDuJour) VALUES (idFesti, f_dateDebut);
-            SET f_dateDebut = DATE_ADD(f_dateDebut, INTERVAL 1 DAY);
-        END WHILE;
+        -- suppression des jours déjà générés
+        DELETE FROM Jour WHERE idGrij = idFesti;
+    ELSE
+        -- Si l'ID n'existe pas, effectuer une insertion
+        INSERT INTO Grij (idGrij, heureDebut, heureFin, tempsEntreSpectacle)
+        VALUES (idFesti, heureDebutSpec, heureFinSpec, ecart);
+    END IF;
+
+    -- Récupérer les dates du Festival
+    SELECT dateDebut, dateFin INTO f_dateDebut, f_dateFin FROM Festival WHERE idFestival = idFesti;
+
+    -- Insérer les jours dans la table Jour
+    WHILE f_dateDebut <= f_dateFin DO
+        INSERT INTO Jour (idGrij, dateDuJour) VALUES (idFesti, f_dateDebut);
+        SET f_dateDebut = DATE_ADD(f_dateDebut, INTERVAL 1 DAY);
+    END WHILE;
+
     COMMIT;
-END;
+END //
 
+DELIMITER ;
 -- Données insérées
 INSERT INTO CategorieFestival (nom)
 VALUES
