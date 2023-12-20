@@ -23,7 +23,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </a>
                 </div>
                 <div class="col-8">
-                    <h2 class="texteCentre blanc bas"> Parametrage de la plannification : </h2>
+                    <h2 class="texteCentre blanc bas"> Consultation de la planification :</h2>
                 </div>
                 <div class="col-2">
                     <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>
