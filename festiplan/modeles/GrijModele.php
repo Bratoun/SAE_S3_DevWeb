@@ -8,43 +8,6 @@ use DateTime;
 
 class GrijModele
 {
-//     DELIMITER //
-
-// CREATE PROCEDURE InsertOuUpdateGrij(idFesti INT(11), heureDebutSpec TIME, heureFinSpec TIME, ecart TIME)
-// BEGIN
-//     DECLARE f_dateDebut DATE;
-//     DECLARE f_dateFin DATE;
-
-//     START TRANSACTION;
-
-//     -- Vérifier si l'ID du festival existe dans la table Grij
-//     IF EXISTS (SELECT 1 FROM Grij WHERE idGrij = idFesti) THEN
-//         -- Si l'ID existe, effectuer une mise à jour
-//         UPDATE Grij
-//         SET heureDebut = heureDebutSpec, heureFin = heureFinSpec, tempsEntreSpectacle = ecart
-//         WHERE idGrij = idFesti;
-
-//         -- suppression des jours déjà générés
-//         DELETE FROM Jour WHERE idGrij = idFesti;
-//     ELSE
-//         -- Si l'ID n'existe pas, effectuer une insertion
-//         INSERT INTO Grij (idGrij, heureDebut, heureFin, tempsEntreSpectacle)
-//         VALUES (idFesti, heureDebutSpec, heureFinSpec, ecart);
-//     END IF;
-
-//     -- Récupérer les dates du Festival
-//     SELECT dateDebut, dateFin INTO f_dateDebut, f_dateFin FROM Festival WHERE idFestival = idFesti;
-
-//     -- Insérer les jours dans la table Jour
-//     WHILE f_dateDebut <= f_dateFin DO
-//         INSERT INTO Jour (idGrij, dateDuJour) VALUES (idFesti, f_dateDebut);
-//         SET f_dateDebut = DATE_ADD(f_dateDebut, INTERVAL 1 DAY);
-//     END WHILE;
-
-//     COMMIT;
-// END //
-
-// DELIMITER ;
     public function modifierCreerGrij(PDO $pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles)
     {
         try {
@@ -71,17 +34,17 @@ class GrijModele
         
             // Récupérer les dates du Festival
             $stmt = $pdo->prepare("SELECT dateDebut, dateFin FROM Festival WHERE idFestival = ?");
-            $stmt->execute([$idFestivl]);
+            $stmt->execute([$idFestival]);
             $row = $stmt->fetch();
             $f_dateDebut = $row['dateDebut'];
             $f_dateFin = $row['dateFin'];
-        
+            
             // Insérer les jours dans la table Jour
-            $listeDate = array('idG' => $idFestival);
+            $listeDate = array();
             $sql = "INSERT INTO Jour (idGrij, dateDuJour) VALUES";
             while (strtotime($f_dateDebut) <= strtotime($f_dateFin)) {
-                $sql .= " (?,?),";
-                $listeDate[] = $idFestival;
+                $sql .= " ( ? , ? ),";
+                $listeDate[] = intval($idFestival);
                 $listeDate[] = $f_dateDebut;
                 $f_dateDebut = date("Y-m-d", strtotime($f_dateDebut . " +1 day"));
             }
@@ -112,6 +75,29 @@ class GrijModele
     public function recupererJours(PDO $pdo, $idFestival)
     {
         $sql = "SELECT * FROM Jour WHERE idGrij = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival]);
+        return $stmt;
+    }
+
+    public function recupererSpectacles(PDO $pdo, $idFestival)
+    {
+        $sql = "SELECT spec.titre, spec.duree, spec.tailleSceneRequise
+        FROM Festival as f
+        JOIN SpectacleDeFestival as sf ON f.idFestival = sf.idFestival
+        JOIN Spectacle as spec ON spec.idSpectacle = sf.idSpectacle
+        WHERE idFestival = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival]);
+        return $stmt;
+    }
+
+    public function recupererScenes(PDO $pdo, $idFestival)
+    {
+        $sql = "SELECT sc.taille, sc.nom FROM Festival as f
+        JOIN SceneFestival as scf ON f.idFestival = scf.idFestival
+        JOIN Scene as sc ON sc.idScene = scf.idScene
+        WHERE idFestival = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$idFestival]);
         return $stmt;

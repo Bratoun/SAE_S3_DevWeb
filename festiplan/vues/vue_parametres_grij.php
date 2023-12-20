@@ -61,13 +61,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             </div>
                         </div>
                         <div class="row">
+                            <!-- Annule les modification du jour sélectionné -->
+                            <div class="col-4">
+                                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-warning">Annuler</button></a>
+                            </div>
                             <!-- Enregistre les paramètres du jour sélectionné -->
                             <div class="col-4">
                                 <input type="submit" class="btn btn-success" value="Valider"/>
-                            </div>
-                            <!-- Annule les modification du jour sélectionné -->
-                            <div class="col-4">
-                                <a href="/festiplan?controller=Accueil"><button type="button" class="btn btn-warning">Annuler</button></a>
                             </div>
                         </div>
                     </form>
