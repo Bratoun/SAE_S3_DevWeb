@@ -104,7 +104,6 @@ class UtilisateurCompteControleur
 
         try {
             $estOk = $verifConfirmMdp && $verifEmail && $verifLogin && $verifMdp && $verifNom && $verifPrenom;
-            var_dump($estOk);
             if ($estOk) {
                 $searchStmt = $this->userModele->creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
                 return new View("vues/vue_connexion");

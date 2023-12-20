@@ -19,7 +19,6 @@ input.form-control {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .cadreConnexion {
@@ -93,6 +92,12 @@ input.form-control {
 :placeholder-shown {
     font-weight: bold;
     font-size: 80%;
+}
+
+.placeholder-invalid::placeholder {
+    font-weight: bold;
+    opacity: 0.6;
+    color: red;
 }
 
 label {
