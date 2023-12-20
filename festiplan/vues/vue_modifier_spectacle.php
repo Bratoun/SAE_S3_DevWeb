@@ -77,6 +77,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="footer">
             <button type="submit" class="btn-bleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn-gris">Annuler</button></a>
+            <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant"><button type="button" class="btn-gris">Ajouter un intervenant</button></a>
         </div>
     </form>
 </body>

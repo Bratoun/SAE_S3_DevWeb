@@ -96,4 +96,16 @@ class SpectacleModele
         $stmt->execute();
         return $stmt;
     }
+
+    /**
+     * Renvoie de la liste des métiers possibles pour un intervenant
+     * @param $pdo un objet PDO connecté à la base de données
+     */
+    public function listeMetiersIntervenants(PDO $pdo)
+    {
+        $sql = "SELECT * FROM MetierIntervenant ORDER BY metier";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
 }

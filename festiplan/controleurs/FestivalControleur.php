@@ -78,9 +78,13 @@ class FestivalControleur {
             // Renvoie a la page d'accueil avec l'affichage des festival et des spectacles de l'utilisateur
             $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idOrganisateur);
             $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idOrganisateur);
-            $vue = new View("vues/vue_accueil");
+
+            // Renvoie a la connexion qui renvoie lui même a l'accueil car l'utilisateur est connecté.
+            // Ainsi cela permet de bloquer l'ajout de festival lorsque l'on refresh a l'infini 
+            $vue = new View("vues/vue_connexion");
             $vue->setVar("mesSpectacles", $mesSpectacles);
             $vue->setVar("mesFestivals", $mesFestivals);
+            $vue->setVar("afficher", false);
             return $vue;
         } else {
             // Si des valeurs sont incorectes renvoie lesquels le sont et les valeurs
@@ -153,10 +157,36 @@ class FestivalControleur {
         return $vue;
     }
 
-    public function ajouterOrganisateur(PDO $pdo) : View {
+    public function gestionOrganisateur(PDO $pdo) : View {
         session_start();
-        $idOrganisateur = $_SESSION['id_utilisateur'];
+        $idResponsable = $_SESSION['id_utilisateur'];
         $idFestival = HttpHelper::getParam('idFestival');
 
+        // Recupere les données du festival séléctionné
+        $festival = $this->festivalModele->leFestival($pdo,$idFestival);
+
+        // Recupere tout les utilisateurs
+        $listeUtilisateur = $this->festivalModele->listeUtilisateur($pdo);
+        // Recupere tout les organisateurActuel du festival
+        $listeOrganisateur = $this->festivalModele->listeOrganisateurFestival($pdo,$idFestival);
+
+        $vue = new View("vues/vue_ajouter_organisateur");
+        $vue->setVar("nomFestival", $festival['titre']);
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("idResponsable", $idResponsable);
+        $vue->setVar("listeOrganisateur", $listeOrganisateur);
+        $vue->setVar("listeUtilisateur", $listeUtilisateur);
+        
+        return $vue;
+    }
+
+    public function majOrganisateur(PDO $pdo) : View {
+
+        // Récupere tout les parametre d'un festivale l'organisateur');
+        $idUtilisateurs = HttpHelper::getParam('Utilisateur');
+        foreach ($checkboxValues as $value) {
+            echo "Checkbox cochée avec la valeur : " . htmlspecialchars($value) . "<br>";
+        }
+ 
     }
 }

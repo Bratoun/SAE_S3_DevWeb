@@ -98,7 +98,7 @@ CREATE TABLE Intervenant (
 );
 
 CREATE TABLE MetierIntervenant (
-    idMetierIntervenant INT(11) NOT NULL,
+    idMetierIntervenant INT(11) NOT NULL AUTO_INCREMENT,
     metier VARCHAR(50) NOT NULL,
     PRIMARY KEY (idMetierIntervenant)
 );
@@ -209,3 +209,15 @@ VALUES
 ('Mateo','Faussurier','M@sfr.fr','mateo','123'),
 ('Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
 ('Alix','BRUGIER','a@sfr.fr','alix','123');
+
+INSERT INTO MetierIntervenant (metier)
+VALUES
+('Acteur'),
+('Danseur'),
+('Chanteur'),
+('Régisseur'),
+('Comédien'),
+('Maquilleur'),
+('Habilleur'),
+('Scènographe'),
+('Eclairagiste');

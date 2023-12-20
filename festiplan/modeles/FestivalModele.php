@@ -152,9 +152,20 @@ class FestivalModele
      * @param idFestival l'id du festival.
      */
     public function listeOrganisateurFestival($pdo,$idFestival) {
-        $sql = "SELECT Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
+        $sql = "SELECT Utilisateur.idUtilisateur,Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idFestival",$idFestival);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
+     * Renvoie la liste de tout les utilisateurs
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function listeUtilisateur($pdo) {
+        $sql = "SELECT idUtilisateur,nom FROM Utilisateur";
+        $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt;
     }

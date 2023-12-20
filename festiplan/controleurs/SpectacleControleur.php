@@ -67,9 +67,12 @@ class SpectacleControleur {
             $search = $this->spectacleModele->insertionspectacle($pdo, $titre, $description, $duree, $illustration, $categorie, $taille, $idUtilisateur);
             $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur);
             $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur);
-            $vue = new View("vues/vue_accueil");
+
+            //Renvoie à l'accueil car quand il va à la pgae connexion il est déjà connecté
+            $vue = new View("vues/vue_connexion");
             $vue->setVar("mesSpectacles", $mesSpectacles);
             $vue->setVar("mesFestivals", $mesFestivals);
+            $vue->setVar("afficher", true);
             return $vue;
         } else {
             // Si des valeurs sont incorectes renvoie lesquels le sont et les valeurs
@@ -120,4 +123,12 @@ class SpectacleControleur {
         $vue->setVar("searchStmt2",$searchStmt2);
         return $vue;
     }
+
+    public function ajouterIntervenant(PDO $pdo) : View {
+        // Recupere les données de la liste des métiers des intervenants
+        $searchStmt = $this->spectacleModele->listeMetiersIntervenants($pdo);
+        $vue = new View("vues/vue_ajouter_intervenant");
+        $vue->setVar("searchStmt",$searchStmt);
+        return $vue;
+    }    
 }

@@ -75,7 +75,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 
                 }
             if($estResponsable) {?>
-                <a href="/festiplan?controller=Festival&action=ajouterOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">ajouter des Organisateur</button></a>  
+                <a href="/festiplan?controller=Festival&action=gestionOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">ajouter des Organisateur</button></a>  
             <?php } ?>
         </div>
         <div class="footer">
