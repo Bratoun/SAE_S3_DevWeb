@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container containerCentre">
-        <div class="cadreConnexion">
+        <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
                 <br><br>

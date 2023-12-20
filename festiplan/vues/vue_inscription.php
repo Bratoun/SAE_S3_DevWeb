@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container containerCentre">
-        <div class="cadreInscription">
+        <div class="cadreUtilisateur inscription">
             <form action="/festiplan/index.php" method="post">
                 <input name="controller" type="hidden" value="UtilisateurCompte">
                 <input name="action" type="hidden" value="creerCompteUtilisateur">
