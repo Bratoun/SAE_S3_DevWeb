@@ -69,10 +69,20 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
        }
     ?>
     <div class="footer">
-        <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn btn-gris">Créer un spectacle</button></a>
-        <a href="/festiplan?controller=Festival"><button type="submit" class="btn btn-bleu">Créer un festival</button></a>
-        <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion"><button type="submit" class="btn btn-danger">Deconnexion</button></a>
-        <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn btn-danger"><?php if ($afficher) {echo 'Voir mes festivals';} else { echo 'Voir mes spectacles';}?></button></a>
+        <div class="row">
+            <div class="col-3">
+                <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn fondVert">Créer un spectacle</button></a>
+            </div>
+            <div class="col-3">
+                <a href="/festiplan?controller=Festival"><button type="submit" class="btn fondBleu">Créer un festival</button></a>
+            </div>
+            <div class="col-3">
+                <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion"><button type="submit" class="btn fondRouge">Deconnexion</button></a>
+            </div>
+            <div class="col-3">
+                <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn fondGris"><?php if ($afficher) {echo 'Voir mes festivals';} else { echo 'Voir mes spectacles';}?></button></a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

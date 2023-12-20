@@ -105,27 +105,27 @@ label {
     opacity: 0.5;
 }
 
-.btn-creer-spectacle {
-    width: 400px;
-    height: 57px;
+.btn {
+    width: auto;
+    height: 50px;
     flex-shrink: 0;
-    background-color: #A1FC76;
-    color: #000;
-}
-.btn-bleu {
-    width: 400px;
-    height: 57px;
-    flex-shrink: 0;
-    background-color: #4EB2F9;
     color: #FFFFFF;
 }
 
-.btn-rouge {
-    width: 400px;
-    height: 57px;
-    flex-shrink: 0;
-    background-color: #EE0000;
-    color: #000000;
+.fondRouge {
+    background-color: red;
+}
+
+.fondVert {
+    background-color: green;
+}
+
+.fondGris {
+    background-color: #4D4D4D;
+}
+
+.fondBleu {
+    background-color: blue;
 }
 
 .header {
