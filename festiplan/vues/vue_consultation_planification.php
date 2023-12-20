@@ -32,14 +32,11 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
     </header>
     <body class="body-blanc">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="col-9" >
-                    <!-- liste des jours -->
-                </div>
-                <div class="3">
-                    <!-- détails du jour sélectionné -->
-                </div>
+                <?php
+                
+                ?>
             </div>
         </div>
     </body>

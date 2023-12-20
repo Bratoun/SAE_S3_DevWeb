@@ -32,9 +32,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
     </header>
     <body class="body-blanc">
-        <div class="container-fluid">
+        <div class="container">
+            <?php if ($message != null) echo "<h1>".$message."</h1>";?>
             <div class="row">
-                <div class="col-12 fixed-position" id="parametres-grij">
+                <div class="col-12" id="parametres-grij">
                     <form method="post" action="index.php">
                         <input type="hidden" name="controller" value="Grij"/>
                         <input type="hidden" name="action" value="enregistrerGrij"/> 

@@ -36,18 +36,27 @@ class GrijControleur
 
     public function enregistrerGrij(PDO $pdo)
     {
+        $message = null;
         $idFestival = HttpHelper::getParam('idFestival');
         $heureDebut = HttpHelper::getParam('heureDebut');
         $heureFin = HttpHelper::getParam('heureFin');
         $ecartEntreSpectacles = HttpHelper::getParam('ecartEntreSpectacles');
 
-        $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
-        
-        $stmt = $this->grijModele->recupererJours($pdo, $idFestival);
-        
-        $vue = new View('vues/vue_consultation_planification');
+        if ($heureDebut == null || $heureFin == null || $ecartEntreSpectacles == null){
+            $vue = new View('vues/vue_parametres_grij');
+            $message = "Vous n'avez pas entré tous les champs";
+            $vue->setVar('heureDebut', $heureDebut);
+            $vue->setVar('heureFin', $heureFin);
+            $vue->setVar('ecartEntreSpectacles', $ecartEntreSpectacles);
+        } else {
+            $vue = new View('vues/vue_consultation_planification');
+            $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
+            $stmt = $this->grijModele->recupererJours($pdo, $idFestival);
+            $vue->setVar('listeJours', $stmt);
+        }
 
-        $vue->setVar('listeJours', $stmt);
+        $vue->setVar('idFestival', $idFestival);
+        $vue->setVar('message', $message);
         return $vue;
     }
 }
