@@ -8,7 +8,7 @@
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="container containerCentre">
         <div class="cadreConnexion">
             <form action="index.php" method="post">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">

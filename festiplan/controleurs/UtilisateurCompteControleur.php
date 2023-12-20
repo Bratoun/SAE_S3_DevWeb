@@ -99,7 +99,6 @@ class UtilisateurCompteControleur
         }
         if ($mdp != $confirmMdp) {
             $verifConfirmMdp = false;
-            $verifMdp = false;
         }
 
         try {
