@@ -186,24 +186,5 @@ img {
 /* Classes et id css relatif à la Grij.*\
 /* positionnement du formulaire de remplissage des paramètres de la planification*/
 #parametres-grij {
-    top: 50px;
-    right: 0;
-    width:100%;
     background-color:#C7C3C2;
-}
-
-.case-jour {
-    border: solid;
-    font-size: 20px;
-    border-width: 2px;
-    border-radius: 8px;
-    color: black;
-}
-
-.case-jour-initialisee {
-    background-color: #DAF7A6;
-}
-
-.case-jour-non-initialisee {
-    background-color: #FFF1EC;
 }
