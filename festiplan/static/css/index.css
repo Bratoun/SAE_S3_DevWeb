@@ -1,0 +1,212 @@
+body {
+    background-color: #4D4D4D;
+}
+
+input.form-control {
+    height: 50px; /* Ajustez la hauteur des champs de saisie */
+    line-height: 50px; /* Ajustez la hauteur de ligne pour centrer le texte verticalement */
+    margin-bottom: 20px;
+}
+
+.boutonTerminerAnnuler {
+    height: 50px; /* Ajustez la hauteur des champs de saisie */
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    width: 240px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cadreUtilisateur {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: auto;
+    background: #FFF;
+    padding: 20px;
+    text-align: center;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-right: 70px;
+    padding-left: 70px;
+}
+
+.connexion {
+    width: 500px;
+}
+
+.inscription {
+    width: 700px;
+}
+
+.custom-form-group {
+    margin-bottom: 0;
+}
+
+.texteCentre {
+    text-align: center;
+}
+
+.texteGauche {
+    text-align: left;
+}
+
+.ligneEnBas {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Change the background color of text input fields */
+.form-control {
+    background-color: #D2D2D2;
+}
+
+/* Increase the size of the submit button */
+.boutonFleche {
+    height: 80px;
+    width: 80px;
+    border-radius: 25px;
+    font-size: 2em;
+    align-items: center;
+    margin: auto;
+    padding: 10px;
+}
+
+.petit {
+    font-size: 80%;
+    opacity: 0.8;
+}
+
+.grand {
+    font-size: 250%;
+    font-weight: bolder;
+}
+
+:placeholder-shown {
+    font-weight: bold;
+    font-size: 80%;
+}
+
+.placeholder-invalid::placeholder {
+    font-weight: bold;
+    opacity: 0.6;
+    color: red;
+}
+
+label {
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+.btn {
+    width: auto;
+    height: 50px;
+    flex-shrink: 0;
+    color: #FFFFFF;
+}
+
+.fondRouge {
+    background-color: red;
+}
+
+.fondVert {
+    background-color: green;
+}
+
+.fondGris {
+    background-color: #4D4D4D;
+}
+
+.fondBleu {
+    background-color: blue;
+}
+
+.header {
+    top: 0;
+    width: 100%; 
+    height: 70px; 
+    background-color: #4D4D4D;
+}
+
+.body-blanc {
+    background-color: #FFFF;
+    color: #000;
+}
+
+.btn-gris {
+    width: 163px;
+    height: 54px;
+    flex-shrink: 0;
+    background-color: #D9D9D9;
+    color: #000000;
+}
+
+img {
+    width: 80px; 
+    height: 40px;  
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #EDEDED;
+    padding: 10px;
+    text-align: center;
+}
+
+.icone-user {
+    padding-right: 15px;
+    font-size: 2em;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.logo-festiplan {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    position: absolute;
+}
+
+.blanc {
+    color: #FFFFFF;
+}
+
+.bas {
+    margin-top: 13px;
+}
+
+.cadreFestival {
+    width: 1349px;
+    height: 105px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #D9D9D9;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Lorsque qu'un champ est invalide affiche en rouge */
+#invalide {
+    color: rgb(245, 0, 0);
+}
+
+/* Classes et id css relatif à la Grij.*\
+/* positionnement du formulaire de remplissage des paramètres de la planification*/
+#parametres-grij {
+    background-color:#C7C3C2;
+}
