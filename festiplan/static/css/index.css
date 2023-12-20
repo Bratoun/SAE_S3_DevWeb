@@ -178,7 +178,10 @@ img {
 }
 
 .centre {
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
 }
 
 .cadreFestival {
@@ -195,6 +198,7 @@ img {
     font-weight: 700;
     line-height: normal;
     padding: 10px;
+    margin-top: 15px;
 }
 
 /* Lorsque qu'un champ est invalide affiche en rouge */
