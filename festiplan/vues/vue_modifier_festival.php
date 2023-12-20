@@ -75,14 +75,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 
                 }
             if($estResponsable) {?>
-                <a href="/festiplan?controller=Festival&action=ajouterOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">ajouter des Organisateur</button></a>  
+                <a href="/festiplan?controller=Festival&action=ajouterOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn fondGris">ajouter des Organisateur</button></a>  
             <?php } ?>
         </div>
         <div class="footer">
             <button type="submit" class="btn btnModif fondVert">Confirmer</button>   
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>  
             <?php if($estResponsable) {?>
-                <a href="/festiplan?controller=Festival&action=supprimerFestival&idFestival=<?php echo $idFestival;?>"> <button type="button" class="btn btn-rouge">Supprimer</button></a>
+                <a href="/festiplan?controller=Festival&action=supprimerFestival&idFestival=<?php echo $idFestival;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer</button></a>
             <?php } ?>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Consulter la planification</button></a>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>

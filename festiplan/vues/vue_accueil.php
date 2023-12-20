@@ -37,15 +37,16 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <?php
         // Affichage de la liste des spectacles
         if ($afficher) {
-            while ($listeSpectacle = $mesSpectacles->fetch()) 
-            {
+            while ($listeSpectacle = $mesSpectacles->fetch()) {
                 ?>
-                <div class='cadreFestival'>
-                <?php
-                    $idSpectacle = $listeSpectacle['idSpectacle'];
-                    echo $listeSpectacle['titre'];
-                ?>
-                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-bleu">Modifier le Spectacle</button></a>
+                <div class="centre">
+                    <div class='cadreFestival'>
+                        <?php
+                            $idSpectacle = $listeSpectacle['idSpectacle'];
+                            echo $listeSpectacle['titre'];
+                        ?>
+                        <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+                    </div>
                 </div>
                 <?php
             }
@@ -54,13 +55,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             while ($festival = $mesFestivals->fetch()) {
                 $idFestival = $festival['idFestival'];
             ?>  
-                <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'>  
-                    <div class='cadreFestival'>
-                    <?php
-                    echo $festival['titre']."<br>";
-                    echo $festival['nom'];
-                    ?>
-                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-bleu">Modifier le Festival</button></a>
+                <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'>
+                    <div class="centre">  
+                        <div class='cadreFestival'>
+                            <?php
+                            echo $festival['titre']."<br>";
+                            echo $festival['nom'];
+                            ?>
+                            <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn fondBleu">Modifier le Festival</button></a>
+                        </div>
                     </div>
                 </a>
                 <br>
