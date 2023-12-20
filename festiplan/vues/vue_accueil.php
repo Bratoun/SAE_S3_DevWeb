@@ -28,7 +28,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <h2 class="texteCentre blanc bas"><?php if ($afficher) {echo 'Mes spectacles';} else { echo 'Mes festivals';}?></h2>
             </div>
             <div class="col-2">
-                <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>
+                <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil"><button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button></a>
             </div>
         </div>
     </div>

@@ -53,4 +53,31 @@ class UserModele
             echo "Erreur : " . $e->getMessage();
         }
     }
+
+    public function modifierCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom) {
+        try {
+            // Début de la transaction
+            $pdo->beginTransaction();
+            
+            // Requête de mise à jour
+            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ? WHERE login = ?";
+            $updateStmt = $pdo->prepare($sql);
+            $updateStmt->execute([$mdp, $nom, $prenom, $login]);
+    
+            // Fin de la transaction (enregistrement des modifications)
+            $pdo->commit();
+        } catch (PDOException $e) {
+            // En cas d'erreur, annuler la transaction
+            $pdo->rollBack();
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    public function recupererInformationsProfil(PDO $pdo, $id) {
+        $sql = "SELECT login, nom, prenom FROM Utilisateur WHERE idUtilisateur = ?";
+        $searchStmt = $pdo->prepare($sql);
+        $searchStmt->execute([$id]);
+        return $searchStmt;
+    }
+    
 }

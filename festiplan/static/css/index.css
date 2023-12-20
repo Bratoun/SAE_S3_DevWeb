@@ -8,7 +8,7 @@ input.form-control {
     margin-bottom: 20px;
 }
 
-.boutonTerminerAnnuler {
+.boutonTerminer {
     height: 50px; /* Ajustez la hauteur des champs de saisie */
     margin-bottom: 10px;
     font-size: 1.3em;
@@ -89,6 +89,10 @@ input.form-control {
     font-weight: bolder;
 }
 
+.plusBas {
+    margin-top: 65px;
+}
+
 :placeholder-shown {
     font-weight: bold;
     font-size: 80%;
@@ -129,10 +133,19 @@ label {
 }
 
 .header {
+    position: absolute;
     top: 0;
     width: 100%; 
     height: 70px; 
     background-color: #4D4D4D;
+}
+
+.header-blanc {
+    position: absolute;
+    top: 0;
+    width: 100%; 
+    height: 70px; 
+    background-color: #FFFFFF;
 }
 
 .body-blanc {
