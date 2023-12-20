@@ -49,10 +49,19 @@ class GrijControleur
             $vue->setVar('heureFin', $heureFin);
             $vue->setVar('ecartEntreSpectacles', $ecartEntreSpectacles);
         } else {
-            $vue = new View('vues/vue_consultation_planification');
-            $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
-            $stmt = $this->grijModele->recupererJours($pdo, $idFestival);
-            $vue->setVar('listeJours', $stmt);
+            
+            $ok = $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
+            if ($ok){
+                $stmt = $this->grijModele->recupererJours($pdo, $idFestival);
+                $vue = new View('vues/vue_consultation_planification');
+                $vue->setVar('listeJours', $stmt);
+            } else {
+                $vue = new View('vues/vue_parametres_grij');
+                $message = "Erreur avec la base de données.";
+                $vue->setVar('heureDebut', $heureDebut);
+                $vue->setVar('heureFin', $heureFin);
+                $vue->setVar('ecartEntreSpectacles', $ecartEntreSpectacles);
+            }
         }
 
         $vue->setVar('idFestival', $idFestival);
