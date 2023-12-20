@@ -79,13 +79,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <?php } ?>
         </div>
         <div class="footer">
-            <button type="submit" class="btn btn-bleu">Confirmer</button>   
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-gris">Annuler</button></a>  
+            <button type="submit" class="btn btnModif fondVert">Confirmer</button>   
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>  
             <?php if($estResponsable) {?>
                 <a href="/festiplan?controller=Festival&action=supprimerFestival&idFestival=<?php echo $idFestival;?>"> <button type="button" class="btn btn-rouge">Supprimer</button></a>
             <?php } ?>
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-bleu">Consulter la planification</button></a>
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btn-bleu">Modifier la liste des spectacles</button></a>
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Consulter la planification</button></a>
+            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
         </div>
     </form>
 </body>
