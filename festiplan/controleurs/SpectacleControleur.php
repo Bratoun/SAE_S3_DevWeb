@@ -131,4 +131,24 @@ class SpectacleControleur {
         $vue->setVar("searchStmt",$searchStmt);
         return $vue;
     }    
+
+    public function nouveauIntervenant(PDO $pdo) : View {
+        session_start();
+        //Récupère tous les paramètres d'un intervenant
+        $nom = HttpHelper::getParam('nom');
+        $prenom = HttpHelper::getParam('prenom');
+        $mail = HttpHelper::getParam('email');
+        $surScene = HttpHelper::getParam('categorieIntervenant');
+        $typeIntervenant = HttpHelper::getParam('metierIntervenant');
+        $verifSurScene = true;
+        if ($surScene == "1") {
+            $verifSurScene = false;
+        } else {
+            $verifSurScene = true;
+        }
+        var_dump($mail);
+        $search = $this->spectacleModele->insertionsIntervenants($pdo, $nom, $prenom, $mail, $verifSurScene, $typeIntervenant);
+        $vue = new View ("vues/vue_modifier_spectacle");
+        return $vue;
+    }
 }

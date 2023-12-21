@@ -108,4 +108,26 @@ class SpectacleModele
         $stmt->execute();
         return $stmt;
     }
+
+    /**
+     * Insertion des intervenants
+     * @param pdo pour la connexion à la base de données
+     * @param nom pour récupérer le nom de l'intervenant
+     * @param prenom pour récupérer le prénom de l'intervenant
+     * @param mail pour récuperer le mail de l'intervenant
+     * @param surScene boolean pour savoir si l'intervenant est sur ou hors scene
+     * @param typeIntervenant pour récupérer le métier de l'intervenant
+     * @return stmt qui insert les données dans la table intervenant 
+     */
+    public function insertionsIntervenants(PDO $pdo, $nom, $prenom, $mail, $surScene, $typeIntervenant)
+    {
+        $sql = "INSERT INTO Intervenant (nom,prenom,mail,surScene,typeIntervenant) VALUES (:leNom,:lePrenom,:leMail,:surScene,:typeIntervenant)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("leNom",$nom);
+        $stmt->bindParam("lePrenom",$prenom);
+        $stmt->bindParam("leMail",$mail);
+        $stmt->bindParam("surScene",$surScene);
+        $stmt->bindParam("typeIntervenant",$typeIntervenant);
+        $stmt->execute();
+    }
 }

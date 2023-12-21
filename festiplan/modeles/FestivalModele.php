@@ -169,4 +169,32 @@ class FestivalModele
         $stmt->execute();
         return $stmt;
     }
+
+    /**
+     * Mets a jour la liste des organisateur d'un festival
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idFestival l'id du festival.
+     */
+    public function supprimerOrganisateurs($pdo,$idFestival) {
+        $sql = "DELETE FROM EquipeOrganisatrice WHERE idFestival = :id AND responsable = false ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idFestival);
+        $stmt->execute();
+    }
+
+    /**
+     * Mets a jour la liste des organisateur d'un festival
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function majOrganisateur($pdo,$idFestival,$utilisateur) {
+
+        $responsable = false;
+        $sql = "INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival) VALUES (:idOrg,:idFestival)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("idOrg",$utilisateur);
+        $stmt->bindParam("idFestival",$idFestival);
+        //$stmt->bindParam("responsable",$responsable);
+        $stmt->execute();
+        $stmt->execute();
+    }
 }

@@ -37,7 +37,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <form action="index.php" method="post">
           
         <input type="hidden" name="controller" value="Spectacle">
-        <input type="hidden" name="action" value="nouveauSpectacle">
+        <input type="hidden" name="action" value="nouveauIntervenant">
 
         <label name="nom">Nom de l'intervenant :</label>
         <input type="text" id="nom" name="nom" required/>
@@ -45,8 +45,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <label name="nom">Prénom de l'intervenant :</label>
         <input type="text" id="prenom" name="prenom" required/>
         <br>
-        <label name="mail" id="mail" name="mail">Adresse mail :</label>
-        <input type="email" id="email" pattern=".+@example\.com" size="30" required/>
+        <label name="email" id="email" name="email">Adresse mail :</label>
+        <input type="email" id="email" size="50" required/>
         <br>
         <label for="metierIntervenant">Métier intervenant :</label><br>    
             <select id="categorie" name="categorie" required>
@@ -57,6 +57,12 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 }
                 ?>
             </select>
+            <br>
+        <label for="categorieIntervenant">Intervenant sur ou hors scène :</label><br>
+        <select name="categorieIntervenant" id="categorieIntervenant">
+            <option value="0">Sur Scène</option>
+            <option value="1">Hors Scène</option>
+        </select>
         <div class="footer">
             <button type="submit" class="btn btn-bleu">Confirmer</button>   
             <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  

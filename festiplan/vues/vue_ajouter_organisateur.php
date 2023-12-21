@@ -56,7 +56,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 
         while ($row = $listeUtilisateur->fetch()) {
             ?>
-            <input type="checkbox" name="Utilisateur" value="<?php echo $row['idUtilisateur']; ?>" <?php
+            <input type="checkbox" name="Utilisateur[]" value="<?php echo $row['idUtilisateur']; ?>" <?php
             // Vérifier si l'utilisateur est dans la liste des organisateurs
             if (in_array($row['idUtilisateur'], $organisateurIDs)) {
                 echo 'checked';

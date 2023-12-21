@@ -180,13 +180,49 @@ class FestivalControleur {
         return $vue;
     }
 
+
+    /**
+     * Ajout a YASMF
+     * @param string $name the name of the param
+     * @return string|null the value of the param if defined, null otherwise
+     */
+    public static function getParamArray(string $name): ?array {
+        if (isset($_GET[$name])) return $_GET[$name];
+        if (isset($_POST[$name])) return $_POST[$name];
+        return null;
+    }
+
+    
     public function majOrganisateur(PDO $pdo) : View {
+        session_start();
+        $idOrganisateur = $_SESSION['id_utilisateur'];
+        $idFestival = HttpHelper::getParam('idFestival');
 
         // Récupere tout les parametre d'un festivale l'organisateur');
-        $idUtilisateurs = HttpHelper::getParam('Utilisateur');
-        foreach ($checkboxValues as $value) {
-            echo "Checkbox cochée avec la valeur : " . htmlspecialchars($value) . "<br>";
+        $idUtilisateurs = self::getParamArray('Utilisateur');
+        // Supprime tout les organisateur sauf le responsable
+        $this->festivalModele->supprimerOrganisateurs($pdo,$idFestival);
+        foreach($idUtilisateurs as $utilisateur) {
+            // Ajoute un a un les nouveaux organisateurs
+            //$this->festivalModele->majOrganisateur($pdo,$idFestival,$utilisateur);
         }
- 
+
+        $vue = new View("vues/vue_modifier_festival");
+        $vue->setVar("nomOk", true);
+        $vue->setVar("ancienNom", $festivalAModifier['titre']);
+        $vue->setVar("descOk", true);
+        $vue->setVar("ancienneDesc", $festivalAModifier['description']);
+        $vue->setVar("dateOk", true);
+        $vue->setVar("ancienneDateDebut", $festivalAModifier['dateDebut']);
+        $vue->setVar("ancienneDateFin", $festivalAModifier['dateFin']);
+        $vue->setVar("ancienneCategorie", $festivalAModifier['categorie']);
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("searchStmt",$searchStmt);
+        $vue->setVar("estResponsable", $estResponsable['responsable']);
+        $vue->setVar("listeOrganisateur", $listeOrganisateur);
+        return $vue;
     }
+
+
+    
 }
