@@ -169,14 +169,17 @@ CREATE TABLE Jour (
 );
 
 CREATE TABLE SpectaclesJour (
-    idJour INT(11) NOT NULL,
+    idFestival INT(11) NOT NULL,
+    idJour INT(11) NULL,
     idSpectacle INT(11) NOT NULL,
-    idScene INT(11) NOT NULL DEFAULT 0,
+    idScene INT(11) NULL,
     ordre INT(3) NOT NULL DEFAULT 0,
-    PRIMARY KEY (idJour, idSpectacle),
+    place TINYINT NOT NULL DEFAULT 0,
+    PRIMARY KEY (idFestival, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
-    FOREIGN KEY (idScene) REFERENCES Scene(idScene)
+    FOREIGN KEY (idScene) REFERENCES Scene(idScene),
+    FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
 );
 
 -- Données insérées

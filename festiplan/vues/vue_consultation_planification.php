@@ -35,7 +35,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="container">
             <div class="row">
                 <?php
-                
+                    var_dump($listeJours);
                 ?>
             </div>
         </div>
