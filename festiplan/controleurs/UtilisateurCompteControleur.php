@@ -125,23 +125,39 @@ class UtilisateurCompteControleur
         }
     }
 
-    public function pageProfil(PDO $pdo) {
+    public function pageModifierProfil(PDO $pdo) {
         $verifNom = true;
         $verifPrenom = true;
         $verifLogin = true;
         $verifMdp = true;
         $verifConfirmMdp = true;
+        $verifEmail = true;
+        session_start();
         $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
         $utilisateur = $utilisateur->fetch();
-        $vue = new View("vues/vue_profil");
+        $vue = new View("vues/vue_modifier_profil");
         $vue->setVar("nomOk", $verifNom);
         $vue->setVar("ancienNom", $utilisateur['nom']);
         $vue->setVar("prenomOk", $verifPrenom);
         $vue->setVar("ancienPrenom", $utilisateur['prenom']);
         $vue->setVar("loginOk", $verifLogin);
         $vue->setVar("ancienLogin", $utilisateur['login']);
+        $vue->setVar("emailOk", $verifEmail);
+        $vue->setVar("ancienEmail", $utilisateur['mail']);
         $vue->setVar("mdpOk", $verifMdp);
         $vue->setVar("confirmMdpOk", $verifConfirmMdp);
+        return $vue;
+    }
+
+    public function pageProfil(PDO $pdo) {
+        session_start();
+        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
+        $utilisateur = $utilisateur->fetch();
+        $vue = new View("vues/vue_profil");
+        $vue->setVar("ancienNom", $utilisateur['nom']);
+        $vue->setVar("ancienPrenom", $utilisateur['prenom']);
+        $vue->setVar("ancienLogin", $utilisateur['login']);
+        $vue->setVar("ancienEmail", $utilisateur['mail']);
         return $vue;
     }
 
@@ -181,7 +197,7 @@ class UtilisateurCompteControleur
         try {
             $estOk = $verifConfirmMdp && $verifLogin && $verifMdp && $verifNom && $verifPrenom;
             if ($estOk) {
-                $searchStmt = $this->userModele->creerCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom);
+                $searchStmt = $this->userModele->modifierCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom);
                 return new View("vues/vue_connexion");
             } else {
                 $vue = new View("vues/vue_inscription");

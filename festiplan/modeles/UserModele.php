@@ -60,9 +60,10 @@ class UserModele
             $pdo->beginTransaction();
             
             // Requête de mise à jour
-            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ? WHERE login = ?";
+            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ? WHERE idUtilisateur = ? ;";
             $updateStmt = $pdo->prepare($sql);
-            $updateStmt->execute([$mdp, $nom, $prenom, $login]);
+            session_start();
+            $updateStmt->execute([$mdp, $nom, $prenom, $login, $_SESSION['id_utilisateur']]);
     
             // Fin de la transaction (enregistrement des modifications)
             $pdo->commit();
@@ -74,7 +75,7 @@ class UserModele
     }
 
     public function recupererInformationsProfil(PDO $pdo, $id) {
-        $sql = "SELECT login, nom, prenom FROM Utilisateur WHERE idUtilisateur = ?";
+        $sql = "SELECT login, nom, prenom, mail FROM Utilisateur WHERE idUtilisateur = ?";
         $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute([$id]);
         return $searchStmt;

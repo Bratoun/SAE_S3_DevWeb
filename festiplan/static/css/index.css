@@ -175,6 +175,11 @@ img {
     right: 5px;
 }
 
+.icone-pencil {
+    font-size: 2.5em;
+    margin-top: 14px;
+}
+
 .logo-festiplan {
     width: 100%;
     max-width: 120px;
