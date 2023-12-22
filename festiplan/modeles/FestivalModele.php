@@ -195,6 +195,5 @@ class FestivalModele
         $stmt->bindParam("idFestival",$idFestival);
         //$stmt->bindParam("responsable",$responsable);
         $stmt->execute();
-        $stmt->execute();
     }
 }

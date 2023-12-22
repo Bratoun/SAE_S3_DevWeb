@@ -119,10 +119,12 @@ class SpectacleModele
      * @param typeIntervenant pour récupérer le métier de l'intervenant
      * @return stmt qui insert les données dans la table intervenant 
      */
-    public function insertionsIntervenants(PDO $pdo, $nom, $prenom, $mail, $surScene, $typeIntervenant)
+    public function insertionsIntervenants(PDO $pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant)
     {
-        $sql = "INSERT INTO Intervenant (nom,prenom,mail,surScene,typeIntervenant) VALUES (:leNom,:lePrenom,:leMail,:surScene,:typeIntervenant)";
+        
+        $sql = "INSERT INTO Intervenant (idSpectacle,nom,prenom,mail,surScene,typeIntervenant) VALUES (:leIdSpectacle,:leNom,:lePrenom,:leMail,:surScene,:typeIntervenant)";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("leIdSpectacle",$idSpectacle);
         $stmt->bindParam("leNom",$nom);
         $stmt->bindParam("lePrenom",$prenom);
         $stmt->bindParam("leMail",$mail);
@@ -130,4 +132,47 @@ class SpectacleModele
         $stmt->bindParam("typeIntervenant",$typeIntervenant);
         $stmt->execute();
     }
+
+    /**
+     * Supprimer le spectacle voulu
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idSpectacle l'id du festival a supprimer.
+     */
+    public function supprimerSpectacle(PDO $pdo, $idSpectacle)
+    {   
+        $sql = "DELETE FROM SpectacleOrganisateur WHERE idSpectacle = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idSpectacle);
+        $stmt->execute();
+        $sql2 = "DELETE FROM Spectacle WHERE idSpectacle = :id";
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->bindParam("id",$idSpectacle);
+        $stmt2->execute();
+    }
+
+    /**
+     * Modifier un spectacle dans la base de données
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param nom nom du spectalce
+     * @param description description du spectacle
+     * @param duree temps du spectacle
+     * @param illustration image du spectacle
+     * @param categorie du spectacle
+     * @param taille de la scène dont le spectacle à besoin
+     * @return searchStmt
+     */
+    public function modifspectacle(PDO $pdo, $titre, $description, $duree, $illustration, $categorie, $taille, $idSpectacle)
+    {
+        $sql = "UPDATE Spectacle SET titre = :leTitre, description = :laDesc, duree = :leTemps, illustration = :illu, categorie = :laCate, tailleSceneRequise = :tailleScene WHERE idSpectacle = :idSpectacle";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("leTitre", $titre);
+        $stmt->bindParam("laDesc", $description);
+        $stmt->bindParam("leTemps", $duree);
+        $stmt->bindParam("illu", $illustration);
+        $stmt->bindParam("laCate", $categorie);
+        $stmt->bindParam("tailleScene", $taille);
+        $stmt->bindParam("idSpectacle", $idSpectacle);
+        $stmt->execute();
+    }
+    
 }

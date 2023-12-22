@@ -38,30 +38,37 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
           
         <input type="hidden" name="controller" value="Spectacle">
         <input type="hidden" name="action" value="nouveauIntervenant">
+        <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
 
         <label name="nom">Nom de l'intervenant :</label>
-        <input type="text" id="nom" name="nom" required/>
+        <input type="text" name="nom" required/>
         <br>
         <label name="nom">Prénom de l'intervenant :</label>
-        <input type="text" id="prenom" name="prenom" required/>
+        <input type="text" name="prenom" required/>
         <br>
-        <label name="email" id="email" name="email">Adresse mail :</label>
-        <input type="email" id="email" size="50" required/>
+        <label name="LabelEmail">Adresse mail :</label>
+        <input type="email" name="email"  size="50" required/>
         <br>
-        <label for="metierIntervenant">Métier intervenant :</label><br>    
-            <select id="categorie" name="categorie" required>
-                <?php
-                while ($row = $searchStmt->fetch()) {?>
-                    <option value="<?php echo $row['idCategorie'];?>"><?php echo $row['metier'];?></option>
-                <?php
-                }
-                ?>
-            </select>
-            <br>
-        <label for="categorieIntervenant">Intervenant sur ou hors scène :</label><br>
-        <select name="categorieIntervenant" id="categorieIntervenant">
-            <option value="0">Sur Scène</option>
-            <option value="1">Hors Scène</option>
+        Métier intervenant :<br>    
+        <select name="metierIntervenant" required>
+            <?php
+            while ($row = $searchStmt->fetch()) {?>
+                <option value="<?php echo $row['idMetierIntervenant'];?>"><?php echo $row['metier'];?></option>
+            <?php
+            }
+            ?>
+        </select>
+        <?php
+            while ($row = $searchStmt->fetch()) {?>
+                <?php echo $row['idMetierIntervenant'];?>
+            <?php
+            }
+            ?>
+        <br>
+        Intervenant sur ou hors scène :<br>
+        <select name="categorieIntervenant" required>
+            <option value="true">Sur Scène</option>
+            <option value="false">Hors Scène</option>
         </select>
         <div class="footer">
             <button type="submit" class="btn btn-bleu">Confirmer</button>   

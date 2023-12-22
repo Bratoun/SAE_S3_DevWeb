@@ -89,6 +89,7 @@ ADD FOREIGN KEY (categorie) REFERENCES CategorieSpectacle(idCategorie);
 -- Création de la table Intervenant
 CREATE TABLE Intervenant (
   idIntervenant INT(11) NOT NULL AUTO_INCREMENT,
+  idSpectacle INT(11) NOT NULL,
   nom VARCHAR(35) NOT NULL,
   prenom VARCHAR(35) NOT NULL,
   mail VARCHAR(50) NOT NULL,
@@ -105,16 +106,6 @@ CREATE TABLE MetierIntervenant (
 
 ALTER TABLE Intervenant
 ADD FOREIGN KEY (typeIntervenant) REFERENCES MetierIntervenant(idMetierIntervenant);
-
-CREATE TABLE IntervenantSpectacle (
-    idSpectacle INT(11) NOT NULL,
-    idIntervenant INT(11) NOT NULL,
-    PRIMARY KEY (idSpectacle, idIntervenant)
-);
-ALTER TABLE IntervenantSpectacle
-ADD FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle);
-ALTER TABLE IntervenantSpectacle
-ADD FOREIGN KEY (idIntervenant) REFERENCES Intervenant(idIntervenant);
 
 
 CREATE TABLE Scene (
