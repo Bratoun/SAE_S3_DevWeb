@@ -22,6 +22,7 @@ class GrijControleur
         $idFestival = HttpHelper::getParam('idFestival');
 
         $vue = new View('vues/vue_parametres_grij');
+        $message = null;
         $stmt = $this->grijModele->recupererParametresGrij($pdo, $idFestival);
         $row = $stmt->fetch();
         if ($row) {
@@ -30,6 +31,7 @@ class GrijControleur
             $vue->setVar('ecartEntreSpectacles', $row['tempsEntreSpectacle']);
         }
 
+        $vue->setVar('message', $message);
         $vue->setVar('idFestival', $idFestival);
         return $vue;
     }
@@ -105,11 +107,20 @@ class GrijControleur
         $dureeTotal = $this->convertirEnMinutes($heureFin) - $this->convertirEnMinutes($heureDebut);
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
         $i = 0;
-        $continuerOk = true;
-        while ($jour =$jours->fetch() && $continuerOk) {
+        $unSpectacle = $spectacles->fetch();
+
+        while (($jour =$jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
-            while($duree < 300 && $unSpectacle = $spectacles->fetch()) {
+            
+            if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
+                $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                $ordre++;
+                $duree += $ecart;
+            }
+
+            while($duree < $dureeTotal && $unSpectacle = $spectacles->fetch()) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
@@ -120,7 +131,7 @@ class GrijControleur
                 }
             }
             if($unSpectacle && $this->convertirEnMinutes($unSpectacle['duree']) > $dureeTotal) {
-                $continuerOk = false;
+                $unSpectacle = false;
             }
         }
         if ($unSpectacle != false) {
