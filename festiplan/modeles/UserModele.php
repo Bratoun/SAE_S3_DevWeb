@@ -62,7 +62,6 @@ class UserModele
             // Requête de mise à jour
             $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ? WHERE idUtilisateur = ? ;";
             $updateStmt = $pdo->prepare($sql);
-            session_start();
             $updateStmt->execute([$mdp, $nom, $prenom, $login, $_SESSION['id_utilisateur']]);
     
             // Fin de la transaction (enregistrement des modifications)
@@ -74,11 +73,71 @@ class UserModele
         }
     }
 
-    public function recupererInformationsProfil(PDO $pdo, $id) {
-        $sql = "SELECT login, nom, prenom, mail FROM Utilisateur WHERE idUtilisateur = ?";
+    public function recupererInformationsProfil(PDO $pdo, $id) {            
+        $sql = "SELECT login, nom, prenom, mail, mdp FROM Utilisateur WHERE idUtilisateur = ?";
         $searchStmt = $pdo->prepare($sql);
         $searchStmt->execute([$id]);
         return $searchStmt;
     }
+    
+    public function supprimerCompteUtilisateur(PDO $pdo, $idUtilisateur) {
+        // Supprimer de EquipeOrganisatrice
+        $sqlUn = "DELETE FROM EquipeOrganisatrice WHERE idUtilisateur = ?";
+        $deleteStmtUn = $pdo->prepare($sqlUn);
+        $deleteStmtUn->execute([$idUtilisateur]);
+    
+        // Supprimer de SpectacleOrganisateur
+        $sqlDeux = "DELETE FROM SpectacleOrganisateur WHERE idUtilisateur = ?";
+        $deleteStmtDeux = $pdo->prepare($sqlDeux);
+        $deleteStmtDeux->execute([$idUtilisateur]);
+    
+        // Supprimer de IntervenantSpectacle
+        $sqlTrois = "DELETE FROM IntervenantSpectacle WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
+        $deleteStmtTrois = $pdo->prepare($sqlTrois);
+        $deleteStmtTrois->execute([$idUtilisateur]);
+    
+        // Supprimer de SpectacleDeFestival
+        $sqlQuatre = "DELETE FROM SpectacleDeFestival WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
+        $deleteStmtQuatre = $pdo->prepare($sqlQuatre);
+        $deleteStmtQuatre->execute([$idUtilisateur]);
+    
+        // Supprimer de SpectaclesJour
+        $sqlCinq = "DELETE FROM SpectaclesJour WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
+        $deleteStmtCinq = $pdo->prepare($sqlCinq);
+        $deleteStmtCinq->execute([$idUtilisateur]);
+
+        // Supprimer de Jour
+        $sqlNeuf = "DELETE FROM Jour WHERE idJour NOT IN (SELECT idJour FROM SpectaclesJour)";
+        $deleteStmtNeuf = $pdo->prepare($sqlNeuf);
+        $deleteStmtNeuf->execute();
+
+        // Supprimer de Grij
+        $sqlHuit = "DELETE FROM Grij WHERE idGrij NOT IN (SELECT idGrij FROM Jour)";
+        $deleteStmtHuit = $pdo->prepare($sqlHuit);
+        $deleteStmtHuit->execute();
+    
+        // Supprimer de SceneFestival
+        $sqlSept = "DELETE FROM SceneFestival WHERE idFestival NOT IN (SELECT idFestival FROM Festival)";
+        $deleteStmtSept = $pdo->prepare($sqlSept);
+        $deleteStmtSept->execute();
+
+        // Supprimer de Festival (où l'utilisateur est responsable)
+        $sqlSix = "DELETE FROM Festival WHERE idFestival IN (SELECT idFestival FROM EquipeOrganisatrice WHERE idUtilisateur = ? AND responsable = 1)";
+        $deleteStmtSix = $pdo->prepare($sqlSix);
+        $deleteStmtSix->execute([$idUtilisateur]);
+
+        // Supprimer de Spectacle (de l'utilisateur)
+        $sqlOnze = "DELETE FROM Spectacle WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
+        $deleteStmtOnze = $pdo->prepare($sqlOnze);
+        $deleteStmtOnze->execute([$idUtilisateur]);
+    
+        // Supprimer de Utilisateur
+        $sqlDix = "DELETE FROM Utilisateur WHERE idUtilisateur = ?";
+        $deleteStmtDix = $pdo->prepare($sqlDix);
+        $deleteStmtDix->execute([$idUtilisateur]);
+    
+        return ($deleteStmtUn && $deleteStmtDeux && $deleteStmtTrois && $deleteStmtQuatre && $deleteStmtCinq && $deleteStmtSix && $deleteStmtSept && $deleteStmtHuit && $deleteStmtNeuf && $deleteStmtDix);
+    }
+    
     
 }

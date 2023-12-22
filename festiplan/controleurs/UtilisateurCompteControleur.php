@@ -161,6 +161,38 @@ class UtilisateurCompteControleur
         return $vue;
     }
 
+    public function pageDesinscription() {
+        $verifLogin = true;
+        $verifMdp = true;
+        $vue = new View("vues/vue_desinscription");
+        $vue->setVar("loginOk", $verifLogin);
+        $vue->setVar("mdpOk", $verifMdp);
+        return $vue;
+    }
+
+    public function supprimerProfil(PDO $pdo) {
+        $login = HttpHelper::getParam('login');
+        $mdp = HttpHelper::getParam('mdp');
+        session_start();
+        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
+        $utilisateur = $utilisateur->fetch();
+        if ($login === $utilisateur['login'] && $mdp == $utilisateur['mdp']) {
+            $this->userModele->supprimerCompteUtilisateur($pdo, $_SESSION['id_utilisateur']);
+            session_destroy();
+            return new View("vues/vue_connexion");
+        } else if ($login != $utilisateur['login']) {
+            $verifLogin = false;
+            $vue = new View("vues/vue_desinscription");
+            $vue->setVar("loginOk", $verifLogin);
+            return $vue;
+        } else {
+            $verifMdp = false;
+            $vue = new View("vues/vue_desinscription");
+            $vue->setVar("mdpOk", $verifMdp);
+            return $vue;
+        }
+    }
+
     public function modifierCompteUtilisateur(PDO $pdo) {
         $nom = HttpHelper::getParam('nom');
         $prenom = HttpHelper::getParam('prenom');
