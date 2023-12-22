@@ -31,22 +31,22 @@
             </div>
             <br>
 
-            <div class="form-group texteGauche">
-                <div class="input-group">
-                    <p>Login : <?php echo $ancienLogin; ?></p>
-                </div>
-            </div>
-            <div class="form-group texteGauche">
+            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
                 <div class="input-group">
                     <p>Prénom : <?php echo $ancienPrenom; ?><p>
                 </div>
             </div>
-            <div class="form-group texteGauche">
+            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
                 <div class="input-group">
                     <p>Nom : <?php echo $ancienNom; ?></p>
                 </div>
             </div>
-            <div class="form-group texteGauche">
+            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+                <div class="input-group">
+                    <p>Login : <?php echo $ancienLogin; ?></p>
+                </div>
+            </div>
+            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
                 <div class="input-group">
                     <p>Email : <?php echo $ancienEmail; ?></p>
                 </div>
@@ -55,7 +55,9 @@
             <div class="texteCentre">
                 <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
             </div>
-            <!-- bouton desinscription -->
+            <div class="texteCentre">
+                <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription"><button type="button" class="btn fondRouge boutonTerminer">Se désinscrire</button></a>
+            </div>
         </div>
     </div>
 </body>
