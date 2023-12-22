@@ -36,9 +36,10 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="input-group">
-                            <input name="login" type="text" class="form-control <?php echo (!$loginOk) ? 'placeholder-invalid' : ''; ?>" <?php if (!$loginOk){echo 'placeholder="login invalide !"';}else{echo 'value="'.$ancienLogin.'"';} ?>  required>
+                            <input name="ancienMdp" type="password" class="form-control <?php echo (!$ancienMdpOk) ? 'placeholder-invalid' : ''; ?>" 
+                                placeholder="<?php echo (!$ancienMdpOk) ? 'Ancien mot de passe invalide !' : 'ANCIEN MOT DE PASSE'; ?>"  required>
                             <div class="input-group-append">
-                                <span class="input-group-text"><span class="fas fa-solid fa-user"></span></span>
+                                <span class="input-group-text"><span class="fas fa-solid fa-lock"></span></span>
                             </div>
                         </div>
                     </div>
@@ -62,9 +63,9 @@
                 <div class="form-group texteGauche row">
                     <div class="col-md-6 col-12">
                         <div class="input-group">
-                            <input name="email" type="text" class="form-control <?php echo (!$emailOk) ? 'placeholder-invalid' : ''; ?>" <?php if (!$emailOk){echo 'placeholder="login invalide !"';}else{echo 'value="'.$ancienEmail.'"';} ?>  required>
+                            <input name="login" type="text" class="form-control <?php echo (!$loginOk) ? 'placeholder-invalid' : ''; ?>" <?php if (!$loginOk){echo 'placeholder="login invalide !"';}else{echo 'value="'.$ancienLogin.'"';} ?>  required>
                             <div class="input-group-append">
-                                <span class="input-group-text"><span class="fas fa-solid fa-envelope"></span></span>
+                                <span class="input-group-text"><span class="fas fa-solid fa-user"></span></span>
                             </div>
                         </div>
                     </div>
@@ -78,6 +79,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group texteGauche">
+                        <div class="input-group">
+                            <input name="email" type="text" class="form-control <?php echo (!$emailOk) ? 'placeholder-invalid' : ''; ?>" <?php if (!$emailOk){echo 'placeholder="login invalide !"';}else{echo 'value="'.$ancienEmail.'"';} ?>  required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><span class="fas fa-solid fa-envelope"></span></span>
+                            </div>
+                        </div>
+                    </div>
                 <br>
                 <div class="texteCentre">
                     <button type="submit" class="btn btn-primary boutonTerminer">Modifier</button>

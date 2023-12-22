@@ -10,7 +10,7 @@
 <body>
     <div class="container containerCentre">
         <div class="cadreUtilisateur inscription">
-            <form action="/festiplan/index.php" method="post">
+            <form action="index.php" method="post">
                 <input name="controller" type="hidden" value="UtilisateurCompte">
                 <input name="action" type="hidden" value="creerCompteUtilisateur">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">

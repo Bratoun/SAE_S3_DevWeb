@@ -54,15 +54,15 @@ class UserModele
         }
     }
 
-    public function modifierCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom) {
+    public function modifierCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom, $email) {
         try {
             // Début de la transaction
             $pdo->beginTransaction();
             
             // Requête de mise à jour
-            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ? WHERE idUtilisateur = ? ;";
+            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ?, mail = ? WHERE idUtilisateur = ?";
             $updateStmt = $pdo->prepare($sql);
-            $updateStmt->execute([$mdp, $nom, $prenom, $login, $_SESSION['id_utilisateur']]);
+            $updateStmt->execute([$mdp, $nom, $prenom, $login, $email, $_SESSION['id_utilisateur']]);
     
             // Fin de la transaction (enregistrement des modifications)
             $pdo->commit();

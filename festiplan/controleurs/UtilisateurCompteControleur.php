@@ -132,6 +132,7 @@ class UtilisateurCompteControleur
         $verifMdp = true;
         $verifConfirmMdp = true;
         $verifEmail = true;
+        $verifAncienMdp = true;
         session_start();
         $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
         $utilisateur = $utilisateur->fetch();
@@ -144,6 +145,7 @@ class UtilisateurCompteControleur
         $vue->setVar("ancienLogin", $utilisateur['login']);
         $vue->setVar("emailOk", $verifEmail);
         $vue->setVar("ancienEmail", $utilisateur['mail']);
+        $vue->setVar("ancienMdpOk", $verifAncienMdp);
         $vue->setVar("mdpOk", $verifMdp);
         $vue->setVar("confirmMdpOk", $verifConfirmMdp);
         return $vue;
@@ -199,6 +201,8 @@ class UtilisateurCompteControleur
         $login = HttpHelper::getParam('login');
         $mdp = HttpHelper::getParam('mdp');
         $confirmMdp = HttpHelper::getParam('confirmMdp');
+        $email = HttpHelper::getParam('email');
+        $ancienMdp = HttpHelper::getParam('ancienMdp');
 
         // Initialisez les variables à true
         $verifNom = true;
@@ -206,7 +210,16 @@ class UtilisateurCompteControleur
         $verifLogin = true;
         $verifMdp = true;
         $verifConfirmMdp = true;
+        $verifEmail = true;
+        $verifAncienMdp = true;
 
+        session_start();
+        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
+        $utilisateur = $utilisateur->fetch();
+
+        if ($ancienMdp != $utilisateur['mdp']) {
+            $verifAncienMdp = false;
+        }
         if (strlen($nom) > 35) {
             $verifNom = false;
         }
@@ -219,32 +232,35 @@ class UtilisateurCompteControleur
         if (strlen($mdp) > 30) {
             $verifMdp = false;
         }
-        if (strlen($confirmMdp) > 30) {
-            $verifConfirmMdp = false;
+        if (strlen($email) > 50) {
+            $verifEmail = false;
         }
         if ($mdp != $confirmMdp) {
             $verifConfirmMdp = false;
         }
 
         try {
-            $estOk = $verifConfirmMdp && $verifLogin && $verifMdp && $verifNom && $verifPrenom;
+            $estOk = $verifConfirmMdp && $verifLogin && $verifMdp && $verifNom && $verifPrenom && $verifEmail && $verifAncienMdp;
             if ($estOk) {
-                $searchStmt = $this->userModele->modifierCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom);
+                $searchStmt = $this->userModele->modifierCompteUtilisateur($pdo, $login, $mdp, $nom, $prenom, $email);
                 return new View("vues/vue_connexion");
             } else {
-                $vue = new View("vues/vue_inscription");
+                $vue = new View("vues/vue_modifier_profil");
                 $vue->setVar("nomOk", $verifNom);
                 $vue->setVar("ancienNom", $nom);
                 $vue->setVar("prenomOk", $verifPrenom);
                 $vue->setVar("ancienPrenom", $prenom);
                 $vue->setVar("loginOk", $verifLogin);
                 $vue->setVar("ancienLogin", $login);
+                $vue->setVar("emailOk", $verifEmail);
+                $vue->setVar("ancienEmail", $email);
+                $vue->setVar("ancienMdpOk", $verifAncienMdp);
                 $vue->setVar("mdpOk", $verifMdp);
                 $vue->setVar("confirmMdpOk", $verifConfirmMdp);
                 return $vue;
             }
         } catch (PDOException $e) {
-            return new View("vues/vue_inscription");
+            return new View("vues/vue_modifier_profil");
         }
     }
 
