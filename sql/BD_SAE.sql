@@ -48,8 +48,8 @@ CREATE TABLE Spectacle (
     idSpectacle INT(11) NOT NULL AUTO_INCREMENT,
     titre VARCHAR(50) NOT NULL,
     description VARCHAR(1000) NULL,
-    duree INT(11) NOT NULL,
-    illustration VARCHAR(50) NOT NULL,
+    duree TIME NOT NULL,
+    illustration VARCHAR(50) NULL,
     categorie INT(11),
     tailleSceneRequise INT(11),
     PRIMARY KEY (idSpectacle)
@@ -206,9 +206,30 @@ VALUES
 ('Moyenne'),
 ('Grande');
 
+
+-- TESTS ////////////////////////////////////////
 INSERT INTO Utilisateur (prenom,nom,mail,login,mdp)
 VALUES
 ('Nathan','Girardin','n@sfr.fr','nathan','123'),
 ('Mateo','Faussurier','M@sfr.fr','mateo','123'),
 ('Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
 ('Alix','BRUGIER','a@sfr.fr','alix','123');
+
+
+INSERT INTO Festival (categorie, titre, description, dateDebut, dateFin, illustration)
+VALUES 
+(1, 'Festival d''été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
+(2, 'Festival de cinéma', 'Projection de films internationaux', '2023-08-15', '2023-08-25', null),
+(3, 'Festival de musique', 'Concerts de divers genres musicaux', '2023-09-05', '2023-09-15', null);
+
+INSERT INTO Spectacle (titre, description, duree, categorie, tailleSceneRequise)
+VALUES ('spec1', 'une description des familles', '01:00:00', 1, 1),
+('spec2', 'une description des familles', '00:10:00', 2, 1),
+('spec3', 'une description des familles', '01:20:00', 4, 2),
+('spec14', 'une description des familles', '00:36:00', 3, 3);
+
+INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival)
+VALUES (2, 1);
+
+INSERT INTO SpectacleDeFestival (idFestival, idSpectacle)
+VALUES (1,1),(1,2),(1,3),(1,4);

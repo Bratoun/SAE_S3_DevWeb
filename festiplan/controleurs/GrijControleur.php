@@ -106,13 +106,13 @@ class GrijControleur
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
         $i = 0;
         $continuerOk = true;
-        while ($jours->fetch() && $continuerOk) {
+        while ($jour =$jours->fetch() && $continuerOk) {
             $ordre = 0;
             $duree = 0;
-            while($duree < $dureeTotal && $unSpectacle = $spectacles->fetch()) {
+            while($duree < 300 && $unSpectacle = $spectacles->fetch()) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jours['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
                     $ordre++;
                     $duree += $ecart;
                 } else {

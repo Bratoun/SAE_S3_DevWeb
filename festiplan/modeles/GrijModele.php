@@ -4,7 +4,6 @@ namespace modeles;
 
 use PDO;
 use PDOException;
-use DateTime;
 
 class GrijModele
 {
@@ -24,6 +23,8 @@ class GrijModele
                 $stmt->execute([$heureDebut, $heureFin, $ecartEntreSpectacles, $idFestival]);
         
                 // Suppression des jours déjà générés
+                $stmt = $pdo->prepare("DELETE FROM SpectaclesJour WHERE idFestival = ?");
+                $stmt->execute([$idFestival]);
                 $stmt = $pdo->prepare("DELETE FROM Jour WHERE idGrij = ?");
                 $stmt->execute([$idFestival]);
             } else {
@@ -107,7 +108,7 @@ class GrijModele
 
     public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $idScene, $ordre, $place)
     {
-        $sql = "INSERT INTO SpectacleJour VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$idFestival,$idJour, $idSpectacle, $idScene, $ordre, $place]);
     }
