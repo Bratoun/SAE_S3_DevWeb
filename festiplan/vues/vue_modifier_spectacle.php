@@ -39,6 +39,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 
         <input type="hidden" name="controller" value="Spectacle">
         <input type="hidden" name="action" value="nouveauSpectacle">
+        <input type="hidden" name="modifier" value="true">
+        <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
         
         <div>
             <label id="<?php if(!$titreOk){echo 'invalide';}?>">Titre :</label>
@@ -77,6 +79,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="footer">
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
+            <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
+            <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer</button></a>
         </div>
     </form>
 </body>

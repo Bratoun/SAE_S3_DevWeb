@@ -39,6 +39,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 
         <input type="hidden" name="controller" value="Spectacle">
         <input type="hidden" name="action" value="nouveauSpectacle">
+        <input type="hidden" name="modifier" value="false">
         
         <div>
             <label id="<?php if(!$titreOk){echo 'invalide';}?>">Titre :</label>

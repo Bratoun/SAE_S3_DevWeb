@@ -71,7 +71,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             Organisateur :
             <?php
                 while ($row = $listeOrganisateur-> fetch()) {
-                    echo $row['nom'];
+                    echo $row['nom']."<br>";
                 
                 }
             if($estResponsable) {?>
@@ -85,7 +85,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <a href="/festiplan?controller=Festival&action=supprimerFestival&idFestival=<?php echo $idFestival;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer</button></a>
             <?php } ?>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Consulter la planification</button></a>
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
+            <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
         </div>
     </form>
 </body>

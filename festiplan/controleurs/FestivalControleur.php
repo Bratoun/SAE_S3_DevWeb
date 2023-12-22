@@ -31,6 +31,7 @@ class FestivalControleur {
         $vue->setVar("nomOk", $verifNom);
         $vue->setVar("descOk", $verifDesc);
         $vue->setVar("dateOk", $verifDate);
+        $vue->setVar("ancienneCategorie", " ");
         $vue->setVar("searchStmt",$searchStmt);
         return $vue;
     }
@@ -75,12 +76,9 @@ class FestivalControleur {
                 $insertion = $this->festivalModele->insertionFestival($pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $img, $idOrganisateur);
             }
 
-            // Renvoie a la page d'accueil avec l'affichage des festival et des spectacles de l'utilisateur
-            $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idOrganisateur);
-            $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idOrganisateur);
-            $vue = new View("vues/vue_accueil");
-            $vue->setVar("mesSpectacles", $mesSpectacles);
-            $vue->setVar("mesFestivals", $mesFestivals);
+            // Renvoie a la connexion qui renvoie lui même a l'accueil car l'utilisateur est connecté.
+            // Ainsi cela permet de bloquer l'ajout de festival lorsque l'on refresh a l'infini 
+            $vue = new View("vues/vue_connexion");
             return $vue;
         } else {
             // Si des valeurs sont incorectes renvoie lesquels le sont et les valeurs
@@ -153,10 +151,90 @@ class FestivalControleur {
         return $vue;
     }
 
-    public function ajouterOrganisateur(PDO $pdo) : View {
+    public function gestionOrganisateur(PDO $pdo) : View {
+        session_start();
+        $idResponsable = $_SESSION['id_utilisateur'];
+        $idFestival = HttpHelper::getParam('idFestival');
+
+        // Recupere les données du festival séléctionné
+        $festival = $this->festivalModele->leFestival($pdo,$idFestival);
+
+        // Recupere tout les utilisateurs
+        $listeUtilisateur = $this->festivalModele->listeUtilisateur($pdo);
+        // Recupere tout les organisateurActuel du festival
+        $listeOrganisateur = $this->festivalModele->listeOrganisateurFestival($pdo,$idFestival);
+
+        $vue = new View("vues/vue_ajouter_organisateur");
+        $vue->setVar("nomFestival", $festival['titre']);
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("idResponsable", $idResponsable);
+        $vue->setVar("listeOrganisateur", $listeOrganisateur);
+        $vue->setVar("listeUtilisateur", $listeUtilisateur);
+        
+        return $vue;
+    }
+
+
+    /**
+     * Ajout a YASMF
+     * @param string $name the name of the param
+     * @return string|null the value of the param if defined, null otherwise
+     */
+    public static function getParamArray(string $name): ?array {
+        if (isset($_GET[$name])) return $_GET[$name];
+        if (isset($_POST[$name])) return $_POST[$name];
+        return null;
+    }
+
+    
+    public function majOrganisateur(PDO $pdo) : View {
         session_start();
         $idOrganisateur = $_SESSION['id_utilisateur'];
         $idFestival = HttpHelper::getParam('idFestival');
 
+        // Récupere tout les parametre d'un festivale l'organisateur');
+        $idUtilisateurs = self::getParamArray('Utilisateur');
+        // Supprime tout les organisateur sauf le responsable
+        
+        $this->festivalModele->supprimerOrganisateurs($pdo,$idFestival);
+        foreach($idUtilisateurs as $utilisateur) {
+            
+            // Ajoute un a un les nouveaux organisateurs
+            $this->festivalModele->majOrganisateur($pdo,$idFestival,$utilisateur);
+        }
+
+        $festivalAModifier = $this->festivalModele->leFestival($pdo,$idFestival);
+        // Recupere les données de la liste des catégorie
+        $searchStmt = $this->festivalModele->listeCategorieFestival($pdo);
+        // Recupere l'ensemble des organisateur actuel du festival
+        $listeOrganisateur = $this->festivalModele->listeOrganisateurFestival($pdo,$idFestival);
+        // Mets les données dans la vue
+        $vue = new View("vues/vue_modifier_festival");
+        $vue->setVar("nomOk", true);
+        $vue->setVar("ancienNom", $festivalAModifier['titre']);
+        $vue->setVar("descOk", true);
+        $vue->setVar("ancienneDesc", $festivalAModifier['description']);
+        $vue->setVar("dateOk", true);
+        $vue->setVar("ancienneDateDebut", $festivalAModifier['dateDebut']);
+        $vue->setVar("ancienneDateFin", $festivalAModifier['dateFin']);
+        $vue->setVar("ancienneCategorie", $festivalAModifier['categorie']);
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("searchStmt",$searchStmt);
+        $vue->setVar("estResponsable", true);
+        $vue->setVar("listeOrganisateur", $listeOrganisateur);
+        return $vue;
     }
+
+
+    public function modifierListeSpectacleFestival(PDO $pdo) : View {
+        session_start();
+        $idOrganisateur = $_SESSION['id_utilisateur'];
+        $idFestival = HttpHelper::getParam('idFestival');
+
+        $vue = new View("vues/vue_modifier_festival");
+
+        return $vue;
+    }
+
+    
 }
