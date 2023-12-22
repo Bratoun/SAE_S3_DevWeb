@@ -27,7 +27,7 @@ Lien github : https://github.com/Bratoun/SAE_S3_DevWeb.git
 Lien Google Drive : https://drive.google.com/drive/u/1/folders/18zeRwdWI466BtDTp8F4idtfl5EW-TGbq
 
 ## Commande dockers
-$ docker-compose up -d 
+$ docker-compose up -d
 $ docker-compose exec SAE_S3_DevWeb composer update
 http://localhost:8080/festiplan/
 
