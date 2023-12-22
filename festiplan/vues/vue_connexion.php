@@ -43,11 +43,12 @@ if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'
                         </div>
                     </div>
                 </div>
-                <br>
+                <!-- 
                 <div class="form-check texteGauche">
                     <input type="checkbox" class="form-check-input" id="resterConnecte">
-                    <label class="form-check-label" for="resterConnecte">Rester connecté</label>
+                    <label class="form-check-label" for="resterConnecte">Rester connecté</label> 
                 </div>
+                -->
                 <br><br>
                 <div class="texteCentre">
                     <button type="submit" class="btn btn-primary boutonFleche"><span class="fas fa-arrow-right"></span></button>

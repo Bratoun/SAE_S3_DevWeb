@@ -8,7 +8,7 @@ input.form-control {
     margin-bottom: 20px;
 }
 
-.boutonTerminerAnnuler {
+.boutonTerminer {
     height: 50px; /* Ajustez la hauteur des champs de saisie */
     margin-bottom: 10px;
     font-size: 1.3em;
@@ -89,6 +89,10 @@ input.form-control {
     font-weight: bolder;
 }
 
+.plusBas {
+    margin-top: 65px;
+}
+
 :placeholder-shown {
     font-weight: bold;
     font-size: 80%;
@@ -105,7 +109,7 @@ label {
     opacity: 0.5;
 }
 
-.btn {
+.btnModif {
     width: auto;
     height: 50px;
     flex-shrink: 0;
@@ -113,39 +117,40 @@ label {
 }
 
 .fondRouge {
-    background-color: red;
+    background-color: rgb(255, 83, 83);
 }
 
 .fondVert {
-    background-color: green;
+    background-color: rgb(85, 157, 85);
 }
 
 .fondGris {
-    background-color: #4D4D4D;
+    background-color: #8a8a8a;
 }
 
 .fondBleu {
-    background-color: blue;
+    background-color: rgb(128, 128, 236);
 }
 
 .header {
+    position: absolute;
     top: 0;
     width: 100%; 
     height: 70px; 
     background-color: #4D4D4D;
 }
 
+.header-blanc {
+    position: absolute;
+    top: 0;
+    width: 100%; 
+    height: 70px; 
+    background-color: #FFFFFF;
+}
+
 .body-blanc {
     background-color: #FFFF;
     color: #000;
-}
-
-.btn-gris {
-    width: 163px;
-    height: 54px;
-    flex-shrink: 0;
-    background-color: #D9D9D9;
-    color: #000000;
 }
 
 img {
@@ -170,6 +175,11 @@ img {
     right: 5px;
 }
 
+.icone-pencil {
+    font-size: 2.5em;
+    margin-top: 14px;
+}
+
 .logo-festiplan {
     width: 100%;
     max-width: 120px;
@@ -185,19 +195,28 @@ img {
     margin-top: 13px;
 }
 
+.centre {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
 .cadreFestival {
-    width: 1349px;
+    width: 1350px;
     height: 105px;
     flex-shrink: 0;
     border-radius: 15px;
     background: #D9D9D9;
     color: #000;
-    text-align: center;
+    text-align: left;
     font-family: Inter;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    padding: 10px;
+    margin-top: 15px;
 }
 
 /* Lorsque qu'un champ est invalide affiche en rouge */

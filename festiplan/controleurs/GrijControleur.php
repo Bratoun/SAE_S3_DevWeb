@@ -22,6 +22,7 @@ class GrijControleur
         $idFestival = HttpHelper::getParam('idFestival');
 
         $vue = new View('vues/vue_parametres_grij');
+        $message = null;
         $stmt = $this->grijModele->recupererParametresGrij($pdo, $idFestival);
         $row = $stmt->fetch();
         if ($row) {
@@ -30,6 +31,7 @@ class GrijControleur
             $vue->setVar('ecartEntreSpectacles', $row['tempsEntreSpectacle']);
         }
 
+        $vue->setVar('message', $message);
         $vue->setVar('idFestival', $idFestival);
         return $vue;
     }
@@ -40,27 +42,46 @@ class GrijControleur
         $idFestival = HttpHelper::getParam('idFestival');
         $heureDebut = HttpHelper::getParam('heureDebut');
         $heureFin = HttpHelper::getParam('heureFin');
-        $ecartEntreSpectacles = HttpHelper::getParam('ecartEntreSpectacles');
+        $ecartEntreSpectacles =HttpHelper::getParam('ecartEntreSpectacles');
 
         if ($heureDebut == null || $heureFin == null || $ecartEntreSpectacles == null){
             $vue = new View('vues/vue_parametres_grij');
             $message = "Vous n'avez pas entré tous les champs";
-            $vue->setVar('heureDebut', $heureDebut);
-            $vue->setVar('heureFin', $heureFin);
-            $vue->setVar('ecartEntreSpectacles', $ecartEntreSpectacles);
+            $this->initialiseHeuresSelectionnees($vue, $heureDebut, $heureFin, $ecartEntreSpectacles);
+        
+        } else if (strtotime($heureDebut)> strtotime($heureFin)) {
+            $vue = new View('vues/vue_parametres_grij');
+            $message = "La date de fin est plus petite que celle de début.<br>Il faut entrer une date de fin plus grande";
+            $this->initialiseHeuresSelectionnees($vue, $heureDebut, $heureFin, $ecartEntreSpectacles);
+        
+        } else if ($this->convertirEnMinutes($ecartEntreSpectacles)
+          >= ($this->convertirEnMinutes($heureFin) - $this->convertirEnMinutes($heureDebut))) {
+            $vue = new View('vues/vue_parametres_grij');
+            $message = "L'écart entre les spectacles est supérieur à la durée totale";
+            $this->initialiseHeuresSelectionnees($vue, $heureDebut, $heureFin, $ecartEntreSpectacles);
+        
         } else {
-            
             $ok = $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
             if ($ok){
-                $stmt = $this->grijModele->recupererJours($pdo, $idFestival);
+                $jours = $this->grijModele->recupererJours($pdo, $idFestival);
+
+                // Récupération des spectacles
+                $spectacles = $this->grijModele->recupererSpectacles($pdo, $idFestival);
+                // Récupération des scenes
+                $scenes = $this->grijModele->recupererScenes($pdo, $idFestival);
+
+                // création de la grij
+                $this->planifierSpectacles($pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
+
+                $grij = $this->grijModele->recupererGrij($pdo, $idFestival);
+
                 $vue = new View('vues/vue_consultation_planification');
-                $vue->setVar('listeJours', $stmt);
+                $vue->setVar('listeJours', $grij);
+
             } else {
                 $vue = new View('vues/vue_parametres_grij');
                 $message = "Erreur avec la base de données.";
-                $vue->setVar('heureDebut', $heureDebut);
-                $vue->setVar('heureFin', $heureFin);
-                $vue->setVar('ecartEntreSpectacles', $ecartEntreSpectacles);
+                $this->initialiseHeuresSelectionnees($vue, $heureDebut, $heureFin, $ecartEntreSpectacles);
             }
         }
 
@@ -99,7 +120,7 @@ class GrijControleur
                 $duree += $ecart;
             }
 
-            while($duree < $dureeTotal && ($unSpectacle = $spectacles->fetch())) {
+            while($duree < $dureeTotal && $unSpectacle = $spectacles->fetch()) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);

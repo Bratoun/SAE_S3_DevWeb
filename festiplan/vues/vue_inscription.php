@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Connexion</title>
+    <title>Inscription</title>
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
@@ -10,7 +10,7 @@
 <body>
     <div class="container containerCentre">
         <div class="cadreUtilisateur inscription">
-            <form action="/festiplan/index.php" method="post">
+            <form action="index.php" method="post">
                 <input name="controller" type="hidden" value="UtilisateurCompte">
                 <input name="action" type="hidden" value="creerCompteUtilisateur">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
@@ -58,7 +58,7 @@
                 </div>
                 <br>
                 <div class="texteCentre">
-                    <button type="submit" class="btn btn-primary boutonTerminerAnnuler">Terminer</button>
+                    <button type="submit" class="btn btn-primary boutonTerminer">Terminer</button>
                 </div>
             </form>
             <br>
