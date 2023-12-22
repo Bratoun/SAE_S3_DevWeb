@@ -68,4 +68,56 @@ class GrijControleur
         $vue->setVar('message', $message);
         return $vue;
     }
+
+    private function convertirEnMinutes($heure) {
+        $temps = explode(":", $heure);
+        return $temps[0] * 60 + $temps[1];
+    }
+
+    private function initialiseHeuresSelectionnees($vue, $debut, $fin, $ecart)
+    {
+        $vue->setVar('heureDebut', $debut);
+        $vue->setVar('heureFin', $fin);
+        $vue->setVar('ecartEntreSpectacles', $ecart);
+    }
+
+    private function planifierSpectacles(PDO $pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours)
+    {
+        $dureeTotal = $this->convertirEnMinutes($heureFin) - $this->convertirEnMinutes($heureDebut);
+        $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
+        $i = 0;
+        $unSpectacle = $spectacles->fetch();
+
+        while (($jour =$jours->fetch()) && $unSpectacle) {
+            $ordre = 0;
+            $duree = 0;
+            
+            if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
+                $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                $ordre++;
+                $duree += $ecart;
+            }
+
+            while($duree < $dureeTotal && ($unSpectacle = $spectacles->fetch())) {
+                if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
+                    $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                    $ordre++;
+                    $duree += $ecart;
+                } else {
+                    $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                }
+            }
+            if($unSpectacle && $this->convertirEnMinutes($unSpectacle['duree']) > $dureeTotal) {
+                $unSpectacle = false;
+            }
+        }
+        if ($unSpectacle != false) {
+            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], null, 0, 0);
+            while ($unSpectacle = $spectacles->fetch()){
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], null, 0, 0);
+            }
+        }
+    }
 }
