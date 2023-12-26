@@ -31,6 +31,8 @@ class SpectacleControleur {
         $vue->setVar("titreOk", $verifTitre);
         $vue->setVar("descOk", $verifDesc);
         $vue->setVar("dureeOk", $verifDuree);
+        $vue->setVar("categorieOk", $verifCategorie);
+        $vue->setVar("tailleOk",$verifTaille);
         $vue->setVar("ancienneCategorie", " ");
         $vue->setVar("ancienneTaille", " ");
         $vue->setVar('searchStmt',$searchStmt);
@@ -55,6 +57,8 @@ class SpectacleControleur {
         $verifTitre = false;
         $verifDesc = false;
         $verifDuree = false;
+        $verifTaille = false;
+        $verifCategorie = false;
         // Verifie que le titre du spectacle fasse moins de 36 carac et sois différent de vide
         if (strlen($titre) <= 35 && trim($titre) != "") {
             $verifTitre = true;
@@ -68,8 +72,16 @@ class SpectacleControleur {
             $verifDuree = true;
         }
 
+        if ($taille != 0) {
+            $verifTaille = true;
+        }
+
+        if ($categorie != 0) {
+            $verifCategorie = true;
+        }
+
          // Si toute les valeurs sont correctes ajoute le spectacle a la base de données
-        if ($verifDuree && $verifDesc && $verifTitre) {
+        if ($verifDuree && $verifDesc && $verifTitre && $verifTaille && $verifCategorie) {
             // Recupere l'id de l'utilisateur
             $idUtilisateur = $_SESSION['id_utilisateur'];
             // Insere ce spectacle dans la base de données ou le modifie selon la valeur de $modifier
@@ -98,6 +110,8 @@ class SpectacleControleur {
             $vue->setVar("ancienneDesc", $description);
             $vue->setVar("dureeOk", $verifDuree);
             $vue->setVar("ancienneDuree", $duree);
+            $vue->setVar("categorieOk", $verifCategorie);
+            $vue->setVar("tailleOk",$verifTaille);
             $vue->setVar("ancienneCategorie", $categorie);
             $vue->setVar("ancienneTaille", $taille);
             $vue->setVar('searchStmt',$searchStmt);
@@ -118,6 +132,8 @@ class SpectacleControleur {
         $searchStmt = $this->spectacleModele->listeCategorieSpectacle($pdo);
         // Recupere les données de la liste des tailles de scènes
         $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
+        // Recupere la liste des intervenants 
+        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo);
         // Mets les données dans la vue
         $vue = new View("vues/vue_modifier_spectacle");
         $vue->setVar("titreOk", true);
@@ -125,6 +141,8 @@ class SpectacleControleur {
         $vue->setVar("descOk", true);
         $vue->setVar("ancienneDesc", $spectacleAModifier['description']);
         $vue->setVar("dureeOk",true);
+        $vue->setVar("categorieOk", true);
+        $vue->setVar("tailleOk", true);
         $vue->setVar("ancienneDuree", $spectacleAModifier['duree']);
         $vue->setVar("ancienneCategorie", $spectacleAModifier['categorie']);
         $vue->setVar("ancienneTaille", $spectacleAModifier['tailleSceneRequise']);
@@ -132,6 +150,7 @@ class SpectacleControleur {
 
         $vue->setVar("searchStmt",$searchStmt);
         $vue->setVar("searchStmt2",$searchStmt2);
+        $vue->setVar("searchStmt3",$searchStmt3);
         return $vue;
     }
 
@@ -163,6 +182,8 @@ class SpectacleControleur {
         $searchStmt = $this->spectacleModele->listeCategorieSpectacle($pdo);
         // Recupere les données de la liste des tailles de scènes
         $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
+        // Recupere la liste des intervenants 
+        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo);
         // Mets les données dans la vue
         $vue = new View("vues/vue_modifier_spectacle");
         $vue->setVar("titreOk", true);
@@ -170,6 +191,8 @@ class SpectacleControleur {
         $vue->setVar("descOk", true);
         $vue->setVar("ancienneDesc", $spectacleAModifier['description']);
         $vue->setVar("dureeOk",true);
+        $vue->setVar("categorieOk", true);
+        $vue->setVar("tailleOk",true);
         $vue->setVar("ancienneDuree", $spectacleAModifier['duree']);
         $vue->setVar("ancienneCategorie", $spectacleAModifier['categorie']);
         $vue->setVar("ancienneTaille", $spectacleAModifier['tailleSceneRequise']);
@@ -177,6 +200,7 @@ class SpectacleControleur {
 
         $vue->setVar("searchStmt",$searchStmt);
         $vue->setVar("searchStmt2",$searchStmt2);
+        $vue->setVar("searchStmt3",$searchStmt3);
         return $vue; 
     }
 

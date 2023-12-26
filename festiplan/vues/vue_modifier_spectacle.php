@@ -41,20 +41,21 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="action" value="nouveauSpectacle">
         <input type="hidden" name="modifier" value="true">
         <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
-        
-        <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
             <label id="<?php if(!$titreOk){echo 'invalide';}?>">Titre :</label>
             <input type="text" id="titre" name="titre" placeholder="(35 caractères maximum)" value="<?php if($titreOk){echo $ancienTitre;}?>" required>
         </div>
-        <div>
+        <div class="col-12">
             <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>   
             <input name="description" type="textarea"  placeholder="(max 1000 caractére)" value="<?php if($descOk){echo $ancienneDesc;}?>" required>
         </div>
-        <div>
-            <label id="<?php if(!$dureeOk){echo 'invalide';}?>">Duree du spectacle (en minutes) :</label>
-            <input id="duree" name="duree" type="number" value="<?php if($dureeOk){echo $ancienneDuree;}?>" required>
+        <div class="col-12">
+            <label id="<?php if(!$dureeOk){echo 'invalide';}?>">Duree du spectacle :</label>
+            <input id="duree" name="duree" type="time" value="<?php if($dureeOk){echo $ancienneDuree;}?>" required>
         </div>
-        <div>
+        <div class="col-12">
             <label for="categorie">Liste catégorie :</label><br>    
             <select id="categorie" name="categorie" required>
                 <?php
@@ -65,7 +66,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 ?>
             </select>
         </div>
-        <div>
+        <div class="col-12">
             <label for="taille">Taille de surface requise :</label><br>
             <select id="taille" name="taille" required>
                 <?php
@@ -76,12 +77,22 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 ?>
             </select>
         </div>
-        <div class="footer">
+        <div class="col-12">
+            <label for="taille">Intervenant du spectacle :</label><br>
+            <option disabled>Choisissez un intervenant sur scène</option>
+            <select id="intervenant" name="intervenant" required>
+                <?php $row = $searchStmt3->fetch()?>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom']; echo $row['prenom'];?></option>
+            </select>
+        </div>
+        <div class="footer col-12">
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
             <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
             <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer</button></a>
         </div>
+    </div>
+</div>
     </form>
 </body>
 </html>

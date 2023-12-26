@@ -174,5 +174,13 @@ class SpectacleModele
         $stmt->bindParam("idSpectacle", $idSpectacle);
         $stmt->execute();
     }
+
+    public function nomIntervenantSurScene(PDO $pdo)
+    {
+        $sql = "SELECT nom,prenom FROM Intervenant WHERE surScene = 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
     
 }

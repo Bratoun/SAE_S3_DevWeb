@@ -39,13 +39,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($afficher) {
             while ($listeSpectacle = $mesSpectacles->fetch()) {
                 ?>
-                <div class="centre">
-                    <div class='cadreFestival'>
-                        <?php
-                            $idSpectacle = $listeSpectacle['idSpectacle'];
-                            echo $listeSpectacle['titre'];
-                        ?>
-                        <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+                <div class="col-12">
+                    <div class="centre">
+                        <div class='cadreFestival'>
+                            <?php
+                                $idSpectacle = $listeSpectacle['idSpectacle'];
+                                echo $listeSpectacle['titre'];
+                            ?>
+                            <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+                        </div>
                     </div>
                 </div>
                 <?php
