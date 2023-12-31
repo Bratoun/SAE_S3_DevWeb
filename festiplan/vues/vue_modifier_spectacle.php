@@ -79,17 +79,30 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
         <div class="col-12">
             <label for="taille">Intervenant du spectacle :</label><br>
-            <option disabled>Choisissez un intervenant sur scène</option>
             <select id="intervenant" name="intervenant" required>
-                <?php $row = $searchStmt3->fetch()?>
+                <option disabled>Intervenant sur scène</option>
+                <?php 
+                while ($row = $searchStmt3->fetch()) {?>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'<br>'; echo $row['prenom'];?></option>
+                <?php
+                }
+                ?>
+                <option disabled>Intervenant hors scène</option>
+                <?php 
+                while ($row = $searchStmt4->fetch()) {?>
                     <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom']; echo $row['prenom'];?></option>
+                <?php
+                }
+                ?>
             </select>
         </div>
         <div class="footer col-12">
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
             <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
-            <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer</button></a>
+            <a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Modifier un intervenant</button></a>
+            <a href="/festiplan?controller=Spectacle&action=supprimerIntervenant"><button type="button" class="btn btnModif fondGris">Supprimer un intervenant</button></a>
+            <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer le spectacle</button></a>
         </div>
     </div>
 </div>

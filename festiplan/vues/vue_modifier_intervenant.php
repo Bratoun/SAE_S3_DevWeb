@@ -10,7 +10,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un intervenant</title>
+    <title>Modifier un intervenant</title>
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </a>
             </div>
             <div class="col-8">
-                <h2 class="texteCentre blanc bas">Ajouter un intervenant</h2>
+                <h2 class="texteCentre blanc bas">Modifier un intervenant</h2>
             </div>
             <div class="col-2">
                 <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>

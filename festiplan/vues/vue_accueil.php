@@ -37,20 +37,28 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <?php
         // Affichage de la liste des spectacles
         if ($afficher) {
-            while ($listeSpectacle = $mesSpectacles->fetch()) {
-                ?>
-                <div class="col-12">
-                    <div class="centre">
-                        <div class='cadreFestival'>
-                            <?php
-                                $idSpectacle = $listeSpectacle['idSpectacle'];
-                                echo $listeSpectacle['titre'];
-                            ?>
-                            <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+            if ($mesSpectacles->rowCount() > 0) {
+                while ($listeSpectacle = $mesSpectacles->fetch()) {
+                    ?>
+                    <div class="col-12">
+                        <div class="centre">
+                            <div class='cadreFestival'>
+                                <?php
+                                    $idSpectacle = $listeSpectacle['idSpectacle'];
+                                    echo $listeSpectacle['titre'];
+                                ?>
+                                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12">';
+                    echo '<div class="centre">';
+                            echo 'Pas de spectacle créer pour le moment';
+                    echo '</div>';
+                echo '</div>';
             }
         } else {
             //affichage de la liste des festivals

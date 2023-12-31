@@ -93,7 +93,7 @@ CREATE TABLE Intervenant (
   nom VARCHAR(35) NOT NULL,
   prenom VARCHAR(35) NOT NULL,
   mail VARCHAR(50) NOT NULL,
-  surScene BOOLEAN NOT NULL,
+  surScene INT(1) NOT NULL,
   typeIntervenant INT(11) NOT NULL,
   PRIMARY KEY (idIntervenant)
 );

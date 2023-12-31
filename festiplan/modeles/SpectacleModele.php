@@ -183,4 +183,11 @@ class SpectacleModele
         return $stmt;
     }
     
+    public function nomIntervenantHorsScene(PDO $pdo)
+    {
+        $sql = "SELECT nom,prenom FROM Intervenant WHERE surScene = 2";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
 }
