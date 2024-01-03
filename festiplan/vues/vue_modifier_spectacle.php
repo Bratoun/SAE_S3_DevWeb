@@ -83,14 +83,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <option disabled>Intervenant sur scène</option>
                 <?php 
                 while ($row = $searchStmt3->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'<br>'; echo $row['prenom'];?></option>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'<br>'.$row['prenom'];?></option>
                 <?php
                 }
                 ?>
                 <option disabled>Intervenant hors scène</option>
                 <?php 
                 while ($row = $searchStmt4->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom']; echo $row['prenom'];?></option>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].$row['prenom'];?></option>
                 <?php
                 }
                 ?>

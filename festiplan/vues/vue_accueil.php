@@ -56,10 +56,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             } else {
                 echo '<div class="col-12">';
                     echo '<div class="centre">';
-                            echo 'Pas de spectacle créer pour le moment';
+                        echo 'Pas de spectacle créer pour le moment';
                     echo '</div>';
                 echo '</div>';
-            }
+            }   
         } else {
             //affichage de la liste des festivals
             while ($festival = $mesFestivals->fetch()) {

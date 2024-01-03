@@ -148,6 +148,10 @@ class SpectacleModele
         $stmt2 = $pdo->prepare($sql2);
         $stmt2->bindParam("id",$idSpectacle);
         $stmt2->execute();
+        $sql3 = "DELETE FROM Intervenant WHERE idSpectacle = :id";
+        $stmt3 = $pdo->prepare($sql3);
+        $stmt3->bindParam("id",$idSpectacle);
+        $stmt3->execute();
     }
 
     /**
@@ -175,18 +179,20 @@ class SpectacleModele
         $stmt->execute();
     }
 
-    public function nomIntervenantSurScene(PDO $pdo)
+    public function nomIntervenantSurScene(PDO $pdo, $idSpectacle)
     {
-        $sql = "SELECT nom,prenom FROM Intervenant WHERE surScene = 1";
+        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 1 AND idSpectacle = :idSpectacle";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("idSpectacle", $idSpectacle);
         $stmt->execute();
         return $stmt;
     }
     
-    public function nomIntervenantHorsScene(PDO $pdo)
+    public function nomIntervenantHorsScene(PDO $pdo, $idSpectacle)
     {
-        $sql = "SELECT nom,prenom FROM Intervenant WHERE surScene = 2";
+        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 2 AND idSpectacle = :idSpectacle";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("idSpectacle", $idSpectacle);
         $stmt->execute();
         return $stmt;
     }

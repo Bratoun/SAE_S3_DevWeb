@@ -133,9 +133,9 @@ class SpectacleControleur {
         // Recupere les données de la liste des tailles de scènes
         $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
         // Recupere la liste des intervenants 
-        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo);
+        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo,$idSpectacle);
         // Recupere la liste des intervenants hors scene 
-        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo);
+        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo,$idSpectacle);
         // Mets les données dans la vue
         $vue = new View("vues/vue_modifier_spectacle");
         $vue->setVar("titreOk", true);
@@ -198,9 +198,9 @@ class SpectacleControleur {
         // Recupere les données de la liste des tailles de scènes
         $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
         // Recupere la liste des intervenants 
-        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo);
+        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo,$idSpectacle);
         // Recupere la liste des intervenants hors scene 
-        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo);
+        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo,$idSpectacle);
         // Mets les données dans la vue
         $vue = new View("vues/vue_modifier_spectacle");
         $vue->setVar("titreOk", true);
@@ -242,6 +242,6 @@ class SpectacleControleur {
     }
 
     public function supprimerIntervenant(PDO $pdo) {
-        
+
     }
 }
