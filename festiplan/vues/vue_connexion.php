@@ -1,3 +1,11 @@
+<?php
+// Vérifier si l'utilisateur est connecté
+session_start();
+if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == true) {
+    header("Location: index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +22,11 @@
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
                 <br><br>
                 <h2 class="grand">Connexion</h2>
-                <br><br>
+                <br>
+                <?php
+                    echo (!$loginOuMdpOk) ? '<p id="invalide">Erreur : Le mot de passe ou le login est invalide.</p>' : '';
+                ?>
+                <br>
                 
                 <input type="hidden" name="controller" value="UtilisateurCompte">
                 <input type="hidden" name="action" value="connexion">

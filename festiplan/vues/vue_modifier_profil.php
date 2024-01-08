@@ -53,7 +53,7 @@
                     <div class="col-md-6 col-12">
                         <div class="input-group">
                             <input name="mdp" type="password" class="form-control <?php echo (!$mdpOk) ? 'placeholder-invalid' : ''; ?>" 
-                                placeholder="<?php echo (!$mdpOk) ? 'Mot de passe non conforme !' : 'MOT DE PASSE'; ?>" required>
+                                placeholder="<?php echo (!$mdpOk) ? 'Mot de passe non conforme !' : 'NOUVEAU MOT DE PASSE'; ?>">
                             <div class="input-group-append">
                                 <span class="input-group-text"><span class="fas fa-solid fa-lock"></span></span>
                             </div>
@@ -72,7 +72,7 @@
                     <div class="col-md-6 col-12">
                         <div class="input-group">
                             <input name="confirmMdp" type="password" class="form-control <?php echo (!$confirmMdpOk) ? 'placeholder-invalid' : ''; ?>" 
-                                placeholder="<?php echo (!$confirmMdpOk) ? 'Mot de passe différent !' : 'CONFIRMER MOT DE PASSE'; ?>" required>
+                                placeholder="<?php echo (!$confirmMdpOk) ? 'Mot de passe différent !' : 'CONFIRMER MOT DE PASSE'; ?>">
                             <div class="input-group-append">
                                 <span class="input-group-text"><span class="fas fa-solid fa-lock"></span></span>
                             </div>

@@ -54,15 +54,41 @@ class UserModele
         }
     }
 
+    // Fonction pour vérifier si l'email existe déjà
+    function emailExisteDeja($pdo, $email) {
+        $sql = "SELECT COUNT(*) FROM Utilisateur WHERE mail = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $count = $stmt->fetchColumn();
+        return ($count > 0);
+    }
+
+    // Fonction pour vérifier si le login existe déjà
+    function loginExisteDeja($pdo, $login) {
+        $sql = "SELECT COUNT(*) FROM Utilisateur WHERE login = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$login]);
+        $count = $stmt->fetchColumn();
+        return ($count > 0);
+    }
+
+
     public function modifierCompteUtilisateur(PDO $pdo, $login, $mdp, $nom, $prenom, $email) {
         try {
             // Début de la transaction
             $pdo->beginTransaction();
             
             // Requête de mise à jour
-            $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ?, mail = ? WHERE idUtilisateur = ?";
-            $updateStmt = $pdo->prepare($sql);
-            $updateStmt->execute([$mdp, $nom, $prenom, $login, $email, $_SESSION['id_utilisateur']]);
+            if ($mdp !== null && $mdp !== "" && strlen($mdp) !== 0) {
+                $sql = "UPDATE Utilisateur SET mdp = ?, nom = ?, prenom = ?, login = ?, mail = ? WHERE idUtilisateur = ?";
+                $updateStmt = $pdo->prepare($sql);
+                $updateStmt->execute([$mdp, $nom, $prenom, $login, $email, $_SESSION['id_utilisateur']]);
+            } else {
+                $sql = "UPDATE Utilisateur SET nom = ?, prenom = ?, login = ?, mail = ? WHERE idUtilisateur = ?";
+                $updateStmt = $pdo->prepare($sql);
+                $updateStmt->execute([$nom, $prenom, $login, $email, $_SESSION['id_utilisateur']]);
+            }
+            
     
             // Fin de la transaction (enregistrement des modifications)
             $pdo->commit();
