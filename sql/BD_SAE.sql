@@ -233,3 +233,14 @@ VALUES (2, 1);
 
 INSERT INTO SpectacleDeFestival (idFestival, idSpectacle)
 VALUES (1,1),(1,2),(1,3),(1,4);
+
+INSERT INTO Scene (taille, nom, nombreSpectateurs, longitude, latitude)
+VALUES (1, 'scene1', 30, 12.12121, 12.12121),
+(1, 'scene2', 33, 12.12121, 12.12121),
+(2, 'scene3', 120, 12.12121, 12.12121),
+(3, 'scene4', 500, 12.12121, 12.12121),
+(3, 'scene5', 503, 12.12121, 12.12121);
+
+
+INSERT INTO SceneFestival (idFestival,idScene)
+VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
