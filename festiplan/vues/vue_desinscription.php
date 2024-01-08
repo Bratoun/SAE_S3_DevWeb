@@ -23,7 +23,9 @@
         <div class="cadreUtilisateur connexion plusBas">
             <form action="index.php" method="post">
                 <h2 class="grand">Desinscription</h2>
-                <br><br>
+                <br>
+                <p>Attention cette action supprimera toutes vos donnees !</p>
+                <br>
 
                 <input type="hidden" name="controller" value="UtilisateurCompte">
                 <input type="hidden" name="action" value="supprimerProfil">
