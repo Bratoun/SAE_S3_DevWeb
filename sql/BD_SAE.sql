@@ -218,7 +218,7 @@ VALUES
 
 INSERT INTO Festival (categorie, titre, description, dateDebut, dateFin, illustration)
 VALUES 
-(1, 'Festival d''été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
+(1, 'Festival d été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
 (2, 'Festival de cinéma', 'Projection de films internationaux', '2023-08-15', '2023-08-25', null),
 (3, 'Festival de musique', 'Concerts de divers genres musicaux', '2023-09-05', '2023-09-15', null);
 
