@@ -218,7 +218,7 @@ VALUES
 
 INSERT INTO Festival (categorie, titre, description, dateDebut, dateFin, illustration)
 VALUES 
-(1, 'Festival d''été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
+(1, 'Festival d été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
 (2, 'Festival de cinéma', 'Projection de films internationaux', '2023-08-15', '2023-08-25', null),
 (3, 'Festival de musique', 'Concerts de divers genres musicaux', '2023-09-05', '2023-09-15', null);
 
@@ -233,3 +233,14 @@ VALUES (2, 1);
 
 INSERT INTO SpectacleDeFestival (idFestival, idSpectacle)
 VALUES (1,1),(1,2),(1,3),(1,4);
+
+INSERT INTO Scene (taille, nom, nombreSpectateurs, longitude, latitude)
+VALUES (1, 'scene1', 30, 12.12121, 12.12121),
+(1, 'scene2', 33, 12.12121, 12.12121),
+(2, 'scene3', 120, 12.12121, 12.12121),
+(3, 'scene4', 500, 12.12121, 12.12121),
+(3, 'scene5', 503, 12.12121, 12.12121);
+
+
+INSERT INTO SceneFestival (idFestival,idScene)
+VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
