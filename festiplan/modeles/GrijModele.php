@@ -96,7 +96,7 @@ class GrijModele
 
     public function recupererScenes(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT sc.taille, sc.nom
+        $sql = "SELECT sc.taille as taille, sc.nom as nom
         FROM Festival as f
         JOIN SceneFestival as scf ON f.idFestival = scf.idFestival
         JOIN Scene as sc ON sc.idScene = scf.idScene

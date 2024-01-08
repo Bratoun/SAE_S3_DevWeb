@@ -70,7 +70,7 @@ class GrijControleur
                 $spectacles = $this->grijModele->recupererSpectacles($pdo, $idFestival);
                 // Récupération des scenes
                 $scenes = $this->grijModele->recupererScenes($pdo, $idFestival);
-
+                $scenes = $scenes->fetchAll();
                 // création de la grij
                 $this->planifierSpectacles($pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
 
@@ -111,7 +111,7 @@ class GrijControleur
         $unSpectacle = $spectacles->fetch();
         $spectacleNonPlace = null;
 
-        while (($jour =$jours->fetch()) && $unSpectacle) {
+        while (($jour = $jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
             $leJourContinue = true;
