@@ -6,6 +6,13 @@
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
+    <style>
+        @media (max-width: 767px) {
+            .container {
+                margin-top: 30px;
+            }
+        }
+    </style>
 </head>
 <header>
     <div class="container-fluid header-blanc">
@@ -57,6 +64,9 @@
             </div>
             <div class="texteCentre">
                 <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription"><button type="button" class="btn fondRouge boutonTerminer">Se désinscrire</button></a>
+            </div>
+            <div class="texteCentre">
+                <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion"><button type="button" class="btn fondViolet boutonTerminer">Deconnexion</button></a>    
             </div>
         </div>
     </div>
