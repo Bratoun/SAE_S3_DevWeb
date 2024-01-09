@@ -63,13 +63,14 @@ class GrijControleur
         } else {
             $ok = $this->grijModele->modifierCreerGrij($pdo, $idFestival, $heureDebut, $heureFin, $ecartEntreSpectacles);
             if ($ok){
-                $jours = $this->grijModele->recupererJours($pdo, $idFestival);
 
+                // Récupération des jours du festival
+                $jours = $this->grijModele->recupererJours($pdo, $idFestival);
                 // Récupération des spectacles
                 $spectacles = $this->grijModele->recupererSpectacles($pdo, $idFestival);
                 // Récupération des scenes
                 $scenes = $this->grijModele->recupererScenes($pdo, $idFestival);
-
+                $scenes = $scenes->fetchAll();
                 // création de la grij
                 $this->planifierSpectacles($pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
 
@@ -109,35 +110,44 @@ class GrijControleur
         $i = 0;
         $unSpectacle = $spectacles->fetch();
 
-        while (($jour =$jours->fetch()) && $unSpectacle) {
+        while (($jour = $jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
-            
-            if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
+            $leJourContinue = true;
+
+            if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
+                $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                if ($scenesAdequates != false) {
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                    $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesAdequates->fetchAll());
+                } else {
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 0);
+                }
                 $ordre++;
                 $duree += $ecart;
             }
 
-            while($duree < $dureeTotal && $unSpectacle = $spectacles->fetch()) {
+            while($leJourContinue && ($unSpectacle = $spectacles->fetch()) && $duree < $dureeTotal) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], null, $ordre, 1);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
                     $ordre++;
                     $duree += $ecart;
                 } else {
+                    $leJourContinue  = false;
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                 }
             }
             if($unSpectacle && $this->convertirEnMinutes($unSpectacle['duree']) > $dureeTotal) {
+                $spectacleNonPlace = $unSpectacle;
                 $unSpectacle = false;
             }
         }
-        if ($unSpectacle != false) {
-            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], null, 0, 0);
+        if ($spectacleNonPlace != null) {
+            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$spectacleNonPlace['id'], 0, 0);
             while ($unSpectacle = $spectacles->fetch()){
-                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], null, 0, 0);
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0);
             }
         }
     }

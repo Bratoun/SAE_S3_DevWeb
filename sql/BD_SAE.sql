@@ -163,13 +163,21 @@ CREATE TABLE SpectaclesJour (
     idFestival INT(11) NOT NULL,
     idJour INT(11) NULL,
     idSpectacle INT(11) NOT NULL,
-    idScene INT(11) NULL,
     ordre INT(3) NOT NULL DEFAULT 0,
     place TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (idFestival, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
+    FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
+);
+
+CREATE TABLE SpectacleScenes (
+    idFestival INT(11) NOT NULL,
+    idSpectacle INT(11) NOT NULL,
+    idScene INT(11) NOT NULL,
+    PRIMARY KEY (idFestival, idSpectacle, idScene),
     FOREIGN KEY (idScene) REFERENCES Scene(idScene),
+    FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
     FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
 );
 
@@ -208,7 +216,7 @@ VALUES
 
 INSERT INTO Festival (categorie, titre, description, dateDebut, dateFin, illustration)
 VALUES 
-(1, 'Festival d''été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
+(1, 'Festival d été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
 (2, 'Festival de cinéma', 'Projection de films internationaux', '2023-08-15', '2023-08-25', null),
 (3, 'Festival de musique', 'Concerts de divers genres musicaux', '2023-09-05', '2023-09-15', null);
 
@@ -234,3 +242,14 @@ VALUES
 ('Habilleur'),
 ('Scènographe'),
 ('Eclairagiste');
+
+INSERT INTO Scene (taille, nom, nombreSpectateurs, longitude, latitude)
+VALUES (1, 'scene1', 30, 12.12121, 12.12121),
+(1, 'scene2', 33, 12.12121, 12.12121),
+(2, 'scene3', 120, 12.12121, 12.12121),
+(3, 'scene4', 500, 12.12121, 12.12121),
+(3, 'scene5', 503, 12.12121, 12.12121);
+
+
+INSERT INTO SceneFestival (idFestival,idScene)
+VALUES (1,1),(1,2),(1,3);

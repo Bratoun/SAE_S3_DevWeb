@@ -30,7 +30,10 @@ class HomeController {
             $vue->setVar("mesFestivals", $mesFestivals);
             return $vue;
         } else {
-            return new View("vues/vue_connexion");
+            $verifLoginOuMdp = true;
+            $vue = new View("vues/vue_connexion");
+            $vue->setVar("loginOuMdpOk", $verifLoginOuMdp);
+            return $vue;
         }
     }
 }

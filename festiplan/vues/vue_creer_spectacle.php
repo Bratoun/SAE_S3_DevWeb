@@ -78,9 +78,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 ?>
             </select>
         </div>
-        <div class="footer col-12">
-            <button type="submit" class="btn btnModif fondBleu">Terminer</button>
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
+        <div class="container-fluid footer">
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btnModif fondBleu">Terminer</button>
+                </div>
+                <div class="col-6">
+                    <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
