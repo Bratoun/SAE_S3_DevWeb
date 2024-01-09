@@ -19,6 +19,7 @@ class AccueilControleur {
     public function index(PDO $pdo) : View {
         $afficher = false;
         $idUtilisateur = $_SESSION['id_utilisateur'];
+        
         $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur);
         $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur);
         $vue = new View("vues/vue_accueil");

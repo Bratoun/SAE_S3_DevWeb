@@ -108,8 +108,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="footer col-12">
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
-            <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
-            <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer le spectacle</button></a>
         </div>
     </div>
 </div>

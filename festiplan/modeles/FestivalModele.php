@@ -63,6 +63,8 @@ class FestivalModele
      */
     public function listeMesFestivals(PDO $pdo, $idOrganisateur)
     {
+        // Exemple de requête SQL avec LIMIT et OFFSET
+        $query = "SELECT * FROM ma_table LIMIT  OFFSET ";
         $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idOrganisateur);
@@ -100,16 +102,26 @@ class FestivalModele
      */
     public function modificationFestival(PDO $pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $illustration, $idFestival)
     {   
-        $sql = "UPDATE Festival SET titre =:leNom, categorie =:laCate, description =:laDesc, dateDebut =:leDeb, dateFin =:laFin, illustration=:lIllu WHERE idFestival =:id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam("leNom",$nom);
-        $stmt->bindParam("laCate",$categorie);
-        $stmt->bindParam("laDesc",$description);
-        $stmt->bindParam("leDeb",$dateDebut);
-        $stmt->bindParam("laFin",$dateFin);
-        $stmt->bindParam("lIllu",$illustration);
-        $stmt->bindParam("id",$idFestival);
-        $stmt->execute();
+        try {
+            // Début de la transaction
+            $pdo->beginTransaction();
+            $sql = "UPDATE Festival SET titre =:leNom, categorie =:laCate, description =:laDesc, dateDebut =:leDeb, dateFin =:laFin, illustration=:lIllu WHERE idFestival =:id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam("leNom",$nom);
+            $stmt->bindParam("laCate",$categorie);
+            $stmt->bindParam("laDesc",$description);
+            $stmt->bindParam("leDeb",$dateDebut);
+            $stmt->bindParam("laFin",$dateFin);
+            $stmt->bindParam("lIllu",$illustration);
+            $stmt->bindParam("id",$idFestival);
+            $stmt->execute();
+            // Valider la transaction
+            $pdo->commit();
+        } catch (PDOException $e) {
+            // En cas d'erreur, annuler la transaction
+            $pdo->rollBack();
+            echo "Erreur : " . $e->getMessage();
+        }
     }
 
     /**
@@ -151,7 +163,8 @@ class FestivalModele
      * @param pdo un objet PDO connecté à la base de données.
      * @param idFestival l'id du festival.
      */
-    public function listeOrganisateurFestival($pdo,$idFestival) {
+    public function listeOrganisateurFestival($pdo,$idFestival) 
+    {
         $sql = "SELECT Utilisateur.idUtilisateur,Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idFestival",$idFestival);
@@ -163,7 +176,8 @@ class FestivalModele
      * Renvoie la liste de tout les utilisateurs
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function listeUtilisateur($pdo) {
+    public function listeUtilisateur($pdo) 
+    {
         $sql = "SELECT idUtilisateur,nom FROM Utilisateur";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -175,7 +189,8 @@ class FestivalModele
      * @param pdo un objet PDO connecté à la base de données.
      * @param idFestival l'id du festival.
      */
-    public function supprimerOrganisateurs($pdo,$idFestival) {
+    public function supprimerOrganisateurs($pdo,$idFestival) 
+    {
         $sql = "DELETE FROM EquipeOrganisatrice WHERE idFestival = :id AND responsable = false ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idFestival);
@@ -186,8 +201,8 @@ class FestivalModele
      * Met a jour la liste des organisateur d'un festival
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function majOrganisateur($pdo,$idFestival,$utilisateur) {
-
+    public function majOrganisateur($pdo,$idFestival,$utilisateur) 
+    {
         $sql = "INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival) VALUES (:idOrg,:idFestival)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idOrg",$utilisateur);
@@ -199,8 +214,8 @@ class FestivalModele
      * Supprimer tout les spectacles d'un festival.
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function supprimerSpectacleDeFestival ($pdo,$idFestival) {
-
+    public function supprimerSpectacleDeFestival ($pdo,$idFestival) 
+    {
         $sql = "DELETE FROM SpectacleDeFestival WHERE idFestival = :id ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idFestival);
@@ -211,8 +226,8 @@ class FestivalModele
      * Met a jour la liste des spectacles d'un festival
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function majSpectacleDeFestival ($pdo,$idFestival,$idSpectacle) {
-
+    public function majSpectacleDeFestival ($pdo,$idFestival,$idSpectacle) 
+    {
         $sql = "INSERT INTO SpectacleDeFestival (idSpectacle, idFestival) VALUES (:idSpectacle,:idFestival)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idSpectacle",$idSpectacle);
@@ -225,7 +240,8 @@ class FestivalModele
      * @param pdo un objet PDO connecté à la base de données.
      * @param idFestival l'id du festival.
      */
-    public function listeSpectacleDeFestival($pdo,$idFestival) {
+    public function listeSpectacleDeFestival($pdo,$idFestival) 
+    {
         $sql = "SELECT idSpectacle FROM SpectacleDeFestival WHERE idFestival = :id ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idFestival);

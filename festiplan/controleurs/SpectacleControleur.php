@@ -240,7 +240,12 @@ class SpectacleControleur {
         return $vue;
     }
 
-    public function supprimerIntervenant(PDO $pdo) {
-
+    public function afficherIntervenant(PDO $pdo) {
+        session_start();
+        $idOrganisateur = $_SESSION['id_utilisateur'];
+        $idSpectacle = HttpHelper::getParam('idSpectacle');
+        
+        $vue = new View("vues/vue_intervenant");
+        return $vue;
     }
 }
