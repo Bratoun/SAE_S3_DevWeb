@@ -48,17 +48,23 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="action" value="nouveauOuModificationFestival">
         <input type="hidden" name="modifier" value="false">
 
-        <div class="form-group texteGauche">
-            <label id="<?php if(!$nomOk){echo 'invalide';}?>">Nom :</label>
-            <input name="nom" type="text"  placeholder="(max 35 caractére)" value="<?php if($nomOk){echo $ancienNom;}?>" required>
+        <div class="col-12">
+            <div class="form-group texteGauche">
+                <label id="<?php if(!$nomOk){echo 'invalide';}?>">Nom :</label>
+                <input name="nom" type="text"  placeholder="(max 35 caractére)" value="<?php if($nomOk){echo $ancienNom;}?>" required>
+            </div>
         </div>
-        <div class="form-group texteGauche">
-        <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>
-            <input name="description" type="textarea"  placeholder="(max 1000 caractére)" value="<?php if($descOk){echo $ancienneDesc;}?>" required>
+        <div class="col-12">
+            <div class="form-group texteGauche">
+            <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>
+                <input name="description" type="textarea"  placeholder="(max 1000 caractére)" value="<?php if($descOk){echo $ancienneDesc;}?>" required>
+            </div>
         </div>
-        <div class="form-group texteGauche">
-        <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de début :</label>
-            <input name="dateDebut" type="date" value="<?php if($dateOk){echo $ancienneDateDebut;}?>" required>
+        <div class="col-12">
+            <div class="form-group texteGauche">
+            <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de début :</label>
+                <input name="dateDebut" type="date" value="<?php if($dateOk){echo $ancienneDateDebut;}?>" required>
+            </div>
         </div>
         <div class="form-group texteGauche">
             <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de fin :</label>

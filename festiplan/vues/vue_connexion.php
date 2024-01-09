@@ -4,8 +4,8 @@ session_start();
 if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == true) {
     header("Location: index.php");
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

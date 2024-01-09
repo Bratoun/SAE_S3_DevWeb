@@ -117,11 +117,6 @@ class UserModele
         $deleteStmtDeux = $pdo->prepare($sqlDeux);
         $deleteStmtDeux->execute([$idUtilisateur]);
     
-        // Supprimer de IntervenantSpectacle
-        $sqlTrois = "DELETE FROM IntervenantSpectacle WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
-        $deleteStmtTrois = $pdo->prepare($sqlTrois);
-        $deleteStmtTrois->execute([$idUtilisateur]);
-    
         // Supprimer de SpectacleDeFestival
         $sqlQuatre = "DELETE FROM SpectacleDeFestival WHERE idSpectacle IN (SELECT idSpectacle FROM SpectacleOrganisateur WHERE idUtilisateur = ?)";
         $deleteStmtQuatre = $pdo->prepare($sqlQuatre);

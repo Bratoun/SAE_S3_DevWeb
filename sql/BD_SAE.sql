@@ -89,32 +89,23 @@ ADD FOREIGN KEY (categorie) REFERENCES CategorieSpectacle(idCategorie);
 -- Création de la table Intervenant
 CREATE TABLE Intervenant (
   idIntervenant INT(11) NOT NULL AUTO_INCREMENT,
+  idSpectacle INT(11) NOT NULL,
   nom VARCHAR(35) NOT NULL,
   prenom VARCHAR(35) NOT NULL,
   mail VARCHAR(50) NOT NULL,
-  surScene BOOLEAN NOT NULL,
+  surScene INT(1) NOT NULL,
   typeIntervenant INT(11) NOT NULL,
   PRIMARY KEY (idIntervenant)
 );
 
 CREATE TABLE MetierIntervenant (
-    idMetierIntervenant INT(11) NOT NULL,
+    idMetierIntervenant INT(11) NOT NULL AUTO_INCREMENT,
     metier VARCHAR(50) NOT NULL,
     PRIMARY KEY (idMetierIntervenant)
 );
 
 ALTER TABLE Intervenant
 ADD FOREIGN KEY (typeIntervenant) REFERENCES MetierIntervenant(idMetierIntervenant);
-
-CREATE TABLE IntervenantSpectacle (
-    idSpectacle INT(11) NOT NULL,
-    idIntervenant INT(11) NOT NULL,
-    PRIMARY KEY (idSpectacle, idIntervenant)
-);
-ALTER TABLE IntervenantSpectacle
-ADD FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle);
-ALTER TABLE IntervenantSpectacle
-ADD FOREIGN KEY (idIntervenant) REFERENCES Intervenant(idIntervenant);
 
 
 CREATE TABLE Scene (
@@ -223,7 +214,6 @@ VALUES
 ('Rayan','IBRAHIME','r@sfr.fr','rayan','123'),
 ('Alix','BRUGIER','a@sfr.fr','alix','123');
 
-
 INSERT INTO Festival (categorie, titre, description, dateDebut, dateFin, illustration)
 VALUES 
 (1, 'Festival d été', 'Un grand festival estival', '2023-07-01', '2023-07-10', NULL),
@@ -241,6 +231,17 @@ VALUES (2, 1);
 
 INSERT INTO SpectacleDeFestival (idFestival, idSpectacle)
 VALUES (1,1),(1,2),(1,3),(1,4);
+INSERT INTO MetierIntervenant (metier)
+VALUES
+('Acteur'),
+('Danseur'),
+('Chanteur'),
+('Régisseur'),
+('Comédien'),
+('Maquilleur'),
+('Habilleur'),
+('Scènographe'),
+('Eclairagiste');
 
 INSERT INTO Scene (taille, nom, nombreSpectateurs, longitude, latitude)
 VALUES (1, 'scene1', 30, 12.12121, 12.12121),

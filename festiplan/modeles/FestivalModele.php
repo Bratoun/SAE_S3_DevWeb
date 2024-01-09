@@ -152,9 +152,83 @@ class FestivalModele
      * @param idFestival l'id du festival.
      */
     public function listeOrganisateurFestival($pdo,$idFestival) {
-        $sql = "SELECT Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
+        $sql = "SELECT Utilisateur.idUtilisateur,Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idFestival",$idFestival);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
+     * Renvoie la liste de tout les utilisateurs
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function listeUtilisateur($pdo) {
+        $sql = "SELECT idUtilisateur,nom FROM Utilisateur";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
+     * Supprime la liste des organisateur d'un festival
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idFestival l'id du festival.
+     */
+    public function supprimerOrganisateurs($pdo,$idFestival) {
+        $sql = "DELETE FROM EquipeOrganisatrice WHERE idFestival = :id AND responsable = false ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idFestival);
+        $stmt->execute();
+    }
+
+    /**
+     * Met a jour la liste des organisateur d'un festival
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function majOrganisateur($pdo,$idFestival,$utilisateur) {
+
+        $sql = "INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival) VALUES (:idOrg,:idFestival)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("idOrg",$utilisateur);
+        $stmt->bindParam("idFestival",$idFestival);
+        $stmt->execute();
+    }
+
+    /**
+     * Supprimer tout les spectacles d'un festival.
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function supprimerSpectacleDeFestival ($pdo,$idFestival) {
+
+        $sql = "DELETE FROM SpectacleDeFestival WHERE idFestival = :id ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idFestival);
+        $stmt->execute();
+    }
+
+    /**
+     * Met a jour la liste des spectacles d'un festival
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function majSpectacleDeFestival ($pdo,$idFestival,$idSpectacle) {
+
+        $sql = "INSERT INTO SpectacleDeFestival (idSpectacle, idFestival) VALUES (:idSpectacle,:idFestival)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("idSpectacle",$idSpectacle);
+        $stmt->bindParam("idFestival",$idFestival);
+        $stmt->execute();
+    }
+
+    /**
+     * Renvoie la liste des spectacles du festival voulu
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idFestival l'id du festival.
+     */
+    public function listeSpectacleDeFestival($pdo,$idFestival) {
+        $sql = "SELECT idSpectacle FROM SpectacleDeFestival WHERE idFestival = :id ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idFestival);
         $stmt->execute();
         return $stmt;
     }

@@ -47,9 +47,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <?php
         // Affichage de la liste des spectacles
         if ($afficher) {
-            while ($listeSpectacle = $mesSpectacles->fetch()) {
-                ?>
-                <div class="row">
+            if ($mesSpectacles->rowCount() > 0) {
+                while ($listeSpectacle = $mesSpectacles->fetch()) {
+                    ?>
                     <div class="col-12">
                         <div class="centre">
                             <div class='cadreFestival'>
@@ -58,12 +58,19 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     echo $listeSpectacle['titre'];
                                 ?>
                                 <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
+                                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier les intervenants du spectacle</button></a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php
-            }
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12">';
+                    echo '<div class="centre">';
+                        echo 'Pas de spectacle créer pour le moment';
+                    echo '</div>';
+                echo '</div>';
+            }   
         } else {
             //affichage de la liste des festivals
             while ($festival = $mesFestivals->fetch()) {
