@@ -15,6 +15,18 @@
                     <img src="static/images/logo_blanc.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
             </div>
+            <div class="offset-8 col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+                <!-- Icône utilisateur avec menu déroulant -->
+                <div class="dropdown">
+                    <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>
+                    <div class="dropdown-content">
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription">Désinscription</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -49,7 +61,7 @@
                     </div>
                 <br><br>
                 <div class="texteCentre">
-                    <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
+                    <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
                 </div>
                 <div class="texteCentre">
                     <button type="submit" class="btn fondRouge boutonTerminer">Se desinscrire</button></a>

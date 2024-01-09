@@ -22,6 +22,18 @@
                     <img src="static/images/logo_blanc.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
             </div>
+            <div class="offset-8 col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+                <!-- Icône utilisateur avec menu déroulant -->
+                <div class="dropdown">
+                    <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>
+                    <div class="dropdown-content">
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription">Désinscription</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -29,12 +41,7 @@
     <div class="container containerCentre">
         <div class="cadreUtilisateur connexion plusBas">
             <div class="row">
-                <h2 class="grand col-10">Informations sur le compte</h2>
-                <a class="col-2" href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">
-                    <button class='btn icone-pencil'>
-                        <span class="fas fa-solid fa-pencil"></span>
-                    </button>
-                </a>
+                <h2 class="grand col-12">Informations sur le compte</h2>
             </div>
             <br>
 
@@ -61,13 +68,7 @@
             <br>
             <div class="texteCentre">
                 <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
-            </div>
-            <div class="texteCentre">
-                <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription"><button type="button" class="btn fondRouge boutonTerminer">Se désinscrire</button></a>
-            </div>
-            <div class="texteCentre">
-                <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion"><button type="button" class="btn fondViolet boutonTerminer">Deconnexion</button></a>    
-            </div>
+            </div> 
         </div>
     </div>
 </body>
