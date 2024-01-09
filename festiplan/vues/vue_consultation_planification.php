@@ -35,7 +35,20 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="container">
             <div class="row">
                 <?php
-                    var_dump($listeJours);
+                // Liste des jours du festival
+                    while($listeJours as $jour)
+                    {
+                        ?>
+                        <div class="cadre col-3">
+                            <h1><?php echo $jour['dateJour'];?></h1>
+                            <?php
+                            // Liste des spetacles du jour du festival
+                            echo $jour['titre'];
+                            // foreach($jour['titre'])
+                            ?>
+                        </div>
+                        <?php
+                    }
                 ?>
             </div>
         </div>

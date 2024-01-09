@@ -115,9 +115,17 @@ class GrijModele
 
     public function recupererGrij(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT * FROM Spectacle as s JOIN SpectaclesJour as sj ON s.idSpectacle = sj.idSpectacle
-                JOIN Jour as j ON j.idJour = sj.idJour
-                WHERE sj.idFestival = ?";
+        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(s.titre) as titre
+                FROM Grij as g
+                JOIN Jour as j
+                ON j.idGrij = g.idGrij
+                JOIN SpectaclesJour as sj
+                ON j.idJour = sj.idJour
+                JOIN Spectacle as s
+                ON s.idSpectacle = sj.idSpectacle
+                WHERE sj.place = 1
+                GROUP BY j.idJour
+                ORDER BY sj.ordre";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$idFestival]);
         return $stmt;
