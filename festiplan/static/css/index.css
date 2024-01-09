@@ -173,7 +173,7 @@ img {
 }
 
 .logo-festiplan {
-    width: 100%;
+    width: auto;
     max-width: 120px;
     height: auto;
     position: absolute;
