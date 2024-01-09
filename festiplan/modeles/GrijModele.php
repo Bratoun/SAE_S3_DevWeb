@@ -96,7 +96,7 @@ class GrijModele
 
     public function recupererScenes(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT sc.taille, sc.nom
+        $sql = "SELECT sc.taille as taille, sc.nom as nom
         FROM Festival as f
         JOIN SceneFestival as scf ON f.idFestival = scf.idFestival
         JOIN Scene as sc ON sc.idScene = scf.idScene
@@ -106,19 +106,54 @@ class GrijModele
         return $stmt;
     }
 
-    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $idScene, $ordre, $place)
+    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place)
     {
-        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival,$idJour, $idSpectacle, $idScene, $ordre, $place]);
+        $stmt->execute([$idFestival,$idJour, $idSpectacle, $ordre, $place]);
     }
 
     public function recupererGrij(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT * FROM Spectacle as s JOIN SpectaclesJour as sj ON s.idSpectacle = sj.idSpectacle
-                JOIN Jour as j ON j.idJour = sj.idJour
-                WHERE sj.idFestival = ?";
+        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(s.titre) as titre
+                FROM Grij as g
+                JOIN Jour as j
+                ON j.idGrij = g.idGrij
+                JOIN SpectaclesJour as sj
+                ON j.idJour = sj.idJour
+                JOIN Spectacle as s
+                ON s.idSpectacle = sj.idSpectacle
+                WHERE sj.place = 1
+                GROUP BY j.idJour
+                ORDER BY sj.ordre";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute([$idFestival]);
+        $stmt->execute([$idFestival]);
+        return $stmt;
+    }
+
+    public function recuperationSceneAdequate(PDO $pdo, $idFestival, $taille)
+    {
+        $sql = "SELECT s.idScene FROM Festival as f
+                JOIN SceneFestival as sf
+                ON f.idFestival = sf.idFestival
+                JOIN Scene as s
+                ON s.idScene = sf.idScene
+                WHERE f.idFestival = ?
+                AND s.taille >= ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival, $taille]);
+        return $stmt;
+    }
+
+    public function insertionSpectacleScene(PDO $pdo, $idFestival, $idSpectacle, $listeScenesAdequates)
+    {
+        $sql = "INSERT INTO SpectacleScenes (idSpectacle,idScene,idFestival)
+                VALUES ";
+        foreach($listeScenesAdequates as $idScene) {
+            $sql .= "(".$idSpectacle.",".$idScene['idScene'].",".$idFestival."),";
+        }
+        $sql = substr($sql,0,-1);
+        $stmt = $pdo->query($sql);
+        return $stmt;
     }
 }
