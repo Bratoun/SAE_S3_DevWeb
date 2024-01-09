@@ -31,8 +31,8 @@
     </div>
 </header>
 <body>
-    <div class="container containerCentre">
-        <div class="cadreUtilisateur connexion plusBas">
+    <div class="container">
+        <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
                 <h2 class="grand">Desinscription</h2>
                 <br>

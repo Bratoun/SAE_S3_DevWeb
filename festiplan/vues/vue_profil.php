@@ -6,13 +6,6 @@
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
-    <style>
-        @media (max-width: 767px) {
-            .container {
-                margin-top: 30px;
-            }
-        }
-    </style>
 </head>
 <header>
     <div class="container-fluid header-blanc">
@@ -38,8 +31,8 @@
     </div>
 </header>
 <body>
-    <div class="container containerCentre">
-        <div class="cadreUtilisateur connexion plusBas">
+    <div class="container">
+        <div class="cadreUtilisateur connexion">
             <div class="row">
                 <h2 class="grand col-12">Informations sur le compte</h2>
             </div>
