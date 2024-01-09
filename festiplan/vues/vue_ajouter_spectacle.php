@@ -27,8 +27,17 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-8">
                 <h2 class="texteCentre blanc bas">Modifier un intervenant</h2>
             </div>
-            <div class="col-2">
-                <button class="btn icone-user"><span class="fas fa-solid fa-user"></span></button>
+            <div class="col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+                <!-- Icône utilisateur avec menu déroulant -->
+                <div class="dropdown">
+                    <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>
+                    <div class="dropdown-content">
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription">Désinscription</a>
+                        <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion">Déconnexion</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
