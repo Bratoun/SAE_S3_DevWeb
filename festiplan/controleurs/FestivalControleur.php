@@ -192,8 +192,8 @@ class FestivalControleur {
         $idOrganisateur = $_SESSION['id_utilisateur'];
         $idFestival = HttpHelper::getParam('idFestival');
 
-        // Récupere tout les parametre d'un festivale l'organisateur');
-        $idUtilisateurs = self::getParamArray('Utilisateur');
+        // Récupere tout les utilisateurs checks
+        $idUtilisateurs = self::getParamArray('Utilisateurs');
         // Supprime tout les organisateur sauf le responsable
         
         $this->festivalModele->supprimerOrganisateurs($pdo,$idFestival);
@@ -227,14 +227,54 @@ class FestivalControleur {
 
 
     public function modifierListeSpectacleFestival(PDO $pdo) : View {
-        session_start();
-        $idOrganisateur = $_SESSION['id_utilisateur'];
         $idFestival = HttpHelper::getParam('idFestival');
+        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo);
 
-        $vue = new View("vues/vue_modifier_festival");
+        // Recupere tout les organisateurActuel du festival
+        $listeSpectacleDeFestival = $this->festivalModele->listeSpectacleDeFestival($pdo,$idFestival);
 
+        $vue = new View("vues/vue_ajouter_spectacle");
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("listeSpectacleDeFestival", $listeSpectacleDeFestival);
+        $vue->setVar("listeSpectacles", $listeSpectacles);
         return $vue;
     }
 
+    public function modifierListeSpectacle (PDO $pdo) : View {
+        $idFestival = HttpHelper::getParam('idFestival');
+        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo);
+
+        $this->festivalModele->supprimerSpectacleDeFestival($pdo,$idFestival);
+
+        // Récupere tout les festivals checks
+        $idSpectacles = self::getParamArray('Spectacles');
+
+        foreach($idSpectacles as $idSpectacle) {
+            // Ajoute un a un les nouveaux organisateurs
+            $this->festivalModele->majSpectacleDeFestival($pdo,$idFestival,$idSpectacle);
+        }
+
+        $festivalAModifier = $this->festivalModele->leFestival($pdo,$idFestival);
+        // Recupere les données de la liste des catégorie
+        $searchStmt = $this->festivalModele->listeCategorieFestival($pdo);
+        // Recupere l'ensemble des organisateur actuel du festival
+        $listeOrganisateur = $this->festivalModele->listeOrganisateurFestival($pdo,$idFestival);
+        // Mets les données dans la vue
+        $vue = new View("vues/vue_modifier_festival");
+        $vue->setVar("nomOk", true);
+        $vue->setVar("ancienNom", $festivalAModifier['titre']);
+        $vue->setVar("descOk", true);
+        $vue->setVar("ancienneDesc", $festivalAModifier['description']);
+        $vue->setVar("dateOk", true);
+        $vue->setVar("ancienneDateDebut", $festivalAModifier['dateDebut']);
+        $vue->setVar("ancienneDateFin", $festivalAModifier['dateFin']);
+        $vue->setVar("ancienneCategorie", $festivalAModifier['categorie']);
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("searchStmt",$searchStmt);
+        $vue->setVar("estResponsable", true);
+        $vue->setVar("listeOrganisateur", $listeOrganisateur);
+        return $vue;
+    }
     
+
 }

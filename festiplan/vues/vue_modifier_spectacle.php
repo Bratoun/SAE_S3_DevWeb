@@ -83,14 +83,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <option disabled>Intervenant sur scène</option>
                 <?php 
                 while ($row = $searchStmt3->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'<br>'.$row['prenom'];?></option>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'&nbsp;'.$row['prenom'];?></option>
                 <?php
                 }
                 ?>
                 <option disabled>Intervenant hors scène</option>
                 <?php 
                 while ($row = $searchStmt4->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].$row['prenom'];?></option>
+                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'&nbsp;'.$row['prenom'];?></option>
                 <?php
                 }
                 ?>
@@ -100,8 +100,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
             <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
-            <a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Modifier un intervenant</button></a>
-            <a href="/festiplan?controller=Spectacle&action=supprimerIntervenant"><button type="button" class="btn btnModif fondGris">Supprimer un intervenant</button></a>
             <a href="/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=<?php echo $idSpectacle;?>"> <button type="button" class="btn btnModif fondRouge">Supprimer le spectacle</button></a>
         </div>
     </div>

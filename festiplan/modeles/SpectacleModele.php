@@ -98,6 +98,19 @@ class SpectacleModele
     }
 
     /**
+     * Recherche la liste de tout les spectacles.
+     * @param pdo un objet PDO connecté à la base de données.
+     * @return searchStmt l'ensemble des festivals.
+     */
+    public function listeSpectacles(PDO $pdo) 
+    {
+        $sql = "SELECT Spectacle.titre,Spectacle.idSpectacle,Spectacle.illustration FROM Spectacle ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
      * Renvoie de la liste des métiers possibles pour un intervenant
      * @param $pdo un objet PDO connecté à la base de données
      */
@@ -121,7 +134,7 @@ class SpectacleModele
      */
     public function insertionsIntervenants(PDO $pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant)
     {
-        
+        try {
         $sql = "INSERT INTO Intervenant (idSpectacle,nom,prenom,mail,surScene,typeIntervenant) VALUES (:leIdSpectacle,:leNom,:lePrenom,:leMail,:surScene,:typeIntervenant)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("leIdSpectacle",$idSpectacle);
@@ -131,6 +144,9 @@ class SpectacleModele
         $stmt->bindParam("surScene",$surScene);
         $stmt->bindParam("typeIntervenant",$typeIntervenant);
         $stmt->execute();
+        } catch (PDOException $e) {
+            
+        }
     }
 
     /**
@@ -181,7 +197,7 @@ class SpectacleModele
 
     public function nomIntervenantSurScene(PDO $pdo, $idSpectacle)
     {
-        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 1 AND idSpectacle = :idSpectacle";
+        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 0 AND idSpectacle = :idSpectacle";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idSpectacle", $idSpectacle);
         $stmt->execute();
@@ -190,7 +206,7 @@ class SpectacleModele
     
     public function nomIntervenantHorsScene(PDO $pdo, $idSpectacle)
     {
-        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 2 AND idSpectacle = :idSpectacle";
+        $sql = "SELECT idIntervenant,nom,prenom FROM Intervenant WHERE surScene = 1 AND idSpectacle = :idSpectacle";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idSpectacle", $idSpectacle);
         $stmt->execute();

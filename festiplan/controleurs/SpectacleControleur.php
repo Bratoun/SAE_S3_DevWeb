@@ -188,9 +188,8 @@ class SpectacleControleur {
         $typeIntervenant = HttpHelper::getParam('metierIntervenant');
         $idSpectacle = HttpHelper::getParam('idSpectacle');
         
-        
         $search = $this->spectacleModele->insertionsIntervenants($pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant);
-
+        
         // Recupere les données du spectacle séléctionné
         $spectacleAModifier = $this->spectacleModele->leSpectacle($pdo,$idSpectacle);
         // Recupere les données de la liste des catégorie
@@ -219,7 +218,7 @@ class SpectacleControleur {
         $vue->setVar("searchStmt2",$searchStmt2);
         $vue->setVar("searchStmt3",$searchStmt3);
         $vue->setVar("searchStmt4",$searchStmt4);
-        return $vue; 
+        return $vue;
     }
 
     

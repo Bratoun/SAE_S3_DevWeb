@@ -78,9 +78,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="col-12">
         Intervenant sur ou hors scène :<br>
         <select name="categorieIntervenant" required>
-        <option disabled value="0">Choisissez le type d'intervenant</option>
-            <option value="1">Sur Scène</option>
-            <option value="2">Hors Scène</option>
+            <option value="0">Sur Scène</option>
+            <option value="1">Hors Scène</option>
         </select>
         </div>
         <div class="footer">
