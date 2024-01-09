@@ -109,20 +109,21 @@ class GrijControleur
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
         $i = 0;
         $unSpectacle = $spectacles->fetch();
+        $spectacleNonPlace = null;
 
         while (($jour = $jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
             $leJourContinue = true;
-
+            
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
                 $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                if ($scenesAdequates != false) {
+                if ($scenesOk = $scenesAdequates->fetchAll()) {
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
-                    $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesAdequates->fetchAll());
+                    $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                 } else {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 0);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0);
                 }
                 $ordre++;
                 $duree += $ecart;
@@ -131,7 +132,15 @@ class GrijControleur
             while($leJourContinue && ($unSpectacle = $spectacles->fetch()) && $duree < $dureeTotal) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                    $scenesOk = $scenesAdequates->fetchAll();
+                    var_dump($scenesOk);
+                    if ($scenesOk) {
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                        $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
+                    } else {
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0);
+                    }
                     $ordre++;
                     $duree += $ecart;
                 } else {
@@ -150,5 +159,13 @@ class GrijControleur
                 $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0);
             }
         }
+    }
+
+    public function profilSpectacleJour(PDO $pdo, $idFestival, $idSpectacle)
+    {
+        $idFestival = HttpHelper::getParam('idFestival');
+        $idSpectacle = HttpHelper::getParam('idSpectacle');
+        $vue = new View("vues/vue_consultation_planification");
+        return $vue;
     }
 }

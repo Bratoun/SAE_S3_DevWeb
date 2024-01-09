@@ -115,22 +115,19 @@ class GrijModele
 
     public function recupererGrij(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(s.titre) as titre
+        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(DISTINCT s.titre ORDER BY sj.ordre) as titres, GROUP_CONCAT(sj.idSpectacle ORDER BY sj.ordre) as idSpectacles
                 FROM Grij as g
-                JOIN Jour as j
-                ON j.idGrij = g.idGrij
-                JOIN SpectaclesJour as sj
-                ON j.idJour = sj.idJour
-                JOIN Spectacle as s
-                ON s.idSpectacle = sj.idSpectacle
+                JOIN Jour as j ON j.idGrij = g.idGrij
+                JOIN SpectaclesJour as sj ON j.idJour = sj.idJour
+                JOIN Spectacle as s ON s.idSpectacle = sj.idSpectacle
                 WHERE sj.place = 1
-                GROUP BY j.idJour
-                ORDER BY sj.ordre";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival]);
+                AND g.idGrij = ".$idFestival.
+                " GROUP BY j.idJour, j.dateDuJour
+                ORDER BY j.dateDuJour";
+        $stmt = $pdo->query($sql);
         return $stmt;
     }
-
+    
     public function recuperationSceneAdequate(PDO $pdo, $idFestival, $taille)
     {
         $sql = "SELECT s.idScene FROM Festival as f
@@ -147,11 +144,17 @@ class GrijModele
 
     public function insertionSpectacleScene(PDO $pdo, $idFestival, $idSpectacle, $listeScenesAdequates)
     {
+        // Suppression de la liste des scènes existante du spectacle
+        $sql = "DELETE FROM SpectacleScenes WHERE idSpectacle = ".$idSpectacle;
+        $stmt = $pdo->query($sql);
+
+        // Ajout de la liste des scènes possibles du spectacle
         $sql = "INSERT INTO SpectacleScenes (idSpectacle,idScene,idFestival)
                 VALUES ";
         foreach($listeScenesAdequates as $idScene) {
             $sql .= "(".$idSpectacle.",".$idScene['idScene'].",".$idFestival."),";
         }
+        var_dump($sql);
         $sql = substr($sql,0,-1);
         $stmt = $pdo->query($sql);
         return $stmt;

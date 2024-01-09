@@ -45,19 +45,23 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="row">
                 <?php
                 // Liste des jours du festival
-                    while($listeJours as $jour)
-                    {
-                        ?>
-                        <div class="cadre col-3">
-                            <h1><?php echo $jour['dateJour'];?></h1>
-                            <?php
-                            // Liste des spetacles du jour du festival
-                            echo $jour['titre'];
-                            // foreach($jour['titre'])
-                            ?>
-                        </div>
+                while($jour = $listeJours->fetch())
+                {
+                    ?>
+                    <div class="col-3">
+                        <h3><?php echo $jour['dateJour'];?></h13>
                         <?php
-                    }
+                        // Liste des spetacles du jour du festival
+                        $listeTitres = explode(',', $jour['titres']);
+                        foreach ($listeTitres as $titreSpectacle){
+                            ?>
+                            <a href="/festiplan?controller=Grij&action=profilSpectacleJour&idFestival=<?php echo $idFestival;?>&idSpectacle=<?php echo ;?>"><button type="button" class="btn fondGris"><?php echo $titreSpectacle;?></button></a>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <?php
+                }
                 ?>
             </div>
         </div>
