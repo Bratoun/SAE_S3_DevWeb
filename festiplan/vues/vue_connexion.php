@@ -16,7 +16,7 @@ if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container containerCentre">
+    <div class="container centreVertical">
         <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
                 <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
