@@ -49,11 +49,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($afficher) {
             if ($mesSpectacles->rowCount() > 0) {
                 ?>
-                <div class="pagination">
-                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
-                    <?php } ?>
-                </div>
+                
                 <?php
                 while ($listeSpectacle = $mesSpectacles->fetch()) {
                     ?>
@@ -72,6 +68,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                     <?php
                 }
+                ?>
+                <div class="pagination">
+                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                    <?php } ?>
+                </div>
+                <?php
             } else {
                 echo '<div class="col-12">';
                     echo '<div class="centre">';
@@ -82,11 +85,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         } else {
             if ($mesFestivals->rowCount() > 0) {
                 ?>
-                <div class="pagination">
-                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
-                    <?php } ?>
-                </div>
+                
                 <?php
                 //affichage de la liste des festivals
                 while ($festival = $mesFestivals->fetch()) {
@@ -109,6 +108,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                 <?php
             }
+            ?>
+            <div class="pagination">
+                <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                    <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                <?php } ?>
+            </div>
+            <?php
         } else {
             echo '<div class="col-12">';
                 echo '<div class="centre">';
