@@ -106,31 +106,28 @@ class GrijModele
         return $stmt;
     }
 
-    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place)
+    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place, $heureDebut, $heureFin)
     {
-        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival,$idJour, $idSpectacle, $ordre, $place]);
+        $stmt->execute([$idFestival,$idJour, $idSpectacle, $ordre, $place,$heureDebut,$heureFin]);
     }
 
     public function recupererGrij(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(s.titre) as titre
+        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(DISTINCT s.titre ORDER BY sj.ordre) as titres, GROUP_CONCAT(DISTINCT sj.idSpectacle ORDER BY sj.ordre) as idSpectacles
                 FROM Grij as g
-                JOIN Jour as j
-                ON j.idGrij = g.idGrij
-                JOIN SpectaclesJour as sj
-                ON j.idJour = sj.idJour
-                JOIN Spectacle as s
-                ON s.idSpectacle = sj.idSpectacle
+                JOIN Jour as j ON j.idGrij = g.idGrij
+                JOIN SpectaclesJour as sj ON j.idJour = sj.idJour
+                JOIN Spectacle as s ON s.idSpectacle = sj.idSpectacle
                 WHERE sj.place = 1
-                GROUP BY j.idJour
-                ORDER BY sj.ordre";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival]);
+                AND g.idGrij = ".$idFestival.
+                " GROUP BY j.idJour, j.dateDuJour
+                ORDER BY j.dateDuJour";
+        $stmt = $pdo->query($sql);
         return $stmt;
     }
-
+    
     public function recuperationSceneAdequate(PDO $pdo, $idFestival, $taille)
     {
         $sql = "SELECT s.idScene FROM Festival as f
@@ -147,6 +144,11 @@ class GrijModele
 
     public function insertionSpectacleScene(PDO $pdo, $idFestival, $idSpectacle, $listeScenesAdequates)
     {
+        // Suppression de la liste des scènes existante du spectacle
+        $sql = "DELETE FROM SpectacleScenes WHERE idSpectacle = ".$idSpectacle;
+        $stmt = $pdo->query($sql);
+
+        // Ajout de la liste des scènes possibles du spectacle
         $sql = "INSERT INTO SpectacleScenes (idSpectacle,idScene,idFestival)
                 VALUES ";
         foreach($listeScenesAdequates as $idScene) {
@@ -154,6 +156,31 @@ class GrijModele
         }
         $sql = substr($sql,0,-1);
         $stmt = $pdo->query($sql);
+        return $stmt;
+    }
+
+    public function recupererListeScenes(PDO $pdo, $idFestival, $idSpectacle)
+    {
+        $sql = "SELECT s.nom as nomScene, s.nombreDeSpectateurs as nbSpectateur, s.longitude as longitude,
+                s.latitude as latitude
+                FROM SpectaclesJour as sj
+                JOIN SpectacleScenes as ss
+                ON sj.idFestival = ss.idFestival AND sj.idSpectacle = ss.idSpectacle
+                JOIN Scene as s
+                ON s.idScene = ss.idScene
+                WHERE sj.idFestival = ?
+                AND sj.idSpectacle = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival, $idSpectacle]);
+        return $stmt;
+    }
+
+    public function recupererProfilSpectacle(PDO $pdo, $idFestival, $idSpectacle)
+    {
+        $sql = "SELECT *
+                FROM SpectacleJour";
+        $stmt = $dpo->prepare($sql);
+        $stmt->execute([$idFestival, $idSpectacle]);
         return $stmt;
     }
 }

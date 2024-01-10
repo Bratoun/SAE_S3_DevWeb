@@ -6,13 +6,6 @@
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
-    <style>
-        @media (max-width: 767px) {
-            .container {
-                margin-top: 30px;
-            }
-        }
-    </style>
 </head>
 <header>
     <div class="container-fluid header-blanc">
@@ -38,37 +31,33 @@
     </div>
 </header>
 <body>
-    <div class="container containerCentre">
-        <div class="cadreUtilisateur connexion plusBas">
+    <div class="container">
+        <div class="cadreUtilisateur connexion">
             <div class="row">
                 <h2 class="grand col-12">Informations sur le compte</h2>
             </div>
             <br>
 
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Prénom : <?php echo $ancienPrenom; ?><p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Nom : <?php echo $ancienNom; ?></p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Login : <?php echo $ancienLogin; ?></p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Email : <?php echo $ancienEmail; ?></p>
                 </div>
             </div>
-            <br>
-            <div class="texteCentre">
-                <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
-            </div> 
         </div>
     </div>
 </body>

@@ -43,22 +43,45 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <body class="body-blanc">
         <div class="container">
             <div class="row">
-                <?php
-                // Liste des jours du festival
-                    while($listeJours as $jour)
-                    {
-                        ?>
-                        <div class="cadre col-3">
-                            <h1><?php echo $jour['dateJour'];?></h1>
-                            <?php
-                            // Liste des spetacles du jour du festival
-                            echo $jour['titre'];
-                            // foreach($jour['titre'])
+                <div class="col-8">
+                    <div class="row">
+                        <?php
+                        // Liste des jours du festival
+                        while($jour = $listeJours->fetch())
+                        {
                             ?>
-                        </div>
+                            <div class="col-3">
+                                <h3><?php echo $jour['dateJour'];?></h13>
+                                <?php
+                                // Liste des spetacles du jour du festival
+                                $listeTitres = explode(',', $jour['titres']);
+                                $listeId = explode(',', $jour['idSpectacles']);
+                                $i = 0;
+                                foreach ($listeTitres as $titreSpectacle){
+                                    ?>
+                                    <a href="/festiplan?controller=Grij&action=profilSpectacleJour&idFestival=<?php echo $idFestival;?>&idSpectacle=<?php echo $listeId[$i];?>"><button type="button" class="btn fondGris"><?php echo $titreSpectacle;?></button></a>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <?php
+                    if ($profilSpectacle) {
+                        ?>
+                        
+                        <?php
+                    } else {
+                        ?>
+                        <h2>Cliquer sur un spectacle pour plus d'information.</h2>
                         <?php
                     }
-                ?>
+                    ?>
+                </div>
             </div>
         </div>
     </body>

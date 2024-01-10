@@ -31,8 +31,8 @@
     </div>
 </header>
 <body>
-    <div class="container containerCentre">
-        <div class="cadreUtilisateur connexion plusBas">
+    <div class="container">
+        <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
                 <h2 class="grand">Desinscription</h2>
                 <br>
@@ -60,9 +60,6 @@
                         </div>
                     </div>
                 <br><br>
-                <div class="texteCentre">
-                    <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
-                </div>
                 <div class="texteCentre">
                     <button type="submit" class="btn fondRouge boutonTerminer">Se desinscrire</button></a>
                 </div>

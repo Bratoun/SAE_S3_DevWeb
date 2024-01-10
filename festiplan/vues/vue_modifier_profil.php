@@ -6,13 +6,6 @@
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
-    <style>
-        @media (max-width: 767px) {
-            .container {
-                margin-top: 120px;
-            }
-        }
-    </style>
 </head>
 <header>
     <div class="container-fluid header-blanc">
@@ -38,7 +31,7 @@
     </div>
 </header>
 <body>
-    <div class="container">
+    <div class="container plusBas">
         <div class="cadreUtilisateur inscription">
             <form action="index.php" method="post">
                 <h2 class="grand">Modifier vos informations</h2>
@@ -104,7 +97,6 @@
                 <br>
                 <div class="texteCentre">
                     <button type="submit" class="btn btn-primary boutonTerminer">Modifier</button>
-                    <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Annuler</button></a>
                 </div>
             </form>
         </div>

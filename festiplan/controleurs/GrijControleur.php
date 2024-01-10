@@ -109,20 +109,21 @@ class GrijControleur
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
         $i = 0;
         $unSpectacle = $spectacles->fetch();
+        $spectacleNonPlace = null;
 
         while (($jour = $jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
             $leJourContinue = true;
-
+            
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
                 $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                if ($scenesAdequates != false) {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
-                    $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesAdequates->fetchAll());
+                if ($scenesOk = $scenesAdequates->fetchAll()) {
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,);
+                    $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                 } else {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 0);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null);
                 }
                 $ordre++;
                 $duree += $ecart;
@@ -131,7 +132,14 @@ class GrijControleur
             while($leJourContinue && ($unSpectacle = $spectacles->fetch()) && $duree < $dureeTotal) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                    $scenesOk = $scenesAdequates->fetchAll();
+                    if ($scenesOk) {
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                        $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
+                    } else {
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null);
+                    }
                     $ordre++;
                     $duree += $ecart;
                 } else {
@@ -145,10 +153,42 @@ class GrijControleur
             }
         }
         if ($spectacleNonPlace != null) {
-            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$spectacleNonPlace['id'], 0, 0);
+            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$spectacleNonPlace['id'], 0, 0,null,null);
             while ($unSpectacle = $spectacles->fetch()){
-                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0);
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null);
             }
         }
+    }
+
+    public function profilSpectacleJour(PDO $pdo)
+    {
+        $message = null;
+        $idFestival = HttpHelper::getParam('idFestival');
+        $idSpectacle = HttpHelper::getParam('idSpectacle');
+
+        $listeScenes = $this->grijModele->recupererListeScene($pdo,$idFestival, $idSpectacle);
+        
+        $vue = new View("vues/vue_consultation_planification");
+        $vue->setVar('idFestival', $idFesstival);
+        $vue->setVar('message', $message);
+        $vue->setVar('profilSpectacle', true);
+        $vue->setVar('listeScenes', $listeScenes);
+        return $vue;
+    }
+
+    public function convertirMinutesEnHeuresMySQL($minutes) {
+        // Calculer le nombre d'heures
+        $heures = floor($minutes / 60);
+        
+        // Calculer le nombre de minutes restantes
+        $minutesRestantes = $minutes % 60;
+        
+        // Créer un objet DateTime pour formater le temps
+        $tempsFormate = new DateTime("1970-01-01 $heures:$minutesRestantes:00");
+        
+        // Formater le temps pour la base de données MySQL
+        $tempsMySQL = $tempsFormate->format('H:i:s');
+        
+        return $tempsMySQL;
     }
 }
