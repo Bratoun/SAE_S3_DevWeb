@@ -51,71 +51,71 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="modifier" value="true">
         <input type="hidden" name="idFestival" value="<?php echo $idFestival?>">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group texteGauche">
-                    <label id="<?php if(!$nomOk){echo 'invalide';}?>">Nom :</label>
-                    <br>
-                    <input name="nom" type="text"  placeholder="(max 35 caractère)" value="<?php if($nomOk){echo $ancienNom;}?>" required class="input-style">
+        <div class="padding">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group texteGauche">
+                        <label id="<?php if(!$nomOk){echo 'invalide';}?>">Nom :</label>
+                        <br>
+                        <input name="nom" type="text"  placeholder="(max 35 caractère)" value="<?php if($nomOk){echo $ancienNom;}?>" required class="input-style">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group texteGauche">
-                    <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>
-                    <br>
-                    <textarea name="description" placeholder="(max 1000 caractère)" required class="textarea-style"><?php if($descOk){echo $ancienneDesc;}?></textarea>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group texteGauche">
+                        <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>
+                        <br>
+                        <textarea name="description" placeholder="(max 1000 caractère)" required class="textarea-style"><?php if($descOk){echo $ancienneDesc;}?></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group texteGauche">
-                    <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de début :</label>
-                    <br>
-                    <input name="dateDebut" type="date" value="<?php if($dateOk){echo $ancienneDateDebut;}?>" required class="input-style">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group texteGauche">
+                        <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de début :</label>
+                        <br>
+                        <input name="dateDebut" type="date" value="<?php if($dateOk){echo $ancienneDateDebut;}?>" required class="input-style">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group texteGauche">
+                        <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de fin :</label>
+                        <br>
+                        <input name="dateFin" type="date" value="<?php if($dateOk){echo $ancienneDateFin;}?>" required class="input-style">
+                    </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group texteGauche">
-                    <label id="<?php if(!$dateOk){echo 'invalide';}?>">Date de fin :</label>
-                    <br>
-                    <input name="dateFin" type="date" value="<?php if($dateOk){echo $ancienneDateFin;}?>" required class="input-style">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group texteGauche">
+                       <label>Liste categorie :</label>
+                        <br>
+                        <select name="categorie" required class="input-style">
+                            <?php
+                            while ($row = $searchStmt -> fetch()) {?>
+                                <option value="<?php echo $row['idCategorie'];?>"  <?php if ($row['idCategorie'] == $ancienneCategorie) { echo 'selected';}?>  ><?php echo $row['nom'];?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group texteGauche">
-                    Liste categorie :
-                    <br>
-                    <select name="categorie" required class="input-style">
+                <div class="col-6">
+                    <div class="form-group texteGauche">
+                        <label>Organisateur : </label>
                         <?php
-                        while ($row = $searchStmt -> fetch()) {?>
-                            <option value="<?php echo $row['idCategorie'];?>"  <?php if ($row['idCategorie'] == $ancienneCategorie) { echo 'selected';}?>  ><?php echo $row['nom'];?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
+                            while ($row = $listeOrganisateur-> fetch()) {
+                                echo $row['nom']."<br>";
+                            
+                            }
+                        if($estResponsable) {?>
+                            <a href="/festiplan?controller=Festival&action=gestionOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn fondGris">ajouter des Organisateur</button></a>  
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group texteGauche">
-                    Organisateur :
-                    <?php
-                        while ($row = $listeOrganisateur-> fetch()) {
-                            echo $row['nom']."<br>";
-                        
-                        }
-                    if($estResponsable) {?>
-                        <a href="/festiplan?controller=Festival&action=gestionOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn fondGris">ajouter des Organisateur</button></a>  
-                    <?php } ?>
-                </div>
-                </div>
-                </div>
         <div class="footer">
             <button type="submit" class="btn btnModif fondVert">Confirmer</button>   
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>  
@@ -126,6 +126,5 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
         </div>
     </form>
-    <script src="js/script.js"></script>
 </body>
 </html>

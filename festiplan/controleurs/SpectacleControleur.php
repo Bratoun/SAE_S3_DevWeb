@@ -203,17 +203,29 @@ class SpectacleControleur {
 
         $idOrganisateur = $_SESSION['id_utilisateur'];
         $idSpectacle = HttpHelper::getParam('idSpectacle');
+        $idUtilisateur = $_SESSION['id_utilisateur'];
 
         // Supprime le festival de la base de données
         $supprimerSpectacle = $this->spectacleModele->supprimerSpectacle($pdo, $idSpectacle);
 
-        // Renvoie a l'accueil sans le festival que l'on a supprimer
-        $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idOrganisateur);
-        $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idOrganisateur);
+        // On détermine sur quelle page on se trouve
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $pageActuelle = (int) strip_tags($_GET['page']);
+        }else{
+            $pageActuelle = 1;
+        }
+        $nbSpectacle = (int)$this->spectacleModele->nombreMesSpectacles($pdo,$idUtilisateur);
+        
+        // On calcule le nombre de pages total
+        $nbPagesSpectacle = ceil($nbSpectacle / 4);
+        // Calcul du 1er element de la page
+        $premier = ($pageActuelle * 4) - 4;
+        $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur,$premier);
+
         $vue = new View("vues/vue_accueil");
-        $vue->setVar("afficher", false);
+        $vue->setVar("afficher", true);
         $vue->setVar("mesSpectacles", $mesSpectacles);
-        $vue->setVar("mesFestivals", $mesFestivals);
+        $vue->setVar("nbPages", $nbPagesSpectacle);
         return $vue;
     }
 

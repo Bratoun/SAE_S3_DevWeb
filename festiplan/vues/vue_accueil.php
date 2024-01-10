@@ -49,11 +49,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($afficher) {
             if ($mesSpectacles->rowCount() > 0) {
                 ?>
-                <div class="pagination">
-                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
-                    <?php } ?>
-                </div>
+                
                 <?php
                 while ($listeSpectacle = $mesSpectacles->fetch()) {
                     ?>
@@ -65,13 +61,20 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     echo $listeSpectacle['titre'];
                                 ?>
                                 <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
-                                <button type="button" id="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
+                                <button type="button" name="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
                                 <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Les intervenants du spectacle</button></a>
                             </div>
                         </div>
                     </div>
                     <?php
                 }
+                ?>
+                <div class="pagination">
+                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                    <?php } ?>
+                </div>
+                <?php
             } else {
                 echo '<div class="col-12">';
                     echo '<div class="centre">';
@@ -82,11 +85,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         } else {
             if ($mesFestivals->rowCount() > 0) {
                 ?>
-                <div class="pagination">
-                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
-                    <?php } ?>
-                </div>
+                
                 <?php
                 //affichage de la liste des festivals
                 while ($festival = $mesFestivals->fetch()) {
@@ -109,6 +108,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                 <?php
             }
+            ?>
+            <div class="pagination">
+                <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                    <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                <?php } ?>
+            </div>
+            <?php
         } else {
             echo '<div class="col-12">';
                 echo '<div class="centre">';
