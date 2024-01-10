@@ -65,7 +65,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     echo $listeSpectacle['titre'];
                                 ?>
                                 <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
-                                <button type="button" id="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
+                                <button type="button" name="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
                                 <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Les intervenants du spectacle</button></a>
                             </div>
                         </div>

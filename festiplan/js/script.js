@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var boutonSuppression = document.getElementById('suppression');
+    var boutonSuppression = document.querySelectorAll('suppression');
 
     boutonSuppression.addEventListener('click', function() {
 

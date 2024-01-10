@@ -36,9 +36,9 @@ class HomeController {
 
                 $nbFestival = (int)$this->festivalModele->nombreMesFestivals($pdo,$idUtilisateur);
                 // On calcule le nombre de pages total
-                $nbPages = ceil($nbFestival / 5);
+                $nbPages = ceil($nbFestival / 4);
                 // Calcul du 1er element de la page
-                $premier = ($pageActuelle * 5) - 5;
+                $premier = ($pageActuelle * 4) - 4;
                 $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur,$premier);
                 $vue = new View("vues/vue_accueil");
                 $vue->setVar("afficher", false);
@@ -56,9 +56,9 @@ class HomeController {
                 $nbSpectacle = (int)$this->spectacleModele->nombreMesSpectacles($pdo,$idUtilisateur);
                 
                 // On calcule le nombre de pages total
-                $nbPagesSpectacle = ceil($nbSpectacle / 5);
+                $nbPagesSpectacle = ceil($nbSpectacle / 4);
                 // Calcul du 1er element de la page
-                $premier = ($pageActuelle * 5) - 5;
+                $premier = ($pageActuelle * 4) - 4;
                 $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur,$premier);
 
                 $vue = new View("vues/vue_accueil");
