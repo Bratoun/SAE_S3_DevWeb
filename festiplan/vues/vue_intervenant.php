@@ -45,14 +45,24 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <body class="body-blanc">
     <div class="container-fluid">
     <table>
-    <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Métier</th>
-        <th>Status</th>
-        <th></th>
-    </tr>
-</table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Métier</th>
+            <th>Statuts</th>
+            <th></th>
+        </tr>
+        <?php while ($row = $search_stmt->fetch()) { ?>
+            <tr>
+                <td><?php echo $row['nom'] ?></td>
+                <td><?php echo $row['prenom'] ?></td>
+                <td><?php echo $row['metier'] ?></td>
+                <td><?php if ($row['surScene'] == 0) { echo "Sur scène"; } else { echo "Hors scène";} ?></td>
+                <td>Modifier</td>
+                <td><a href="/festiplan?controller=Spectacle&action=supprimerIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>">Supprimer</a></td>
+            </tr>
+        <?php } ?>
+    </table>
     </div>
 
     <div class="footer col-12">

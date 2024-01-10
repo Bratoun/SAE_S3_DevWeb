@@ -10,7 +10,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Modifier un intervenant</title>
+    <title>Ajouter des spectacles</title>
     <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/index.css"/>
     <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </a>
             </div>
             <div class="col-8">
-                <h2 class="texteCentre blanc bas">Modifier un intervenant</h2>
+                <h2 class="texteCentre blanc bas">Ajouter des spectacles</h2>
             </div>
             <div class="col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
@@ -49,40 +49,39 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="action" value="modifierListeSpectacle">
         <input type="hidden" name="idFestival" value="<?php echo $idFestival?>">
         <div class="col-12">
-            <div class="centre">
-                <div class='cadreFestival'>
-                    <?php
-                    // Charger tous les résultats de la liste des spectacles du fetival dans un tableau
-                    $spectacleIDs = array();
-                    while ($row = $listeSpectacleDeFestival->fetch()) {
-                        $spectacleIDs[] = $row['idSpectacle'];
-                    }
-                        while ($spectacle = $listeSpectacles->fetch()) {
-                            ?>
-                            <div class="col-12">
-                                <div class="centre">
-                                    <div class='cadreFestival'>
-                                        <?php
-                                            $idSpectacle = $spectacle['idSpectacle'];
-                                            echo $spectacle['titre'];
-                                        ?>
-                                        <input type="checkbox" name="Spectacles[]" value="<?php echo $spectacle['idSpectacle']; ?>" <?php
 
-                                        // Vérifier si le festival est deja dans la liste des festivals
-                                        if (in_array($spectacle['idSpectacle'], $spectacleIDs)) {
-                                            echo 'checked';
-                                                
-                                        }
-
-                                        ?>>
-                                    </div>
-                                </div>
-                            </div>
+        <?php
+        // Charger tous les résultats de la liste des spectacles du fetival dans un tableau
+        $spectacleIDs = array();
+        while ($row = $listeSpectacleDeFestival->fetch()) {
+            $spectacleIDs[] = $row['idSpectacle'];
+        }
+            while ($spectacle = $listeSpectacles->fetch()) {
+                ?>
+                <div class="col-12">
+                    <div class="centre">
+                        <div class='cadreFestival'>
                             <?php
-                        }
-                    ?>
+                                $idSpectacle = $spectacle['idSpectacle'];
+                                echo $spectacle['titre']." ".$spectacle['duree'];
+                            ?>
+                            <input type="checkbox" name="Spectacles[]" value="<?php echo $spectacle['idSpectacle']; ?>" <?php
+
+                            // Vérifier si le festival est deja dans la liste des festivals
+                            if (in_array($spectacle['idSpectacle'], $spectacleIDs)) {
+                                echo 'checked';
+                                    
+                            }
+
+                            ?>>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <?php
+            }
+        ?>
+                
+            
         </div>
         <div class="footer">
             <button type="submit" class="btn btn-bleu">Confirmer</button>   

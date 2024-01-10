@@ -187,40 +187,22 @@ class SpectacleControleur {
         $surScene = HttpHelper::getParam('categorieIntervenant');
         $typeIntervenant = HttpHelper::getParam('metierIntervenant');
         $idSpectacle = HttpHelper::getParam('idSpectacle');
-        
-        $search = $this->spectacleModele->insertionsIntervenants($pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant);
-        
-        // Recupere les données du spectacle séléctionné
-        $spectacleAModifier = $this->spectacleModele->leSpectacle($pdo,$idSpectacle);
-        // Recupere les données de la liste des catégorie
-        $searchStmt = $this->spectacleModele->listeCategorieSpectacle($pdo);
-        // Recupere les données de la liste des tailles de scènes
-        $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
-        // Recupere la liste des intervenants 
-        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo,$idSpectacle);
-        // Recupere la liste des intervenants hors scene 
-        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo,$idSpectacle);
-        // Mets les données dans la vue
-        $vue = new View("vues/vue_modifier_spectacle");
-        $vue->setVar("titreOk", true);
-        $vue->setVar("ancienTitre", $spectacleAModifier['titre']);
-        $vue->setVar("descOk", true);
-        $vue->setVar("ancienneDesc", $spectacleAModifier['description']);
-        $vue->setVar("dureeOk",true);
-        $vue->setVar("categorieOk", true);
-        $vue->setVar("tailleOk",true);
-        $vue->setVar("ancienneDuree", $spectacleAModifier['duree']);
-        $vue->setVar("ancienneCategorie", $spectacleAModifier['categorie']);
-        $vue->setVar("ancienneTaille", $spectacleAModifier['tailleSceneRequise']);
-        $vue->setVar("idSpectacle", $idSpectacle);
+        // Regarde si l'intervenant a insérer existe déja.
+        $existePas = $this->spectacleModele->existeIntervenant($pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant);
 
-        $vue->setVar("searchStmt",$searchStmt);
-        $vue->setVar("searchStmt2",$searchStmt2);
-        $vue->setVar("searchStmt3",$searchStmt3);
-        $vue->setVar("searchStmt4",$searchStmt4);
+        if(!$existePas) {
+            $this->spectacleModele->insertionIntervenant($pdo, $idSpectacle, $nom, $prenom, $mail, $surScene, $typeIntervenant);
+            //Renvoie le nom prénom et métier de notre artiste
+            $search_stmt = $this->spectacleModele->afficherIntervenant($pdo, $idSpectacle);
+        }
+        
+        // Mets les données dans la vue
+        
+        $vue = new View("vues/vue_intervenant");
+        $vue->setVar("idSpectacle",$idSpectacle);
+        $vue->setVar("search_stmt",$search_stmt);
         return $vue;
     }
-
     
     public function supprimerSpectacle(PDO $pdo) : View {
         session_start();
@@ -244,8 +226,31 @@ class SpectacleControleur {
         session_start();
         $idOrganisateur = $_SESSION['id_utilisateur'];
         $idSpectacle = HttpHelper::getParam('idSpectacle');
+
+        //Renvoie le nom prénom et métier de notre artiste
+        $search_stmt = $this->spectacleModele->afficherIntervenant($pdo, $idSpectacle);
         
         $vue = new View("vues/vue_intervenant");
+        $vue->setVar("idSpectacle",$idSpectacle);
+        $vue->setVar("search_stmt",$search_stmt);
+        return $vue;
+    }
+
+    public function supprimerIntervenant(PDO $pdo)
+    {
+        session_start();
+        $idOrganisateur = $_SESSION['id_utilisateur'];
+        $idSpectacle = HttpHelper::getParam('idSpectacle');
+        $idIntervenant = HttpHelper::getParam('idIntervenant');
+
+        //Renvoie le nom prénom et métier de notre artiste
+        $search_stmt = $this->spectacleModele->afficherIntervenant($pdo, $idSpectacle);
+
+        $this->spectacleModele->supprimerIntervenant($pdo, $idIntervenant);
+
+        $vue = new View("vues/vue_intervenant");
+        $vue->setVar("idSpectacle",$idSpectacle);
+        $vue->setVar("search_stmt",$search_stmt);
         return $vue;
     }
 }

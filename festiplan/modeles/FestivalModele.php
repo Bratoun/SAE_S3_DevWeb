@@ -30,7 +30,6 @@ class FestivalModele
      * @param categorie categorie du festival.
      * @param illustration illustration du festival.
      * @param idOrganisateur l'id de l'utilisateur courant.
-     * @return stmt true si cela a marché
      */
     public function insertionFestival(PDO $pdo, $nom, $description, $dateDebut, $dateFin, $categorie, $illustration, $idOrganisateur)
     {
@@ -54,22 +53,59 @@ class FestivalModele
         $stmt2->execute();
     }
 
+    /**
+     * Compte le nombre de festival de l'utilisateur
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idOrganisateur l'id de l'utilisateur courant.
+     * @return nbFestival le nombre de festivals.
+     */
+    public function nombreMesFestivals(PDO $pdo, $idOrganisateur)
+    {
+        $sql = "SELECT Count(Festival.idFestival) AS nbFestival FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idOrganisateur);
+        $stmt->execute();
+        // Récupérer le résultat du COUNT
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Maintenant, $result contient le résultat du COUNT
+        $nbFestival = $result['nbFestival'];
+
+        return $nbFestival;
+    }
+
+    // /**
+    //  * Recherche la liste des festivals de l'utilisateur
+    //  * @param pdo un objet PDO connecté à la base de données.
+    //  * @param idOrganisateur l'id de l'utilisateur courant.
+    //  * @return stmt l'ensemble des festivals.
+    //  */
+    // public function listeMesFestivals(PDO $pdo, $idOrganisateur)
+    // {
+    //     $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id";
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->bindParam("id",$idOrganisateur);
+    //     $stmt->execute();
+    //     return $stmt;
+    // }
 
     /**
      * Recherche la liste des festivals de l'utilisateur
      * @param pdo un objet PDO connecté à la base de données.
      * @param idOrganisateur l'id de l'utilisateur courant.
-     * @return searchStmt l'ensemble des festivals.
+     * @return stmt l'ensemble des festivals.
      */
-    public function listeMesFestivals(PDO $pdo, $idOrganisateur)
+    public function listeMesFestivals(PDO $pdo, $idOrganisateur, $premier)
     {
         // Exemple de requête SQL avec LIMIT et OFFSET
         $query = "SELECT * FROM ma_table LIMIT  OFFSET ";
-        $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id";
+        $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id LIMIT 5 OFFSET :nPage";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idOrganisateur);
+        $stmt->bindParam("nPage",$premier,PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
+        
     }
 
     /**
@@ -165,7 +201,7 @@ class FestivalModele
      */
     public function listeOrganisateurFestival($pdo,$idFestival) 
     {
-        $sql = "SELECT Utilisateur.idUtilisateur,Utilisateur.nom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
+        $sql = "SELECT Utilisateur.idUtilisateur,Utilisateur.nom,Utilisateur.prenom FROM Utilisateur JOIN EquipeOrganisatrice ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur AND idFestival =:idFestival";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("idFestival",$idFestival);
         $stmt->execute();
@@ -178,7 +214,7 @@ class FestivalModele
      */
     public function listeUtilisateur($pdo) 
     {
-        $sql = "SELECT idUtilisateur,nom FROM Utilisateur";
+        $sql = "SELECT idUtilisateur,nom,prenom FROM Utilisateur";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt;

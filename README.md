@@ -35,3 +35,5 @@ http://localhost:8080/festiplan/
 $ docker exec -it SAE_S3_DevWeb_db  mysql -uusers -p
 sae
 USE Festiplan;
+
+http://localhost:8080/festiplan/?controller=Spectacle&action=afficherIntervenant&idSpectacle=32

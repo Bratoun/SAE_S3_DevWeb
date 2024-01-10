@@ -76,7 +76,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 echo ' disabled';
             }
             ?>>
-            <?php echo $row['nom']; ?>
+            <?php echo $row['nom']." ".$row['prenom']; ?>
             <br>
             <?php
         }
