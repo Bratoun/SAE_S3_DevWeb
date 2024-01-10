@@ -38,30 +38,26 @@
             </div>
             <br>
 
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Prénom : <?php echo $ancienPrenom; ?><p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Nom : <?php echo $ancienNom; ?></p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Login : <?php echo $ancienLogin; ?></p>
                 </div>
             </div>
-            <div class="form-group texteCentre mx-auto"> <!-- Ajout des classes texteCentre et mx-auto -->
+            <div class="form-group"> 
                 <div class="input-group">
                     <p>Email : <?php echo $ancienEmail; ?></p>
                 </div>
             </div>
-            <br>
-            <div class="texteCentre">
-                <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
-            </div> 
         </div>
     </div>
 </body>

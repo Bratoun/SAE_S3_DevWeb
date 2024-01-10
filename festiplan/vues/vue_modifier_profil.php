@@ -97,7 +97,6 @@
                 <br>
                 <div class="texteCentre">
                     <button type="submit" class="btn btn-primary boutonTerminer">Modifier</button>
-                    <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Annuler</button></a>
                 </div>
             </form>
         </div>

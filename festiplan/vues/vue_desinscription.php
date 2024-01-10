@@ -61,9 +61,6 @@
                     </div>
                 <br><br>
                 <div class="texteCentre">
-                    <a href="index.php"><button type="button" class="btn fondGris boutonTerminer">Retour</button></a>
-                </div>
-                <div class="texteCentre">
                     <button type="submit" class="btn fondRouge boutonTerminer">Se desinscrire</button></a>
                 </div>
             </form>
