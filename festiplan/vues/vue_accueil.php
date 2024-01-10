@@ -73,7 +73,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 echo '</div>';
             }   
         } else {
-            if ($mesSpectacles->rowCount() > 0) {
+            if ($mesFestivals->rowCount() > 0) {
                 //affichage de la liste des festivals
                 while ($festival = $mesFestivals->fetch()) {
                     $idFestival = $festival['idFestival'];
