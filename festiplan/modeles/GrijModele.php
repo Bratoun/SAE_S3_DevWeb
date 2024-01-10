@@ -115,7 +115,8 @@ class GrijModele
 
     public function recupererGrij(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(DISTINCT s.titre ORDER BY sj.ordre) as titres, GROUP_CONCAT(DISTINCT sj.idSpectacle ORDER BY sj.ordre) as idSpectacles
+        $sql = "SELECT j.dateDuJour as dateJour, GROUP_CONCAT(DISTINCT s.titre ORDER BY sj.ordre) as titres, GROUP_CONCAT(DISTINCT sj.idSpectacle ORDER BY sj.ordre) as idSpectacles,
+                GROUP_CONCAT(DISTINCT sj.heureDebut) as heureDebut, GROUP_CONCAT(DISTINCT sj.heureFin) as heureFin
                 FROM Grij as g
                 JOIN Jour as j ON j.idGrij = g.idGrij
                 JOIN SpectaclesJour as sj ON j.idJour = sj.idJour
@@ -186,6 +187,18 @@ class GrijModele
                 AND sj.idSpectacle = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$idFestival, $idSpectacle]);
+        return $stmt;
+    }
+    public function recupererSpectacleNonPlace(PDO $pdo, $idFestival)
+    {
+        $sql = "SELECT s.titre as titre, s.duree as duree
+                FROM SpectaclesJour as sj
+                JOIN Spectacle as s
+                ON s.idSpectacle = sj.idSpectacle
+                WHERE sj.idFestival = ?
+                AND sj.place = 0";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival]);
         return $stmt;
     }
 }

@@ -173,6 +173,7 @@ class GrijControleur
         $listeScenes = $this->grijModele->recupererListeScenes($pdo,$idFestival, $idSpectacle);
         $infosSpectacle = $this->grijModele->recupererProfilSpectacle($pdo, $idFestival, $idSpectacle);
         $grij = $this->grijModele->recupererGrij($pdo, $idFestival);
+        $spectacleNonPlace = $this->grijModele->recupererSpectacleNonPlace($pdo,$idFestival);
 
         $vue = new View("vues/vue_consultation_planification");
         $vue->setVar('idFestival', $idFestival);
@@ -181,6 +182,7 @@ class GrijControleur
         $vue->setVar('listeScenes', $listeScenes);
         $vue->setVar('infosSpectacle', $infosSpectacle);
         $vue->setVar('listeJours', $grij);
+        $vue->setVar('listeSpectacleNonPlace', $spectacleNonPlace);
         return $vue;
     }
 

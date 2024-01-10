@@ -327,3 +327,50 @@ label {
 .padding {
     padding: 20px;
 }
+
+/* Style des page relative à la grij (paramétrage et consultation)*/
+.square {
+    width: 100%;
+    padding-bottom: 60%;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.square-link {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    background-color: orangered;
+}
+
+.square-link:hover {
+    background-color: orange;
+}
+
+.fondJour {
+    background-color:   #ffe8ac  ; /* Couleur grise de fond */
+    border-radius: 10px; /* Arrondi des coins */
+    padding: 10px; /* Marge sur les côtés */
+    margin-bottom: 15px; /* Espacement entre les éléments */
+}
+
+.fondSpecNonPlace {
+    background-color:    #ff8476   ; /* Couleur grise de fond */
+    border-radius: 10px; /* Arrondi des coins */
+    padding: 10px; /* Marge sur les côtés */
+    margin-bottom: 10px; /* Espacement entre les éléments */
+}

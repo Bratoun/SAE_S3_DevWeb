@@ -50,27 +50,43 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         while($jour = $listeJours->fetch())
                         {
                             ?>
-                            <div class="col-3">
+                            <div class="col-xl-3 col-md-6 col-12 ">
+                            <div class="fondJour">
                                 <h3><?php echo $jour['dateJour'];?></h3>
                                 <?php
                                 // Liste des spetacles du jour du festival
                                 $listeTitres = explode(',', $jour['titres']);
                                 $listeId = explode(',', $jour['idSpectacles']);
+                                $listeHeureDebut = explode(',', $jour['heureDebut']);
+                                $listeHeureFin = explode(',', $jour['heureFin']);
                                 $i = 0;
                                 foreach ($listeTitres as $titreSpectacle){
                                     ?>
-                                    <a href="/festiplan?controller=Grij&action=profilSpectacleJour&idFestival=<?php echo $idFestival;?>&idSpectacle=<?php echo $listeId[$i];?>"><button type="button" class="btn fondGris"><?php echo $titreSpectacle;?></button></a>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="/festiplan?controller=Grij&action=profilSpectacleJour&idFestival=<?php echo $idFestival;?>&idSpectacle=<?php echo $listeId[$i];?>" class="square-link">
+                                                <div class="square">
+                                                    <div class="content">
+                                                        <h4><?php echo $titreSpectacle;?></h4>
+                                                        <p>De : <?php echo $listeHeureDebut[$i];?></p>
+                                                        <p>À : <?php echo $listeHeureFin[$i];?></p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php
                                     $i++;
                                 }
                                 ?>
+                            </div>
                             </div>
                             <?php
                         }
                         ?>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-sm-3 col-3">
                     <?php
                     if ($profilSpectacle) {
                         $spectacle = $infosSpectacle->fetch();
@@ -111,6 +127,39 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         <?php
                     }
                     ?>
+                    <div class="col-12">
+                        <?php
+                        var_dump($listeSpectacleNonPlace);
+                        if ($listeSpectacleNonPlace == null)
+                        {
+                            ?>
+                            <!-- Ajouter du vert -->
+                            <h3>Tous les spectacles ont été placés</h3>
+                            <?php
+                        } else {
+                        ?>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>Liste des spectacles non placés</h3>
+                                </div>
+                            <?php 
+                            while($specNonPlace = $listeSpectacleNonPlace->fetch()){
+                                ?>
+                                    <div class="col-12 fondSpecNonPlace">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h4><?php echo $specNonPlace['titre'];?></h4>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>Duree : <?php echo $specNonPlace['duree'];?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                            }?>
+                            </div><?php
+                        }?>
+                    </div>
                 </div>
             </div>
         </div>
