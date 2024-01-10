@@ -165,6 +165,8 @@ CREATE TABLE SpectaclesJour (
     idSpectacle INT(11) NOT NULL,
     ordre INT(3) NOT NULL DEFAULT 0,
     place TINYINT NOT NULL DEFAULT 0,
+    heureDebut TIME NULL,
+    heureFin TIME NULL,
     PRIMARY KEY (idFestival, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
