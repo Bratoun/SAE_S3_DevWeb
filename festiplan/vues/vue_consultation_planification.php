@@ -41,9 +41,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
     </header>
     <body class="body-blanc">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-8">
+                <div class="col-9">
                     <div class="row">
                         <?php
                         // Liste des jours du festival
@@ -51,7 +51,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         {
                             ?>
                             <div class="col-3">
-                                <h3><?php echo $jour['dateJour'];?></h13>
+                                <h3><?php echo $jour['dateJour'];?></h3>
                                 <?php
                                 // Liste des spetacles du jour du festival
                                 $listeTitres = explode(',', $jour['titres']);
@@ -61,6 +61,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     ?>
                                     <a href="/festiplan?controller=Grij&action=profilSpectacleJour&idFestival=<?php echo $idFestival;?>&idSpectacle=<?php echo $listeId[$i];?>"><button type="button" class="btn fondGris"><?php echo $titreSpectacle;?></button></a>
                                     <?php
+                                    $i++;
                                 }
                                 ?>
                             </div>
@@ -69,11 +70,40 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         ?>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <?php
                     if ($profilSpectacle) {
+                        $spectacle = $infosSpectacle->fetch();
                         ?>
-                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h2><?php echo $spectacle['titre']; ?></h2>
+                            </div>
+                            <div class="col-12">
+                                Heure de début - <?php echo substr($spectacle['heureDebut'],0,-3);?><br/>
+                                Heure de fin - <?php echo substr($spectacle['heureFin'],0,-3);?>
+                            </div>
+                            <div class="col-12">
+                                <h4>Liste des scènes adéquates</h4>
+                            </div>
+                            <?php
+                            while ($scene = $listeScenes->fetch()) {
+                                ?>
+                                <div class="col-4">
+                                    <h5><?php echo $scene['nomScene'];?></h5>
+                                </div>
+                                <div class="col-4">
+                                    nombre de spectateurs</br>
+                                    <?php echo $scene['nbSpectateurs'];?>
+                                </div>
+                                <div class="col-4">
+                                    <b>Longitude : </b><?php echo $scene['longitude'];?><br/>
+                                    <b>Latitude : </b><?php echo $scene['latitude'];?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
                         <?php
                     } else {
                         ?>

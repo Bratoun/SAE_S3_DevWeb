@@ -121,10 +121,11 @@ class GrijModele
                 JOIN SpectaclesJour as sj ON j.idJour = sj.idJour
                 JOIN Spectacle as s ON s.idSpectacle = sj.idSpectacle
                 WHERE sj.place = 1
-                AND g.idGrij = ".$idFestival.
-                " GROUP BY j.idJour, j.dateDuJour
+                AND g.idGrij = ?
+                GROUP BY j.idJour, j.dateDuJour
                 ORDER BY j.dateDuJour";
-        $stmt = $pdo->query($sql);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idFestival]);
         return $stmt;
     }
     
@@ -161,7 +162,7 @@ class GrijModele
 
     public function recupererListeScenes(PDO $pdo, $idFestival, $idSpectacle)
     {
-        $sql = "SELECT s.nom as nomScene, s.nombreDeSpectateurs as nbSpectateur, s.longitude as longitude,
+        $sql = "SELECT s.nom as nomScene, s.nombreSpectateurs as nbSpectateurs, s.longitude as longitude,
                 s.latitude as latitude
                 FROM SpectaclesJour as sj
                 JOIN SpectacleScenes as ss
@@ -177,9 +178,13 @@ class GrijModele
 
     public function recupererProfilSpectacle(PDO $pdo, $idFestival, $idSpectacle)
     {
-        $sql = "SELECT *
-                FROM SpectacleJour";
-        $stmt = $dpo->prepare($sql);
+        $sql = "SELECT sj.heureDebut as heureDebut, sj.heureFin as heureFin, s.titre as titre, s.duree as duree
+                FROM SpectaclesJour as sj
+                JOIN Spectacle as s
+                ON s.idSpectacle = sj.idSpectacle
+                WHERE sj.idFestival = ?
+                AND sj.idSpectacle = ?";
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$idFestival, $idSpectacle]);
         return $stmt;
     }

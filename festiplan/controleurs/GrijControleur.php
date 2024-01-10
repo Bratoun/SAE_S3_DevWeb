@@ -118,9 +118,11 @@ class GrijControleur
             
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
                 $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                 if ($scenesOk = $scenesAdequates->fetchAll()) {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle);
                     $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                 } else {
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null);
@@ -131,11 +133,13 @@ class GrijControleur
 
             while($leJourContinue && ($unSpectacle = $spectacles->fetch()) && $duree < $dureeTotal) {
                 if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) < $dureeTotal) {
+                    $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                    $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                     $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
                     $scenesOk = $scenesAdequates->fetchAll();
                     if ($scenesOk) {
-                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1);
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle);
                         $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                     } else {
                         $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null);
@@ -166,27 +170,24 @@ class GrijControleur
         $idFestival = HttpHelper::getParam('idFestival');
         $idSpectacle = HttpHelper::getParam('idSpectacle');
 
-        $listeScenes = $this->grijModele->recupererListeScene($pdo,$idFestival, $idSpectacle);
-        
+        $listeScenes = $this->grijModele->recupererListeScenes($pdo,$idFestival, $idSpectacle);
+        $infosSpectacle = $this->grijModele->recupererProfilSpectacle($pdo, $idFestival, $idSpectacle);
+        $grij = $this->grijModele->recupererGrij($pdo, $idFestival);
+
         $vue = new View("vues/vue_consultation_planification");
-        $vue->setVar('idFestival', $idFesstival);
+        $vue->setVar('idFestival', $idFestival);
         $vue->setVar('message', $message);
         $vue->setVar('profilSpectacle', true);
         $vue->setVar('listeScenes', $listeScenes);
+        $vue->setVar('infosSpectacle', $infosSpectacle);
+        $vue->setVar('listeJours', $grij);
         return $vue;
     }
 
     public function convertirMinutesEnHeuresMySQL($minutes) {
-        // Calculer le nombre d'heures
         $heures = floor($minutes / 60);
-        
-        // Calculer le nombre de minutes restantes
         $minutesRestantes = $minutes % 60;
-        
-        // Créer un objet DateTime pour formater le temps
         $tempsFormate = new DateTime("1970-01-01 $heures:$minutesRestantes:00");
-        
-        // Formater le temps pour la base de données MySQL
         $tempsMySQL = $tempsFormate->format('H:i:s');
         
         return $tempsMySQL;

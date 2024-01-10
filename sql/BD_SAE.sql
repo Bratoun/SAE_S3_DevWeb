@@ -226,7 +226,7 @@ INSERT INTO Spectacle (titre, description, duree, categorie, tailleSceneRequise)
 VALUES ('spec1', 'une description des familles', '01:00:00', 1, 1),
 ('spec2', 'une description des familles', '00:10:00', 2, 1),
 ('spec3', 'une description des familles', '01:20:00', 4, 2),
-('spec14', 'une description des familles', '00:36:00', 3, 3);
+('spec4', 'une description des familles', '00:36:00', 3, 3);
 
 INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival)
 VALUES (2, 1);
