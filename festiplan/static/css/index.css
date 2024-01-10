@@ -297,10 +297,6 @@ img {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-@media (max-width: 767px) {
-    .plusBas {
-        margin-top: 120px;
-    }
 }
 
 .centreVertical {

@@ -43,16 +43,18 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     </div>
 </header>
 <body class="body-blanc">
-    <div class="pagination">
-        <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-            <a href="/festiplan?controller=Home&page=<?php echo $page;?>"><?php echo $page;?>   </a>
-        <?php } ?>
-    </div>
     <div class="container-fluid">
     <?php
         // Affichage de la liste des spectacles
         if ($afficher) {
             if ($mesSpectacles->rowCount() > 0) {
+                ?>
+                <div class="pagination">
+                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                    <?php } ?>
+                </div>
+                <?php
                 while ($listeSpectacle = $mesSpectacles->fetch()) {
                     ?>
                     <div class="col-12">
@@ -79,6 +81,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             }   
         } else {
             if ($mesFestivals->rowCount() > 0) {
+                ?>
+                <div class="pagination">
+                    <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                        <a href="/festiplan?controller=Home&page=<?php echo $page;?>&afficher=<?php echo $afficher;?>"><?php echo $page;?>   </a>
+                    <?php } ?>
+                </div>
+                <?php
                 //affichage de la liste des festivals
                 while ($festival = $mesFestivals->fetch()) {
                     $idFestival = $festival['idFestival'];
@@ -98,7 +107,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             </a>
                         </div>
                     </div>
-                    <br>
                 <?php
             }
         } else {

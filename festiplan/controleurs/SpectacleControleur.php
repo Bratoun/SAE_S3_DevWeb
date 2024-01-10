@@ -132,10 +132,6 @@ class SpectacleControleur {
         $searchStmt = $this->spectacleModele->listeCategorieSpectacle($pdo);
         // Recupere les données de la liste des tailles de scènes
         $searchStmt2 = $this->spectacleModele->listeTailleScene($pdo);
-        // Recupere la liste des intervenants 
-        $searchStmt3 = $this->spectacleModele->nomIntervenantSurScene($pdo,$idSpectacle);
-        // Recupere la liste des intervenants hors scene 
-        $searchStmt4 = $this->spectacleModele->nomIntervenantHorsScene($pdo,$idSpectacle);
         // Mets les données dans la vue
         $vue = new View("vues/vue_modifier_spectacle");
         $vue->setVar("titreOk", true);
@@ -152,8 +148,6 @@ class SpectacleControleur {
 
         $vue->setVar("searchStmt",$searchStmt);
         $vue->setVar("searchStmt2",$searchStmt2);
-        $vue->setVar("searchStmt3",$searchStmt3);
-        $vue->setVar("searchStmt4",$searchStmt4);
         return $vue;
     }
 
@@ -217,6 +211,7 @@ class SpectacleControleur {
         $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idOrganisateur);
         $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idOrganisateur);
         $vue = new View("vues/vue_accueil");
+        $vue->setVar("afficher", false);
         $vue->setVar("mesSpectacles", $mesSpectacles);
         $vue->setVar("mesFestivals", $mesFestivals);
         return $vue;

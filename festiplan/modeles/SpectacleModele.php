@@ -82,17 +82,41 @@ class SpectacleModele
         return $fetch;
     }
 
+
     /**
-     * Recherche la liste des spectalce de l'utilisateur
+     * Recherche la nombre de spectacle de l'utilisateur
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idOrganisateur l'id de l'utilisateur courant.
+     * @return nb l'ensemble des festivals.
+     */
+    public function nombreMesSpectacles(PDO $pdo, $idOrganisateur) 
+    {
+        $sql = "SELECT Count(Spectacle.idSpectacle) AS nbSpectacle FROM Spectacle JOIN SpectacleOrganisateur ON Spectacle.idSpectacle=SpectacleOrganisateur.idSpectacle JOIN Utilisateur ON Utilisateur.idUtilisateur=SpectacleOrganisateur.idUtilisateur WHERE SpectacleOrganisateur.idUtilisateur = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("id",$idOrganisateur);
+        $stmt->execute();
+        // Récupérer le résultat du COUNT
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Maintenant, $result contient le résultat du COUNT
+        $nbSpectacle = $result['nbSpectacle'];
+
+        return $nbSpectacle;
+    }
+
+
+    /**
+     * Recherche la liste des spectacle de l'utilisateur
      * @param pdo un objet PDO connecté à la base de données.
      * @param idOrganisateur l'id de l'utilisateur courant.
      * @return searchStmt l'ensemble des festivals.
      */
-    public function listeMesSpectacles(PDO $pdo, $idOrganisateur) 
+    public function listeMesSpectacles(PDO $pdo, $idOrganisateur, $premier) 
     {
-        $sql = "SELECT Spectacle.titre,Utilisateur.nom,Spectacle.idSpectacle FROM Spectacle JOIN SpectacleOrganisateur ON Spectacle.idSpectacle=SpectacleOrganisateur.idSpectacle JOIN Utilisateur ON Utilisateur.idUtilisateur=SpectacleOrganisateur.idUtilisateur WHERE SpectacleOrganisateur.idUtilisateur = :id";
+        $sql = "SELECT Spectacle.titre,Utilisateur.nom,Spectacle.idSpectacle FROM Spectacle JOIN SpectacleOrganisateur ON Spectacle.idSpectacle=SpectacleOrganisateur.idSpectacle JOIN Utilisateur ON Utilisateur.idUtilisateur=SpectacleOrganisateur.idUtilisateur WHERE SpectacleOrganisateur.idUtilisateur = :id LIMIT 5 OFFSET :nPage";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idOrganisateur);
+        $stmt->bindParam("nPage",$premier,PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
     }

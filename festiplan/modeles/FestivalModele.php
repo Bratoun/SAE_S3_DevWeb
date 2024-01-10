@@ -74,21 +74,6 @@ class FestivalModele
         return $nbFestival;
     }
 
-    // /**
-    //  * Recherche la liste des festivals de l'utilisateur
-    //  * @param pdo un objet PDO connecté à la base de données.
-    //  * @param idOrganisateur l'id de l'utilisateur courant.
-    //  * @return stmt l'ensemble des festivals.
-    //  */
-    // public function listeMesFestivals(PDO $pdo, $idOrganisateur)
-    // {
-    //     $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id";
-    //     $stmt = $pdo->prepare($sql);
-    //     $stmt->bindParam("id",$idOrganisateur);
-    //     $stmt->execute();
-    //     return $stmt;
-    // }
-
     /**
      * Recherche la liste des festivals de l'utilisateur
      * @param pdo un objet PDO connecté à la base de données.
@@ -97,8 +82,6 @@ class FestivalModele
      */
     public function listeMesFestivals(PDO $pdo, $idOrganisateur, $premier)
     {
-        // Exemple de requête SQL avec LIMIT et OFFSET
-        $query = "SELECT * FROM ma_table LIMIT  OFFSET ";
         $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id LIMIT 5 OFFSET :nPage";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idOrganisateur);

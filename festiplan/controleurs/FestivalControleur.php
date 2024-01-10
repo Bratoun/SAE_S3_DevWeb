@@ -146,6 +146,7 @@ class FestivalControleur {
         $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idOrganisateur);
         $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idOrganisateur);
         $vue = new View("vues/vue_accueil");
+        $vue->setVar("afficher", false);
         $vue->setVar("mesSpectacles", $mesSpectacles);
         $vue->setVar("mesFestivals", $mesFestivals);
         return $vue;

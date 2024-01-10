@@ -86,25 +86,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 ?>
             </select>
         </div>
-        <div class="col-12">
-            <label for="taille">Intervenant du spectacle :</label><br>
-            <select id="intervenant" name="intervenant" required>
-                <option disabled>Intervenant sur scène</option>
-                <?php 
-                while ($row = $searchStmt3->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'&nbsp;'.$row['prenom'];?></option>
-                <?php
-                }
-                ?>
-                <option disabled>Intervenant hors scène</option>
-                <?php 
-                while ($row = $searchStmt4->fetch()) {?>
-                    <option value="<?php echo $row['idIntervenant'];?>"><?php echo $row['nom'].'&nbsp;'.$row['prenom'];?></option>
-                <?php
-                }
-                ?>
-            </select>
-        </div>
         <div class="footer col-12">
             <button type="submit" class="btn btnModif fondBleu">Terminer</button>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>

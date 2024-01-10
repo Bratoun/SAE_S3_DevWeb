@@ -40,9 +40,25 @@ class UtilisateurCompteControleur
             $_SESSION['utilisateur_connecte'] = true;
             $_SESSION['id_utilisateur'] = $user['idUtilisateur'];
             $idUtilisateur = $_SESSION['id_utilisateur'];
-            $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur);
-            $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur);
+            // On détermine sur quelle page on se trouve
+            if(isset($_GET['page']) && !empty($_GET['page'])){
+                $pageActuelle = (int) strip_tags($_GET['page']);
+            }else{
+                $pageActuelle = 1;
+            }
+
+            $nbFestival = (int)$this->festivalModele->nombreMesFestivals($pdo,$idUtilisateur);
+            $nbSpectacle = (int)$this->spectacleModele->nombreMesSpectacles($pdo,$idUtilisateur);
+            // On calcule le nombre de pages total
+            $nbPages = ceil($nbFestival / 5);
+            $nbPagesSpectacle = ceil($nbSpectacle / 5);
+            // Calcul du 1er element de la page
+            $premier = ($pageActuelle * 5) - 5;
+            $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur,$premier);
+            $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur,$premier);
+
             $vue = new View("vues/vue_accueil");
+            $vue->setVar("nbPages", $nbPages);
             $vue->setVar("mesSpectacles", $mesSpectacles);
             $vue->setVar("mesFestivals", $mesFestivals);
             return $vue;
