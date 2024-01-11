@@ -191,10 +191,11 @@ img {
     justify-content: center;
     align-items: center;
     display: flex;
-
+    text-align: center;
 }
 
 .cadreFestival {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: relative;
     width: 100%;
     height: 105px;
@@ -217,14 +218,36 @@ img {
     content: '';
     position: absolute;
     top: -15px;
-    right: -45%; /* Ajustez cette valeur pour déplacer le losange vers la droite */
-    width: calc(100% + 30px); /* Ajustez la taille du losange selon vos besoins */
-    height: calc(100% + 500px); /* Ajustez la taille du losange selon vos besoins */
+    width: calc(100% + 200px); 
+    height: calc(100% + 700px); 
     background: linear-gradient(45deg, red, orange);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transform: rotate(45deg);
 }
 
+@media (max-width: 768px) {
+    .cadreFestival::before {
+        right: -70%; /* Ajustez la valeur selon vos besoins */
+    }
+}
+
+@media (min-width: 768px) {
+    .cadreFestival::before {
+        right: -60%; /* Ajustez la valeur selon vos besoins */
+    }
+}
+
+@media (min-width: 992px) {
+    .cadreFestival::before {
+        right: -50%; /* Ajustez la valeur selon vos besoins */
+    }
+}
+
+@media (min-width: 1200px) {
+    .cadreFestival::before {
+        right: -45%; /* Ajustez la valeur selon vos besoins */
+    }
+}
 
 /* Lorsque qu'un champ est invalide affiche en rouge */
 #invalide {
@@ -429,3 +452,14 @@ label {
     border-color: #007bff;
 }
   
+.icone-calendar {
+    font-size: 2.5em;
+    background: linear-gradient(45deg, red, orange);
+    -webkit-background-clip: text; 
+    color: transparent; 
+}
+
+
+.centreCadreFestival {
+    margin-top: 13px;
+} 

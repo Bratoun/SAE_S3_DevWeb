@@ -91,19 +91,22 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 while ($festival = $mesFestivals->fetch()) {
                     $idFestival = $festival['idFestival'];
                 ?>  
-                    <div class="row">
-                        <div class="col-12">
-                            <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'>
-                                <div class="centre">  
-                                    <div class='cadreFestival'>
-                                        <?php
-                                        echo $festival['titre']."<br>";
-                                        echo $festival['nom'];
-                                        ?>
-                                        <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
-                                    </div>
+                    <div class="cadreFestival"> 
+                        <div class="centreCadreFestival">
+                            <div class="row">
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <?php
+                                    echo $festival['titre']."<br>";
+                                    echo $festival['nom'];
+                                    ?>
                                 </div>
-                            </a>
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar centre"></span></a>
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php
