@@ -106,11 +106,11 @@ class GrijModele
         return $stmt;
     }
 
-    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place, $heureDebut, $heureFin)
+    public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place, $heureDebut, $heureFin, $causeNonPlace)
     {
-        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival,$idJour, $idSpectacle, $ordre, $place,$heureDebut,$heureFin]);
+        $stmt->execute([$idFestival,$idJour, $idSpectacle, $ordre, $place,$heureDebut,$heureFin, $causeNonPlace]);
     }
 
     public function recupererGrij(PDO $pdo, $idFestival)

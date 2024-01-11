@@ -124,7 +124,7 @@ class GrijControleur
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                 $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                 if ($scenesOk = $scenesAdequates->fetchAll()) {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle,null);
                     $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                 } else {
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null);
@@ -141,10 +141,10 @@ class GrijControleur
                     $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
                     $scenesOk = $scenesAdequates->fetchAll();
                     if ($scenesOk) {
-                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle);
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle,null);
                         $this->grijModele->insertionSpectacleScene($pdo, $idFestival, $unSpectacle['id'], $scenesOk);
                     } else {
-                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null);
+                        $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null,3);
                     }
                     $ordre++;
                     $duree += $ecart;
@@ -160,9 +160,15 @@ class GrijControleur
             }
         }
         if ($spectacleNonPlace != null) {
-            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$spectacleNonPlace['id'], 0, 0,null,null);
+            $causeNonPlace = null;
+            if($jour != false) {
+                $causeNonPlace = 1;
+            } else {
+                $causeNonPlace = 2;
+            }
+            $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$spectacleNonPlace['id'], 0, 0,null,null,$causeNonPlace);
             while ($unSpectacle = $spectacles->fetch()){
-                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null);
+                $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], 0, 0,null,null,$causeNonPlace);
             }
         }
     }

@@ -42,8 +42,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     </header>
     <body class="body-blanc">
         <div class="container">
-            <?php if ($message != null) echo "<h1>".$message."</h1>";?>
             <div class="row">
+                <?php
+                if ($message != null){
+                    ?>
+                    <div class="col-12">
+                        <p id="invalide"><?php echo $message;?><p>
+                    </div>
+                    <?php
+                }?>
                 <div class="col-12" id="parametres-grij">
                     <form method="post" action="index.php">
                         <input type="hidden" name="controller" value="Grij"/>
@@ -68,14 +75,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             <div class="col-12">
                                 <input type="time" name="ecartEntreSpectacles" value="<?php echo $ecartEntreSpectacles;?>">
                             </div>
-                        </div>
-                        <div class="row">
+                        
                             <!-- Annule les modification du jour sélectionné -->
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a href="/festiplan?controller=Home"><button type="button" class="btn btn-warning">Annuler</button></a>
                             </div>
                             <!-- Enregistre les paramètres du jour sélectionné -->
-                            <div class="col-4">
+                            <div class="col-6">
                                 <input type="submit" class="btn btn-success" value="Valider"/>
                             </div>
                         </div>
