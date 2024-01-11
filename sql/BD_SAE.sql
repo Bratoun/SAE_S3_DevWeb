@@ -159,6 +159,12 @@ CREATE TABLE Jour (
     FOREIGN KEY (idGrij) REFERENCES Grij(idGrij)
 );
 
+CREATE TABLE CauseSpectacleNonPlace (
+    idCause INT(11) NOT NULL AUTO_INCREMENT,
+    intitule VARCHAR(35) NULL,
+    PRIMARY KEY (idCause)
+);
+
 CREATE TABLE SpectaclesJour (
     idFestival INT(11) NOT NULL,
     idJour INT(11) NULL,
@@ -167,10 +173,12 @@ CREATE TABLE SpectaclesJour (
     place TINYINT NOT NULL DEFAULT 0,
     heureDebut TIME NULL,
     heureFin TIME NULL,
+    idCauseNonPlace INT(11) NULL,
     PRIMARY KEY (idFestival, idSpectacle),
     FOREIGN KEY (idJour) REFERENCES Jour(idJour),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
-    FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
+    FOREIGN KEY (idFestival) REFERENCES Festival(idFestival),
+    FOREIGN KEY (idCauseNonPlace) REFERENCES CauseSpectacleNonPlace(idCause)
 );
 
 CREATE TABLE SpectacleScenes (
@@ -182,6 +190,8 @@ CREATE TABLE SpectacleScenes (
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
     FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
 );
+
+
 
 -- Données insérées
 INSERT INTO CategorieFestival (nom)
@@ -207,6 +217,11 @@ VALUES
 ('Moyenne'),
 ('Grande');
 
+INSERT INTO CauseSpectacleNonPlace (intitule)
+VALUES
+('Durée trop longue'),
+('Plus de jour disponible'),
+('Pas de scène adéquate');
 
 -- TESTS ////////////////////////////////////////
 INSERT INTO Utilisateur (prenom,nom,mail,login,mdp)

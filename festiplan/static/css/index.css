@@ -382,8 +382,8 @@ label {
     margin-bottom: 10px; /* Espacement entre les éléments */
 }
 
-.fondCliquerInfoSpec {
-    background-color:    #6ee0e8; /* Couleur grise de fond */
+.fondDescSpectacle {
+    background-color:    #caecdf; /* Couleur grise de fond */
     border-radius: 10px; /* Arrondi des coins */
     padding: 10px; /* Marge sur les côtés */
     margin-bottom: 10px; /* Espacement entre les éléments */
@@ -395,6 +395,10 @@ label {
     width:50%;
     align-content: center;
     color:#000;
+}
+
+.titreSpecDesc {
+    line-height: 1.5;
 }
 
 /* Pagination styles */
