@@ -113,7 +113,7 @@ label {
 }
 
 .fondRouge {
-    background-color: rgb(255, 83, 83);
+    background-color: rgb(238, 63, 63);
 }
 
 .fondVert {
@@ -217,9 +217,9 @@ img {
     content: '';
     position: absolute;
     top: -15px;
-    right: -15%; /* Ajustez cette valeur pour déplacer le losange vers la droite */
+    right: -45%; /* Ajustez cette valeur pour déplacer le losange vers la droite */
     width: calc(100% + 30px); /* Ajustez la taille du losange selon vos besoins */
-    height: calc(100% + 30px); /* Ajustez la taille du losange selon vos besoins */
+    height: calc(100% + 500px); /* Ajustez la taille du losange selon vos besoins */
     background: linear-gradient(45deg, red, orange);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transform: rotate(45deg);
@@ -427,11 +427,5 @@ label {
     background-color: #007bff;
     color: #fff;
     border-color: #007bff;
-}
-
-@media (max-width: 576px) {
-    .pagination {
-        flex-direction: column;
-    }
 }
   

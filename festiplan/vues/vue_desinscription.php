@@ -68,7 +68,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                 <br><br>
                 <div class="texteCentre">
-                    <button type="submit" class="btn fondRouge boutonTerminer">Se desinscrire</button></a>
+                    <button type="submit" class="btn btn-danger fondRouge boutonTerminer">Se desinscrire</button></a>
                 </div>
             </form>
         </div>

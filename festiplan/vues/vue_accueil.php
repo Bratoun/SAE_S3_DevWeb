@@ -60,9 +60,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     $idSpectacle = $listeSpectacle['idSpectacle'];
                                     echo $listeSpectacle['titre'];
                                 ?>
-                                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
-                                <button type="button" id="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
-                                <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Les intervenants du spectacle</button></a>
+                                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Spectacle</button></a>
+                                <button type="button" name="suppression" class="btn btn-danger fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
+                                <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Les intervenants du spectacle</button></a>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                         }
                                         
                                         ?>
-                                        <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn fondBleu">Modifier le Festival</button></a>
+                                        <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
                                     </div>
                                 </div>
                             </a>
@@ -136,14 +136,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     ?>
     <div class="container-fluid footer">
         <div class="row">
-            <div class="col-12 col-md-4">
-                <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn btnModif fondVert">Créer un spectacle</button></a>
+            <div class="col-3 col-md-4">
+                <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn btn-success btnModif fondVert">Créer un spectacle</button></a>
             </div>
-            <div class="col-12 col-md-4">
-                <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn btnModif fondGris"><?php if ($afficher) {echo 'Voir mes festivals';} else { echo 'Voir mes spectacles';}?></button></a>
+            <div class="col-6 col-md-4">
+                <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn btn-secondary btnModif fondGris"><?php if ($afficher) {echo 'Voir mes festivals';} else { echo 'Voir mes spectacles';}?></button></a>
             </div>
-            <div class="col-12 col-md-4">
-                <a href="/festiplan?controller=Festival"><button type="submit" class="btn btnModif fondVert">Créer un festival</button></a>
+            <div class="col-3 col-md-4">
+                <a href="/festiplan?controller=Festival"><button type="submit" class="btn btn-success btnModif fondVert">Créer un festival</button></a>
             </div>
         </div>
     </div>
