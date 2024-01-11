@@ -374,6 +374,29 @@ label {
     padding: 10px; /* Marge sur les côtés */
     margin-bottom: 10px; /* Espacement entre les éléments */
 }
+
+.fondCliquerInfoSpec {
+    background-color:    #6ee0e8; /* Couleur grise de fond */
+    border-radius: 10px; /* Arrondi des coins */
+    padding: 10px; /* Marge sur les côtés */
+    margin-bottom: 10px; /* Espacement entre les éléments */
+}
+
+.fondCliquerInfoSpec {
+    background-color:    #6ee0e8; /* Couleur grise de fond */
+    border-radius: 10px; /* Arrondi des coins */
+    padding: 10px; /* Marge sur les côtés */
+    margin-bottom: 10px; /* Espacement entre les éléments */
+}
+
+.btnModifierGrij {
+    background-color:    #ff8476   ; /* Couleur grise de fond */
+    border-radius: 10px; /* Arrondi des coins */
+    width:50%;
+    align-content: center;
+    color:#000;
+}
+
 /* Pagination styles */
 .pagination {
     display: flex;

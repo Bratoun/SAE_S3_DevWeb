@@ -123,13 +123,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         <?php
                     } else {
                         ?>
-                        <h2>Cliquer sur un spectacle pour plus d'information.</h2>
+                        <div class="fondCliquerInfoSpec">
+                            <h2>Cliquer sur un spectacle pour plus d'information.</h2>
+                        </div>
                         <?php
                     }
                     ?>
                     <div class="col-12">
                         <?php
-                        var_dump($listeSpectacleNonPlace);
                         if ($listeSpectacleNonPlace == null)
                         {
                             ?>
@@ -160,6 +161,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             </div><?php
                         }?>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid footer">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>"><div class="btnModifierGrij">Modifier la planification</div></a>
                 </div>
             </div>
         </div>

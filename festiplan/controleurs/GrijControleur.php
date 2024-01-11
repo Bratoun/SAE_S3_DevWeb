@@ -75,8 +75,10 @@ class GrijControleur
                 $this->planifierSpectacles($pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
 
                 $grij = $this->grijModele->recupererGrij($pdo, $idFestival);
+                $spectacleNonPlace = $this->grijModele->recupererSpectacleNonPlace($pdo,$idFestival);
 
                 $vue = new View('vues/vue_consultation_planification');
+                $vue->setVar('listeSpectacleNonPlace', $spectacleNonPlace);
                 $vue->setVar('listeJours', $grij);
 
             } else {
@@ -109,12 +111,12 @@ class GrijControleur
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);
         $i = 0;
         $unSpectacle = $spectacles->fetch();
-        $spectacleNonPlace = null;
 
         while (($jour = $jours->fetch()) && $unSpectacle) {
             $ordre = 0;
             $duree = 0;
             $leJourContinue = true;
+            $spectacleNonPlace = null;
             
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
                 $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
@@ -149,6 +151,7 @@ class GrijControleur
                 } else {
                     $leJourContinue  = false;
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
+                    $spectacleNonPlace = $unSpectacle;
                 }
             }
             if($unSpectacle && $this->convertirEnMinutes($unSpectacle['duree']) > $dureeTotal) {
