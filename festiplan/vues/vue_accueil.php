@@ -91,16 +91,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 while ($festival = $mesFestivals->fetch()) {
                     $idFestival = $festival['idFestival'];
                 ?>  
-                    <div class="row">
-                        <div class="col-12">
-                            <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'>
-                                <div class="centre">  
-                                    <div class='cadreFestival'>
-                                        <?php
-                                        echo $festival['titre']."<br>";
+                    <div class="cadreFestival"> 
+                        <div class="centreCadreFestival">
+                            <div class="row">
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <?php
+                                    echo $festival['titre']."<br>";
                                         // Affiche le nom de l'utilisateur responsable
                                         if ($festival['responsable']) {
-                                            echo "responsable: ".$festival['nom'];
+                                        echo "responsable: ".$festival['nom'];
                                         } else {
                                             while ($responsable = $lesResponsables->fetch()) {
                                                 if($responsable['idFestival'] == $idFestival) {
@@ -109,11 +108,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                             }
                                         }
                                         
-                                        ?>
-                                        <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
-                                    </div>
+                                    ?>
                                 </div>
-                            </a>
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar centre"></span></a>
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php

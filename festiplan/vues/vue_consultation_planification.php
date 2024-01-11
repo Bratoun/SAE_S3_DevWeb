@@ -91,9 +91,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     if ($profilSpectacle) {
                         $spectacle = $infosSpectacle->fetch();
                         ?>
-                        <div class="row">
+                        <div class="row fondDescSpectacle">
                             <div class="col-12">
-                                <h2><?php echo $spectacle['titre']; ?></h2>
+                                <h2 class="titreSpecDesc text-truncate"><?php echo $spectacle['titre']; ?></h2>
                             </div>
                             <div class="col-12">
                                 Heure de début - <?php echo substr($spectacle['heureDebut'],0,-3);?><br/>
@@ -102,23 +102,30 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             <div class="col-12">
                                 <h4>Liste des scènes adéquates</h4>
                             </div>
-                            <?php
-                            while ($scene = $listeScenes->fetch()) {
-                                ?>
-                                <div class="col-4">
-                                    <h5><?php echo $scene['nomScene'];?></h5>
-                                </div>
-                                <div class="col-4">
-                                    nombre de spectateurs</br>
-                                    <?php echo $scene['nbSpectateurs'];?>
-                                </div>
-                                <div class="col-4">
-                                    <b>Longitude : </b><?php echo $scene['longitude'];?><br/>
-                                    <b>Latitude : </b><?php echo $scene['latitude'];?>
-                                </div>
+                            <div class="col-12">
                                 <?php
-                            }
-                            ?>
+                                while ($scene = $listeScenes->fetch()) {
+                                    ?>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h5 class="titreSpecDesc text-truncate"><?php echo $scene['nomScene'];?></h5>
+                                        </div>
+                                        <div class="col-4">
+                                            nombre de spectateurs</br>
+                                            <?php echo $scene['nbSpectateurs'];?>
+                                        </div>
+                                        <div class="col-4">
+                                            <b>Longitude : </b><?php echo $scene['longitude'];?><br/>
+                                            <b>Latitude : </b><?php echo $scene['latitude'];?>
+                                        </div>
+                                        <div class="col-12">
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                         <?php
                     } else {
@@ -149,7 +156,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     <div class="col-12 fondSpecNonPlace">
                                         <div class="row">
                                             <div class="col-6">
-                                                <h4><?php echo $specNonPlace['titre'];?></h4>
+                                                <h5 class="text-truncate titreSpecDesc"><?php echo $specNonPlace['titre'];?></h5>
                                             </div>
                                             <div class="col-6">
                                                 <p>Duree : <?php echo $specNonPlace['duree'];?></p>
