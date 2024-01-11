@@ -48,19 +48,18 @@ class UtilisateurCompteControleur
             }
 
             $nbFestival = (int)$this->festivalModele->nombreMesFestivals($pdo,$idUtilisateur);
-            $nbSpectacle = (int)$this->spectacleModele->nombreMesSpectacles($pdo,$idUtilisateur);
             // On calcule le nombre de pages total
-            $nbPages = ceil($nbFestival / 5);
-            $nbPagesSpectacle = ceil($nbSpectacle / 5);
+            $nbPages = ceil($nbFestival / 4);
             // Calcul du 1er element de la page
-            $premier = ($pageActuelle * 5) - 5;
+            $premier = ($pageActuelle * 4) - 4;
             $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur,$premier);
-            $mesSpectacles = $this->spectacleModele->listeMesSpectacles($pdo,$idUtilisateur,$premier);
+            // Recupere le responsable de chaque Festival
+            $lesResponsables = $this->festivalModele->listeLesResponsables($pdo);
 
             $vue = new View("vues/vue_accueil");
             $vue->setVar("nbPages", $nbPages);
-            $vue->setVar("mesSpectacles", $mesSpectacles);
             $vue->setVar("mesFestivals", $mesFestivals);
+            $vue->setVar("lesResponsables", $lesResponsables);
             return $vue;
         }
     }

@@ -51,7 +51,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="col-12">
 
         <?php
-        // Charger tous les résultats de la liste des spectacles du fetival dans un tableau
+        // Charge tout les résultats de la liste des spectacles du fetival dans un tableau
         $spectacleIDs = array();
         while ($row = $listeSpectacleDeFestival->fetch()) {
             $spectacleIDs[] = $row['idSpectacle'];

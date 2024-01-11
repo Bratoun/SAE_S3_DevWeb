@@ -35,21 +35,23 @@ class FestivalModele
     {
         $sql = "INSERT INTO Festival (titre,categorie,description,dateDebut,dateFin,illustration) VALUES (:leNom,:laCate,:laDesc,:leDeb,:laFin,:lIllu)";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam("leNom",$nom);
-        $stmt->bindParam("laCate",$categorie);
-        $stmt->bindParam("laDesc",$description);
-        $stmt->bindParam("leDeb",$dateDebut);
-        $stmt->bindParam("laFin",$dateFin);
-        $stmt->bindParam("lIllu",$illustration);
+        $stmt->bindParam(":leNom", $nom);
+        $stmt->bindParam(":laCate", $categorie);
+        $stmt->bindParam(":laDesc", $description);
+        $stmt->bindParam(":leDeb", $dateDebut);
+        $stmt->bindParam(":laFin", $dateFin);
+        $stmt->bindParam(":lIllu", $illustration);
         $stmt->execute();
-        // Enregistre le créateur du festival en temps qu'organisateur
+
+        // Enregistre le créateur du festival en tant qu'organisateur
         $responsable = true;
         $idFestival = $pdo->lastInsertId();
+
         $sql2 = "INSERT INTO EquipeOrganisatrice (idUtilisateur, idFestival, responsable) VALUES (:idOrg,:idFestival,:responsable)";
         $stmt2 = $pdo->prepare($sql2);
-        $stmt2->bindParam("idOrg",$idOrganisateur);
-        $stmt2->bindParam("idFestival",$idFestival);
-        $stmt2->bindParam("responsable",$responsable);
+        $stmt2->bindParam(":idOrg", $idOrganisateur);
+        $stmt2->bindParam(":idFestival", $idFestival);
+        $stmt2->bindParam(":responsable", $responsable);
         $stmt2->execute();
     }
 
@@ -82,7 +84,7 @@ class FestivalModele
      */
     public function listeMesFestivals(PDO $pdo, $idOrganisateur, $premier)
     {
-        $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id LIMIT 4 OFFSET :nPage";
+        $sql = "SELECT Festival.titre,Utilisateur.nom,Festival.idFestival,Festival.illustration,EquipeOrganisatrice.responsable FROM Festival JOIN EquipeOrganisatrice ON Festival.idFestival=EquipeOrganisatrice.idFestival JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.idUtilisateur = :id LIMIT 4 OFFSET :nPage";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("id",$idOrganisateur);
         $stmt->bindParam("nPage",$premier,PDO::PARAM_INT);
@@ -90,6 +92,20 @@ class FestivalModele
         return $stmt;
         
     }
+
+    /**
+     * Recherche la liste des responsables de Festivals
+     * @param pdo un objet PDO connecté à la base de données.
+     * @return stmt l'ensemble des responsables.
+     */
+    public function listeLesResponsables(PDO $pdo)
+    {
+        $sql = "SELECT Utilisateur.nom,EquipeOrganisatrice.idFestival FROM EquipeOrganisatrice JOIN Utilisateur ON Utilisateur.idUtilisateur=EquipeOrganisatrice.idUtilisateur WHERE EquipeOrganisatrice.responsable = true";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
 
     /**
      * Recherche tout les parametre du festival voulu.

@@ -120,11 +120,12 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <button type="submit" class="btn btnModif fondVert">Confirmer</button>   
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>  
             <?php if($estResponsable) {?>
-                <button type="button" id="suppressionFestival" class="btn btnModif fondRouge" data-id-festival="<?php echo $idFestival; ?>">Supprimer</button>
+                <button type="button" id="suppressionFestival" class="btn fondRouge" data-id-festival="<?php echo $idFestival; ?>">Supprimer</button>
             <?php } ?>
             <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Consulter la planification</button></a>
             <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
         </div>
     </form>
+    <script src="js/script.js"></script>
 </body>
 </html>

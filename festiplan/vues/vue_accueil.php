@@ -61,7 +61,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     echo $listeSpectacle['titre'];
                                 ?>
                                 <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Modifier le Spectacle</button></a>
-                                <button type="button" name="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
+                                <button type="button" id="suppression" class="btn btnModif fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
                                 <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn fondBleu">Les intervenants du spectacle</button></a>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             } else {
                 echo '<div class="col-12">';
                     echo '<div class="centre">';
-                        echo 'Pas de spectacle créer pour le moment';
+                        echo 'Pas de spectacle crée pour le moment';
                     echo '</div>';
                 echo '</div>';
             }   
@@ -98,7 +98,17 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     <div class='cadreFestival'>
                                         <?php
                                         echo $festival['titre']."<br>";
-                                        echo $festival['nom'];
+                                        // Affiche le nom de l'utilisateur responsable
+                                        if ($festival['responsable']) {
+                                            echo "responsable: ".$festival['nom'];
+                                        } else {
+                                            while ($responsable = $lesResponsables->fetch()) {
+                                                if($responsable['idFestival'] == $idFestival) {
+                                                    echo "responsable: ".$responsable['nom'];
+                                                }
+                                            }
+                                        }
+                                        
                                         ?>
                                         <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn fondBleu">Modifier le Festival</button></a>
                                     </div>
@@ -118,7 +128,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         } else {
             echo '<div class="col-12">';
                 echo '<div class="centre">';
-                    echo 'Pas de spectacle créer pour le moment';
+                    echo 'Pas de festival crée pour le moment';
                 echo '</div>';
             echo '</div>';
         }
