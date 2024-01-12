@@ -119,10 +119,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     ?>
                                 </div>
                                 <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar centre"></span></a>
+                                    <a class="centre" href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar"></span></a>
                                 </div>
                                 <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
+                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier</button></a>
                                 </div>
                             </div>
                         </div>

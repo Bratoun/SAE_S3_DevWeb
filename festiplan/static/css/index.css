@@ -472,3 +472,9 @@ label {
 .centreCadreSpectacle {
     margin-top: 25px;
 }
+
+@media (max-width: 767px) {
+    .plusBas {
+        margin-top: 120px;
+    }
+}
