@@ -19,7 +19,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <header class="header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <a href="index.php">
                     <img src="static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-8">
                 <h2 class="texteCentre blanc bas"><?php if ($afficher) {echo 'Mes spectacles';} else { echo 'Mes festivals';}?></h2>
             </div>
-            <div class="col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+            <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
@@ -53,16 +53,24 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <?php
                 while ($listeSpectacle = $mesSpectacles->fetch()) {
                     ?>
-                    <div class="col-12">
-                        <div class="centre">
-                            <div class='cadreFestival'>
-                                <?php
-                                    $idSpectacle = $listeSpectacle['idSpectacle'];
-                                    echo $listeSpectacle['titre'];
-                                ?>
-                                <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Spectacle</button></a>
-                                <button type="button" name="suppression" class="btn btn-danger fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer le spectacle</button>
-                                <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Les intervenants du spectacle</button></a>
+                    <div class="cadreFestival"> 
+                        <div class="centreCadreSpectacle">
+                            <div class="row">
+                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <?php
+                                        $idSpectacle = $listeSpectacle['idSpectacle'];
+                                        echo $listeSpectacle['titre'];
+                                    ?>
+                                </div>
+                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier</button></a>
+                                </div>
+                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <button type="button" name="suppression" class="btn btn-danger fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer</button>
+                                </div>
+                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Intervenants</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,10 +119,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                     ?>
                                 </div>
                                 <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar centre"></span></a>
+                                    <a class="centre" href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar"></span></a>
                                 </div>
                                 <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
+                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier</button></a>
                                 </div>
                             </div>
                         </div>
@@ -139,17 +147,16 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     ?>
     <div class="container-fluid footer">
         <div class="row">
-            <div class="col-3 col-md-4">
-                <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn btn-success btnModif fondVert">Créer un spectacle</button></a>
+            <div class="col-4">
+                <a href="/festiplan?controller=Spectacle"><button type="submit" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Spectacle</b></button></a>
             </div>
-            <div class="col-6 col-md-4">
-                <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn btn-secondary btnModif fondGris"><?php if ($afficher) {echo 'Voir mes festivals';} else { echo 'Voir mes spectacles';}?></button></a>
+            <div class="col-4">
+                <a href="/festiplan?controller=Accueil&action=<?php if ($afficher) {echo 'voirFestival';} else { echo 'VoirSpectacle';}?>"><button type="submit" class="btn btn-secondary btnModif fondGris"><?php if ($afficher) {echo '<b>Voir mes festivals</b>';} else { echo '<b>Voir mes spectacles</b>';}?></button></a>
             </div>
-            <div class="col-3 col-md-4">
-                <a href="/festiplan?controller=Festival"><button type="submit" class="btn btn-success btnModif fondVert">Créer un festival</button></a>
+            <div class="col-4">
+                <a href="/festiplan?controller=Festival"><button type="submit" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Festival</b></button></a>
             </div>
         </div>
     </div>
-    <script src="js/script.js"></script>
 </body>
 </html>

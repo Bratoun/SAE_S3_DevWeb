@@ -17,7 +17,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <header>
         <div class="container-fluid header">
             <div class="row">
-                <div class="col-2">
+                <div class="col-3 col-md-2">
                     <a href="index.php">
                         <img src="static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
                     </a>
@@ -25,7 +25,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <div class="col-8">
                     <h2 class="texteCentre blanc bas"> Parametrage de la plannification : </h2>
                 </div>
-                <div class="col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+                <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
@@ -41,7 +41,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
     </header>
     <body class="body-blanc">
-        <div class="container">
+        <div class="padding">
             <div class="row">
                 <?php
                 if ($message != null){
@@ -51,38 +51,42 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                     <?php
                 }?>
-                <div class="col-12" id="parametres-grij">
+                <div class="col-12">
                     <form method="post" action="index.php">
                         <input type="hidden" name="controller" value="Grij"/>
                         <input type="hidden" name="action" value="enregistrerGrij"/> 
                         <div class="row">
                             <input type="hidden" name="idFestival" value="<?php echo $idFestival;?>"/> 
+                            <br>
                             <div class="col-12">
                                 <label for="heureDebut">Heure de début :</label>
                             </div>
                             <div class="col-12">
-                                <input type="time" name="heureDebut" value="<?php echo $heureDebut;?>"/>
+                                <input type="time" name="heureDebut" value="<?php echo $heureDebut;?>" class="input-style"/>
                             </div>
+                            <br>
                             <div class="col-12">
                                 <label for="heureFin">Heure de fin :</label>
                             </div>
                             <div class="col-12">
-                                <input type="time" name="heureFin" value="<?php echo $heureFin;?>"/>
+                                <input type="time" name="heureFin" value="<?php echo $heureFin;?>" class="input-style"/>
                             </div>
+                            <br>
                             <div class="col-12">
                                 <label for="ecartEntreSpectacles">Écart entre chaque spectacle :</label>
                             </div>
                             <div class="col-12">
-                                <input type="time" name="ecartEntreSpectacles" value="<?php echo $ecartEntreSpectacles;?>">
+                                <input type="time" name="ecartEntreSpectacles" value="<?php echo $ecartEntreSpectacles;?>" class="input-style">
                             </div>
-                        
-                            <!-- Annule les modification du jour sélectionné -->
-                            <div class="col-6">
-                                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-warning">Annuler</button></a>
-                            </div>
-                            <!-- Enregistre les paramètres du jour sélectionné -->
-                            <div class="col-6">
-                                <input type="submit" class="btn btn-success" value="Valider"/>
+                        </div>
+                        <div class="container-fluid footer">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif btn-secondary fondGris"><b>Annuler</b></button></a>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <button type="submit" class="btn btnModif btn-success fondVert"><b>Valider</b></button>
+                                </div>
                             </div>
                         </div>
                     </form>

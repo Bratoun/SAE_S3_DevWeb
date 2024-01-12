@@ -17,12 +17,12 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <header>
     <div class="container-fluid header-blanc">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <a href="index.php">
                     <img src="static/images/logo_blanc.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
             </div>
-            <div class="offset-8 col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+            <div class="offset-8 col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>

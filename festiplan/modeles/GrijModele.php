@@ -191,10 +191,12 @@ class GrijModele
     }
     public function recupererSpectacleNonPlace(PDO $pdo, $idFestival)
     {
-        $sql = "SELECT s.titre as titre, s.duree as duree
+        $sql = "SELECT s.titre as titre, s.duree as duree, c.intitule as causeNonPlace
                 FROM SpectaclesJour as sj
                 JOIN Spectacle as s
                 ON s.idSpectacle = sj.idSpectacle
+                JOIN CauseSpectacleNonPlace as c
+                ON c.idCause = sj.idCauseNonPlace
                 WHERE sj.idFestival = ?
                 AND sj.place = 0";
         $stmt = $pdo->prepare($sql);
