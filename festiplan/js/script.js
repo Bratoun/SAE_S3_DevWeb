@@ -63,8 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // L'utilisateur a cliqué sur "OK"
                 alert("Intervenant supprimé !");
                 window.location.href = '/festiplan?controller=Spectacle&action=supprimerIntervenant&idIntervenant='+ idIntervenant + '&idSpectacle=' + idSpectacle;
-            } else {
-                window.location.href = '/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=' + idSpectacle;
             }
         });
     });

@@ -249,11 +249,12 @@ class FestivalModele
      * Supprimer tout les spectacles d'un festival.
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function supprimerSpectacleDeFestival ($pdo,$idFestival) 
+    public function supprimerSpectacleDeFestival ($pdo,$idFestival, $idSpectacle) 
     {
-        $sql = "DELETE FROM SpectacleDeFestival WHERE idFestival = :id ";
+        $sql = "DELETE FROM SpectacleDeFestival WHERE idFestival = :idFestival AND idSpectacle = :idSpectacle";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam("id",$idFestival);
+        $stmt->bindParam("idFestival",$idFestival);
+        $stmt->bindParam("idSpectacle",$idSpectacle);
         $stmt->execute();
     }
 

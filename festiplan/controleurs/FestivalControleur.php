@@ -257,6 +257,7 @@ class FestivalControleur {
         }else{
             $pageActuelle = 1;
         }
+        
         $nbSpectacles = (int)$this->spectacleModele->nombreSpectacles($pdo);
         // On calcule le nombre de pages total
         $nbPages = ceil($nbSpectacles / 4);
@@ -264,13 +265,12 @@ class FestivalControleur {
         $premier = ($pageActuelle * 4) - 4;
         $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo,$premier);
         $listeSpectacleDeFestival = $this->festivalModele->listeSpectacleDeFestival($pdo,$idFestival);
-        $listeCoche = [];
+
         $vue = new View("vues/vue_ajouter_spectacle");
         $vue->setVar("idFestival", $idFestival);
         $vue->setVar("nbPages",$nbPages);
         $vue->setVar("listeSpectacleDeFestival", $listeSpectacleDeFestival);
         $vue->setVar("listeSpectacles", $listeSpectacles);
-        $vue->setVar("listeCoche",$listeCoche);
         return $vue;
     }
 
@@ -278,15 +278,19 @@ class FestivalControleur {
         $idFestival = HttpHelper::getParam('idFestival');
         $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo);
 
-        $this->festivalModele->supprimerSpectacleDeFestival($pdo,$idFestival);
-
         // Récupere tout les festivals checks
         $idSpectacles = self::getParamArray('Spectacles');
 
         foreach($idSpectacles as $idSpectacle) {
-            // Ajoute un a un les nouveaux organisateurs
-            $this->festivalModele->majSpectacleDeFestival($pdo,$idFestival,$idSpectacle);
+            if (!isset($_POST[$idSpectacle])) {
+                // Supprime un a un les spectacles pas cochées
+                $this->festivalModele->supprimerSpectacleDeFestival($pdo,$idFestival,$idSpectacle);
+            } else  {
+                // Ajoute un a un les nouveaux spectacles
+                $this->festivalModele->majSpectacleDeFestival($pdo,$idFestival,$idSpectacle);
+            }
         }
+
 
         $festivalAModifier = $this->festivalModele->leFestival($pdo,$idFestival);
         // Recupere les données de la liste des catégories
@@ -310,30 +314,5 @@ class FestivalControleur {
         return $vue;
     }
     
-    public function pageSuivante (PDO $pdo) : View {
-        $idFestival = HttpHelper::getParam('idFestival');
-        $coche = HttpHelper::getParam('coche');
-        $listeCoche = HttpHelper::getParam('listeCoche');
-        // On détermine sur quelle page on se trouve
-        if(isset($_GET['page']) && !empty($_GET['page'])){
-            $pageActuelle = (int) strip_tags($_GET['page']);
-        }else{
-            $pageActuelle = 1;
-        }
-        $nbSpectacles = (int)$this->spectacleModele->nombreSpectacles($pdo);
-        // On calcule le nombre de pages total
-        $nbPages = ceil($nbSpectacles / 4);
-        // Calcul du 1er element de la page
-        $premier = ($pageActuelle * 4) - 4;
-        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo,$premier);
-        $listeSpectacleDeFestival = $this->festivalModele->listeSpectacleDeFestival($pdo,$idFestival);
-
-        $vue = new View("vues/vue_ajouter_spectacle");
-        $vue->setVar("idFestival", $idFestival);
-        $vue->setVar("nbPages",$nbPages);
-        $vue->setVar("listeSpectacleDeFestival", $listeSpectacleDeFestival);
-        $vue->setVar("listeSpectacles", $listeSpectacles);
-        return $vue;
-    }
 
 }

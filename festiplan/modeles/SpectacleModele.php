@@ -270,7 +270,7 @@ class SpectacleModele
      * @param surScne si l'intervenant sur ou hors Scene
      * @return searchStmt
      */
-    public function modifIntervenant(PDO $pdo, $nom, $prenom, $mail, $surScne, $typeIntervenant, $idIntervenant)
+    public function modifIntervenant(PDO $pdo, $nom, $prenom, $mail, $surScene, $typeIntervenant, $idIntervenant)
     {
         $sql = "UPDATE Intervenant SET nom = :leNom, prenom = :lePrenom, mail = :leMail, surScene = :surScene, typeIntervenant = :leMetier WHERE idIntervenant = :idIntervenant";
         $stmt = $pdo->prepare($sql);

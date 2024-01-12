@@ -64,8 +64,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <td><?php echo $row['prenom'] ?></td>
                     <td><?php echo $row['metier'] ?></td>
                     <td><?php if ($row['surScene'] == 0) { echo "Sur scène"; } else { echo "Hors scène";} ?></td>
-                    <td><a href="/festiplan?controller=Spectacle&action=AvantmodifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>">Modifier</a></td>
-                    <td><a href=""data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant">Supprimer</a></td>
+                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>">Modifier</a></td>
+                    <td><a data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant">Supprimer</a></td>
                 </tr>
                 <?php } ?>
             </table>
@@ -83,6 +83,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Terminer</button></a>
         <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Retour</button></a>
         <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
+        <button type="button" class="btn btnModif fondGris">Ajouter un lot d'intervenants via un fichier</button>
     </div>
     <script src="js/script.js"></script>
 </body>
