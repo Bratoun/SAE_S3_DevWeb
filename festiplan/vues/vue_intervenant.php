@@ -64,7 +64,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <td><?php echo $row['prenom'] ?></td>
                     <td><?php echo $row['metier'] ?></td>
                     <td><?php if ($row['surScene'] == 0) { echo "Sur scène"; } else { echo "Hors scène";} ?></td>
-                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>">Modifier</a></td>
+                    <td><a href="/festiplan?controller=Spectacle&action=AvantmodifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>">Modifier</a></td>
                     <td><a href=""data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant">Supprimer</a></td>
                 </tr>
                 <?php } ?>

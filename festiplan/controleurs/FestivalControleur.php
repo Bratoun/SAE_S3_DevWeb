@@ -251,15 +251,26 @@ class FestivalControleur {
 
     public function modifierListeSpectacleFestival(PDO $pdo) : View {
         $idFestival = HttpHelper::getParam('idFestival');
-        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo);
-
-        // Recupere tout les organisateurActuel du festival
+        // On détermine sur quelle page on se trouve
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $pageActuelle = (int) strip_tags($_GET['page']);
+        }else{
+            $pageActuelle = 1;
+        }
+        $nbSpectacles = (int)$this->spectacleModele->nombreSpectacles($pdo);
+        // On calcule le nombre de pages total
+        $nbPages = ceil($nbSpectacles / 4);
+        // Calcul du 1er element de la page
+        $premier = ($pageActuelle * 4) - 4;
+        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo,$premier);
         $listeSpectacleDeFestival = $this->festivalModele->listeSpectacleDeFestival($pdo,$idFestival);
-
+        $listeCoche = [];
         $vue = new View("vues/vue_ajouter_spectacle");
         $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("nbPages",$nbPages);
         $vue->setVar("listeSpectacleDeFestival", $listeSpectacleDeFestival);
         $vue->setVar("listeSpectacles", $listeSpectacles);
+        $vue->setVar("listeCoche",$listeCoche);
         return $vue;
     }
 
@@ -299,5 +310,30 @@ class FestivalControleur {
         return $vue;
     }
     
+    public function pageSuivante (PDO $pdo) : View {
+        $idFestival = HttpHelper::getParam('idFestival');
+        $coche = HttpHelper::getParam('coche');
+        $listeCoche = HttpHelper::getParam('listeCoche');
+        // On détermine sur quelle page on se trouve
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $pageActuelle = (int) strip_tags($_GET['page']);
+        }else{
+            $pageActuelle = 1;
+        }
+        $nbSpectacles = (int)$this->spectacleModele->nombreSpectacles($pdo);
+        // On calcule le nombre de pages total
+        $nbPages = ceil($nbSpectacles / 4);
+        // Calcul du 1er element de la page
+        $premier = ($pageActuelle * 4) - 4;
+        $listeSpectacles = $this->spectacleModele->listeSpectacles($pdo,$premier);
+        $listeSpectacleDeFestival = $this->festivalModele->listeSpectacleDeFestival($pdo,$idFestival);
+
+        $vue = new View("vues/vue_ajouter_spectacle");
+        $vue->setVar("idFestival", $idFestival);
+        $vue->setVar("nbPages",$nbPages);
+        $vue->setVar("listeSpectacleDeFestival", $listeSpectacleDeFestival);
+        $vue->setVar("listeSpectacles", $listeSpectacles);
+        return $vue;
+    }
 
 }

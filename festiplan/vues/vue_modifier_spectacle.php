@@ -72,7 +72,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <select id="categorie" name="categorie" required class="input-style">
                         <?php
                         while ($row = $searchStmt->fetch()) {?>
-                            <option value="<?php echo $row['idCategorie'];?>"  <?php if ($row['idCategorie'] == $ancienneCategorie) { echo 'selected';}?>  ><?php echo $row['nomCategorie'];?></option>
+                            <option value="<?php echo $row['idCategorie'];?>"  <?php if ($row['idCategorie'] == $ancienneCategorie) { echo 'selected';}?> ><?php echo $row['nomCategorie'];?></option>
                         <?php
                         }
                         ?>

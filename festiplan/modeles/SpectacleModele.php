@@ -86,6 +86,22 @@ class SpectacleModele
         return $fetch;
     }
 
+        /**
+     * Renvoie les noms des festivals crées 
+     * @param pdo un objet PDO connecté à la base de données.
+     * @param idSpectacle pour savoir quelle spectacle récupéré
+     * @return search_stmt
+     */
+    public function intervenant(PDO $pdo, $idIntervenant)  
+    {
+        $sql = "SELECT * FROM Intervenant WHERE idIntervenant = :id";
+        $search_stmt = $pdo->prepare($sql);
+        $search_stmt->bindParam("id",$idIntervenant);
+        $search_stmt->execute();
+        $fetch = $search_stmt->fetch();
+        return $fetch;
+    }
+
 
     /**
      * Recherche la nombre de spectacle de l'utilisateur
@@ -108,6 +124,22 @@ class SpectacleModele
         return $nbSpectacle;
     }
 
+    /**
+     * Calcule le nombre total de spectacle d'un festival.
+     * @param pdo un objet PDO connecté à la base de données.
+     */
+    public function nombreSpectacles ($pdo) 
+    {
+        $sql = "SELECT Count(idSpectacle) AS nbSpectacle FROM Spectacle ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        // Récupérer le résultat du COUNT
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Maintenant, $result contient le résultat du COUNT
+        $nbSpectacle = $result['nbSpectacle'];
+        return $nbSpectacle;
+
+    }
 
     /**
      * Recherche la liste des spectacle de l'utilisateur
@@ -130,10 +162,11 @@ class SpectacleModele
      * @param pdo un objet PDO connecté à la base de données.
      * @return searchStmt l'ensemble des festivals.
      */
-    public function listeSpectacles(PDO $pdo) 
+    public function listeSpectacles(PDO $pdo, $premier) 
     {
-        $sql = "SELECT Spectacle.titre,Spectacle.idSpectacle,Spectacle.duree FROM Spectacle ";
+        $sql = "SELECT Spectacle.titre,Spectacle.idSpectacle,Spectacle.duree FROM Spectacle LIMIT 4 OFFSET :nPage ";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam("nPage",$premier,PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
     }
@@ -237,15 +270,15 @@ class SpectacleModele
      * @param surScne si l'intervenant sur ou hors Scene
      * @return searchStmt
      */
-    public function modifspectacle(PDO $pdo, $nom, $prenom, $mail, $metier, $surScne, $idIntervenant)
+    public function modifIntervenant(PDO $pdo, $nom, $prenom, $mail, $surScne, $typeIntervenant, $idIntervenant)
     {
-        $sql "UPDATE Intervenant SET nom = :leNom, prenom = :lePrenom, mail = :leMail, surScene = :surScene, typeIntervenant = :leMetier WHERE idIntervenant = :idIntervenant";
+        $sql = "UPDATE Intervenant SET nom = :leNom, prenom = :lePrenom, mail = :leMail, surScene = :surScene, typeIntervenant = :leMetier WHERE idIntervenant = :idIntervenant";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam("leNom", $nom);
         $stmt->bindParam("lePrenom", $prenom);
         $stmt->bindParam("leMail", $mail);
         $stmt->bindParam("surScene", $surScene);
-        $stmt->bindParam("leMetier", $metier);
+        $stmt->bindParam("leMetier", $typeIntervenant);
         $stmt->bindParam("idIntervenant", $idIntervenant);
         $stmt->execute();
     }

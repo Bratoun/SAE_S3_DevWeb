@@ -48,6 +48,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="controller" value="Spectacle">
         <input type="hidden" name="action" value="nouveauIntervenant">
         <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
+        <input type="hidden" name="modifier" value="false">
         <div class="container">
             <div class="row">
                 <div class="col-12">
