@@ -104,10 +104,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="container-fluid footer">
             <div class="row">
                 <div class="col-6">
-                    <button type="submit" class="btn btnModif fondBleu">Terminer</button>
+                    <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif btn-secondary fondGris"><span class="fas fa-solid fa-arrow-left-long"></span></button></a>
                 </div>
                 <div class="col-6">
-                    <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>
+                    <button type="submit" class="btn btnModif btn-primary fondBleu"><span class="fas fa-solid fa-check"></span></button>
                 </div>
             </div>
         </div>

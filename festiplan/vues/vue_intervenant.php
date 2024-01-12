@@ -30,7 +30,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
-                    <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>
+                    <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
                     <div class="dropdown-content">
                         <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
                         <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
@@ -83,7 +83,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <div class="container-fluid footer">
         <div class="row">
             <div class="col-3">
-                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><b>Retour</b></button></a>
+                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><span class="fas fa-solid fa-arrow-left-long"></span></button></a>
             </div>
             <div class="col-3">
                 <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Intervenant</b></button></a>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Lot Intervenant</b></button>
             </div>
             <div class="col-3">
-                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-primary btnModif fondBleu"><b>Terminer</b></button></a>
+                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-primary btnModif fondBleu"><span class="fas fa-solid fa-check"></span></button></a>
             </div>
         </div>
     </div>
