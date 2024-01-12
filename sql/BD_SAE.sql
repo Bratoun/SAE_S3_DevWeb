@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS Festiplan;
-CREATE DATABASE IF NOT EXISTS Festiplan DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS Festiplan DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE Festiplan;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -11,14 +11,14 @@ CREATE TABLE Utilisateur (
     mail VARCHAR(50) NOT NULL UNIQUE,
     login VARCHAR(35) NOT NULL UNIQUE,
     mdp VARCHAR(30) NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=`utf8` COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Création de la table CategorieFestival
 CREATE TABLE CategorieFestival (
     idCategorie INT(11) NOT NULL AUTO_INCREMENT,
     nom VARCHAR(35) NULL,
     PRIMARY KEY (idCategorie)
-)ENGINE=InnoDB DEFAULT CHARSET=`utf8` COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Festival (
     idFestival INT(11) NOT NULL AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE Festival (
     dateFin DATE NOT NULL,
     illustration VARCHAR(50) NULL,
     PRIMARY KEY (idFestival)
-)ENGINE=InnoDB DEFAULT CHARSET=`utf8` COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE Festival
 ADD FOREIGN KEY (categorie) REFERENCES CategorieFestival(idCategorie);
 
@@ -38,7 +38,7 @@ CREATE TABLE EquipeOrganisatrice (
     idFestival INT(11) NOT NULL,
     responsable BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (idUtilisateur, idFestival)
-)ENGINE=InnoDB DEFAULT CHARSET=`utf8` COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE EquipeOrganisatrice
 ADD FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur);
 ALTER TABLE EquipeOrganisatrice
@@ -53,13 +53,13 @@ CREATE TABLE Spectacle (
     categorie INT(11),
     tailleSceneRequise INT(11),
     PRIMARY KEY (idSpectacle)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SpectacleOrganisateur (
     idUtilisateur INT(11) NOT NULL,
     idSpectacle INT(11) NOT NULL,
     PRIMARY KEY (idUtilisateur, idSpectacle)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE SpectacleOrganisateur
 ADD FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur);
 ALTER TABLE SpectacleOrganisateur
@@ -69,7 +69,7 @@ CREATE TABLE SpectacleDeFestival (
     idSpectacle INT(11) NOT NULL,
     idFestival INT(11) NOT NULL,
     PRIMARY KEY (idSpectacle, idFestival)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE SpectacleDeFestival
 ADD FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle);
 ALTER TABLE SpectacleDeFestival
@@ -79,7 +79,7 @@ CREATE TABLE CategorieSpectacle (
     idCategorie INT(11) NOT NULL AUTO_INCREMENT,
     nomCategorie VARCHAR(35) NOT NULL,
     PRIMARY KEY (idCategorie)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE Spectacle
 ADD FOREIGN KEY (categorie) REFERENCES CategorieSpectacle(idCategorie);
@@ -96,13 +96,13 @@ CREATE TABLE Intervenant (
   surScene INT(1) NOT NULL,
   typeIntervenant INT(11) NOT NULL,
   PRIMARY KEY (idIntervenant)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE MetierIntervenant (
     idMetierIntervenant INT(11) NOT NULL AUTO_INCREMENT,
     metier VARCHAR(50) NOT NULL,
     PRIMARY KEY (idMetierIntervenant)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE Intervenant
 ADD FOREIGN KEY (typeIntervenant) REFERENCES MetierIntervenant(idMetierIntervenant);
@@ -116,13 +116,13 @@ CREATE TABLE Scene (
     latitude NUMERIC(8,5) NULL,
     nom VARCHAR(35) NULL,
     PRIMARY KEY (idScene)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Taille (
     idTaille INT(11) NOT NULL AUTO_INCREMENT,
     nom VARCHAR(35) NULL,
     PRIMARY KEY (idTaille)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+);
 
 
 ALTER TABLE Scene
@@ -134,7 +134,7 @@ CREATE TABLE SceneFestival (
     idFestival INT(11) NOT NULL,
     idScene INT(11) NOT NULL,
     PRIMARY KEY (idFestival,idScene)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE SceneFestival
 ADD FOREIGN KEY (idScene) REFERENCES Scene(idScene);
@@ -149,7 +149,7 @@ CREATE TABLE Grij (
     tempsEntreSpectacle TIME NULL,
     PRIMARY KEY (idGrij),
     FOREIGN KEY (idGrij) REFERENCES Festival(idFestival)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE Jour (
     idJour INT(11) NOT NULL AUTO_INCREMENT,
@@ -157,13 +157,13 @@ CREATE TABLE Jour (
     dateDuJour DATE NOT NULL,
     PRIMARY KEY (idJour),
     FOREIGN KEY (idGrij) REFERENCES Grij(idGrij)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE CauseSpectacleNonPlace (
     idCause INT(11) NOT NULL AUTO_INCREMENT,
     intitule VARCHAR(35) NULL,
     PRIMARY KEY (idCause)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SpectaclesJour (
     idFestival INT(11) NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE SpectaclesJour (
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
     FOREIGN KEY (idFestival) REFERENCES Festival(idFestival),
     FOREIGN KEY (idCauseNonPlace) REFERENCES CauseSpectacleNonPlace(idCause)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SpectacleScenes (
     idFestival INT(11) NOT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE SpectacleScenes (
     FOREIGN KEY (idScene) REFERENCES Scene(idScene),
     FOREIGN KEY (idSpectacle) REFERENCES Spectacle(idSpectacle),
     FOREIGN KEY (idFestival) REFERENCES Festival(idFestival)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=`utf8_general_ci`;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
@@ -212,7 +212,7 @@ VALUES
 
 
 INSERT INTO Taille (nom)
-VALUES
+VALUES  
 ('Petite'),
 ('Moyenne'),
 ('Grande');

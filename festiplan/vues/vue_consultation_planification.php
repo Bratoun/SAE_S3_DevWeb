@@ -195,6 +195,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </div>
             </div>
         </div>
+        <div class="ecartBottom"></div>
         <div class="container-fluid footerGrij">
             <div class="row">
                 <div class="col-6">
