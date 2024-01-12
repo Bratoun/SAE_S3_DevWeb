@@ -50,52 +50,60 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
         <input type="hidden" name="idIntervenant" value="<?php echo $idIntervenant?>">
         <input type="hidden" name="modifier" value="true">
-        <div class="container">
+        <div class="padding">
             <div class="row">
                 <div class="col-12">
-        <label name="nom">Nom de l'intervenant :</label>
-        <input type="text" name="nom" value ="<?php echo $nom?>" required/>
-        <br>
+                    <label name="nom">Nom de l'intervenant :</label><br>
+                    <input class="input-style" type="text" name="nom" value ="<?php echo $nom?>" required/>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label name="nom">Prénom de l'intervenant :</label><br>
+                    <input class="input-style" type="text" name="prenom" value ="<?php echo $prenom;?>" required/>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label name="LabelEmail">Adresse mail :</label><br>
+                    <input class="input-style" type="email" name="email" value =<?php echo $mail?> size="50" required/>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label>Métier intervenant :</label><br>    
+                    <select class="input-style" name="metierIntervenant" required>
+                        <option disabled value="0">Choisissez le métier de l'intervenant</option>
+                        <?php
+                        while ($row = $searchStmt->fetch()) {?>
+                            <option value="<?php echo $row['idMetierIntervenant'];?>" <?php if ($row['idMetierIntervenant'] == $ancienMetier) { echo 'selected';}?>><?php echo $row['metier'];?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <?php
+                        while ($row = $searchStmt->fetch()) {?>
+                            <?php echo $row['idMetierIntervenant'];?>
+                        <?php
+                        }
+                        ?>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label>Intervenant sur ou hors scène :</label><br>
+                    <select class="input-style" name="categorieIntervenant" required>
+                        <option value="<?php echo $ancienSurScene?>"<?php if ($ancienSurScene == 0) { echo 'selected';}?>>Sur Scène</option>
+                        <option value="<?php echo $ancienSurScene?>"<?php if ($ancienSurScene == 1) { echo 'selected';}?>>Hors Scène</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
-        <label name="nom">Prénom de l'intervenant :</label>
-        <input type="text" name="prenom" value ="<?php echo $prenom;?>" required/>
-        <br>
-        </div>
-        <div class="col-12">
-        <label name="LabelEmail">Adresse mail :</label>
-        <input type="email" name="email" value =<?php echo $mail?> size="50" required/>
-        <br>
-        </div>
-        <div class="col-12">
-        Métier intervenant :<br>    
-        <select name="metierIntervenant" required>
-            <option disabled value="0">Choisissez le métier de l'intervenant</option>
-            <?php
-            while ($row = $searchStmt->fetch()) {?>
-                <option value="<?php echo $row['idMetierIntervenant'];?>" <?php if ($row['idMetierIntervenant'] == $ancienMetier) { echo 'selected';}?>><?php echo $row['metier'];?></option>
-            <?php
-            }
-            ?>
-        </select>
-        <?php
-            while ($row = $searchStmt->fetch()) {?>
-                <?php echo $row['idMetierIntervenant'];?>
-            <?php
-            }
-            ?>
-        <br>
-        </div>
-        <div class="col-12">
-        Intervenant sur ou hors scène :<br>
-        <select name="categorieIntervenant" required>
-            <option value="<?php echo $ancienSurScene?>"<?php if ($ancienSurScene == 0) { echo 'selected';}?>>Sur Scène</option>
-            <option value="<?php echo $ancienSurScene?>"<?php if ($ancienSurScene == 1) { echo 'selected';}?>>Hors Scène</option>
-        </select>
-        </div>
-        <div class="footer">
-            <button type="submit" class="btn btn-bleu">Confirmer</button>   
-            <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  
+        <div class="container-fluid footer">
+            <div class="row">
+                <div class="col-6">
+                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-secondary btnModif btnGris">Annuler</button></a>  
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary btnModif fondBleu">Confirmer</button>   
+                </div>
+            </div>
         </div>
     </form>
 </body>

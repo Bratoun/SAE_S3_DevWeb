@@ -116,14 +116,26 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <button type="submit" class="btn btnModif fondVert">Confirmer</button>   
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Annuler</button></a>  
-            <?php if($estResponsable) {?>
-                <button type="button" id="suppressionFestival" class="btn fondRouge" data-id-festival="<?php echo $idFestival; ?>">Supprimer</button>
-            <?php } ?>
-            <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Consulter la planification</button></a>
-            <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btnModif fondBleu">Modifier la liste des spectacles</button></a>
+        <div class="container-fluid footer">
+            <div class="row">
+                <div class="<?php if($estResponsable) {echo "col-2";}else{echo "col-3";}?>">
+                    <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris">Annuler</button></a> 
+                </div> 
+                <?php if($estResponsable) {?>
+                    <div class="col-2">
+                        <button type="button" id="suppressionFestival" class="btn btn-danger btnModif fondRouge" data-id-festival="<?php echo $idFestival; ?>">Supprimer</button>
+                    </div>
+                <?php } ?>
+                <div class="col-3">
+                    <a href="/festiplan?controller=Home"><button type="button" class="btn btn-primary btnModif fondBleu">Planification</button></a>
+                </div>
+                <div class="col-3">
+                    <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-primary btnModif fondBleu">Modifier la liste des spectacles</button></a>
+                </div>
+                <div class="<?php if($estResponsable) {echo "col-2";}else{echo "col-3";}?>">
+                    <button type="submit" class="btn btn-succes btnModif fondVert">Confirmer</button>   
+                </div>
+            </div>
         </div>
     </form>
     <script src="js/script.js"></script>

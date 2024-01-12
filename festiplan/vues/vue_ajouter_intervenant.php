@@ -27,10 +27,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-8">
                 <h2 class="texteCentre blanc bas">Ajouter un intervenant</h2>
             </div>
-            <div class="col-1 col-md-1 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+            <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
-                    <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>
+                    <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
                     <div class="dropdown-content">
                         <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
                         <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
@@ -55,45 +55,53 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 echo '<h1>Votre intervenant existe déja</h1>';
             }
         ?>
-        <div class="container">
+        <div class="padding">
             <div class="row">
                 <div class="col-12">
-                    <label name="nom">Nom de l'intervenant :</label>
-                    <input type="text" name="nom" required/>
+                    <label name="nom">Nom de l'intervenant :</label><br>
+                    <input class="input-style" type="text" name="nom" required/>
                     <br>
                 </div>
-        <div class="col-12">
-        <label name="nom">Prénom de l'intervenant :</label>
-        <input type="text" name="prenom" required/>
-        <br>
+                <div class="col-12">
+                    <label name="nom">Prénom de l'intervenant :</label><br>
+                    <input class="input-style" type="text" name="prenom" required/>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label name="LabelEmail">Adresse mail :</label><br>
+                    <input class="input-style" type="email" name="email"  size="50" required/>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label>Choisissez le métier de l'intervenant :</label><br>    
+                    <select class="input-style" name="metierIntervenant" required>
+                        <?php
+                        while ($row = $searchStmt->fetch()) {?>
+                            <option value="<?php echo $row['idMetierIntervenant'];?>"><?php echo $row['metier'];?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <br>
+                </div>
+                <div class="col-12">
+                    <label>Choisissez le type d'intervenant :</label><br>
+                    <select class="input-style" name="categorieIntervenant" required>
+                        <option value="0" selected>Sur Scène</option>
+                        <option value="1">Hors Scène</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
-        <label name="LabelEmail">Adresse mail :</label>
-        <input type="email" name="email"  size="50" required/>
-        <br>
-        </div>
-        <div class="col-12">
-        Choisissez le métier de l'intervenant :<br>    
-        <select name="metierIntervenant" required>
-            <?php
-            while ($row = $searchStmt->fetch()) {?>
-                <option value="<?php echo $row['idMetierIntervenant'];?>"><?php echo $row['metier'];?></option>
-            <?php
-            }
-            ?>
-        </select>
-        <br>
-        </div>
-        <div class="col-12">
-        Choisissez le type d'intervenant :<br>
-        <select name="categorieIntervenant" required>
-            <option value="0" selected>Sur Scène</option>
-            <option value="1">Hors Scène</option>
-        </select>
-        </div>
-        <div class="footer">
-            <input type="submit" value="OK" class="btn btn-bleu">   
-            <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  
+        <div class="container-fluid footer">
+            <div class="row">
+                <div class="col-6">  
+                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-secondary fondGris btnModif">Annuler</button></a>
+                </div>
+                <div class="col-6">
+                    <input type="submit" value="OK" class="btn btn-primary fondBleu btnModif">  
+                </div>
+            </div>  
         </div>
     </form>
 </body>

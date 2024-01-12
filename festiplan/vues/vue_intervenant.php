@@ -73,17 +73,28 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <?php
         } else{
             
-            echo "<h1>Vous n'avez aucun intervenant pour ce spectacle</h1>";
+            echo '<h3 class="centre">Vous n'."'avez aucun intervenant pour ce spectacle</h3>";
     ?>
     
     <?php 
         }
     ?>
-    <div class="footer col-12">
-        <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondBleu">Terminer</button></a>
-        <a href="/festiplan?controller=Home"><button type="button" class="btn btnModif fondGris">Retour</button></a>
-        <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btnModif fondGris">Ajouter un intervenant</button></a>
-        <button type="button" class="btn btnModif fondGris">Ajouter un lot d'intervenants via un fichier</button>
+    </div>
+    <div class="container-fluid footer">
+        <div class="row">
+            <div class="col-3">
+                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><b>Retour</b></button></a>
+            </div>
+            <div class="col-3">
+                <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Intervenant</b></button></a>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Lot Intervenant</b></button>
+            </div>
+            <div class="col-3">
+                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-primary btnModif fondBleu"><b>Terminer</b></button></a>
+            </div>
+        </div>
     </div>
     <script src="js/script.js"></script>
 </body>

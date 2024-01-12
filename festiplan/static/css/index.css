@@ -106,10 +106,26 @@ label {
 }
 
 .btnModif {
-    width: auto;
+    width: 50%;
     height: 50px;
     flex-shrink: 0;
     color: #FFFFFF;
+}
+
+@media (max-width: 1200px) {
+    .btnModif {
+        width: 75%;
+    }
+}
+
+@media (max-width: 992px) {
+    .btnModif {
+        width: 100%;
+    }
+}
+
+.grandeWidth {
+    width: 100%;
 }
 
 .fondRouge {
@@ -160,11 +176,9 @@ img {
 
 
 .icone-user {
-    padding-right: 15px;
     font-size: 2em;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    right: 15px;
 }
 
 .icone-pencil {
@@ -173,10 +187,14 @@ img {
 }
 
 .logo-festiplan {
-    width: auto;
-    max-width: 120px;
+    width: 120px;
     height: auto;
     position: absolute;
+    transition: width 0.3s ease;
+}
+
+.logo-festiplan:hover {
+    width: 130px;
 }
 
 .blanc {
@@ -219,6 +237,17 @@ img {
     padding: 10px;
     margin-top: 15px;
     overflow: hidden;
+}
+
+.cadreFestival a {
+    text-decoration: none; /* Supprime le soulignement par défaut */
+    color: rgb(160, 0, 0); /* Utilise la couleur par défaut du texte */
+    transition: color 0.5s ease, font-size 0.35s ease; /* Animation de transition pour la couleur */
+}
+
+.cadreFestival a:hover {
+    font-size: 28px;
+    color: rgb(190, 120, 0); /* Couleur au survol */
 }
 
 .cadreFestival::before {
@@ -287,7 +316,7 @@ img {
     border-radius: 5px;
     left: auto;
     right: 0;
-    margin-top: 38px; /* Ajoutez cette ligne pour espacer le menu du bouton */
+    margin-top: 32px; /* Ajoutez cette ligne pour espacer le menu du bouton */
 }
 
 .dropdown-content a {
@@ -476,12 +505,18 @@ label {
 }
   
 .icone-calendar {
-    font-size: 2.5em;
-    background: linear-gradient(45deg, red, orange);
-    -webkit-background-clip: text; 
-    color: transparent; 
+    font-size: 2em;
+    background: linear-gradient(45deg, rgb(160, 0, 0), rgb(190, 120, 0));
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: background-position 0.5s ease-in-out, font-size 0.1s ease; /* Ajout de la transition sur la position du fond */
+    background-size: 200% 100%; /* Définir la taille du fond à deux fois la largeur pour permettre le mouvement */
 }
 
+.icone-calendar:hover {
+    font-size: 2.1em;
+    background-position: 100% 0; /* Déplace le gradient vers la droite au survol */
+}
 
 .centreCadreFestival {
     margin-top: 13px;

@@ -27,7 +27,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-8">
                 <h2 class="texteCentre blanc bas"><?php if ($afficher) {echo 'Mes spectacles';} else { echo 'Mes festivals';}?></h2>
             </div>
-            <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+            <div class="col-1 col-md-2 text-right">
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
@@ -54,22 +54,27 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 while ($listeSpectacle = $mesSpectacles->fetch()) {
                     ?>
                     <div class="cadreFestival"> 
-                        <div class="centreCadreSpectacle">
-                            <div class="row">
-                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <?php
-                                        $idSpectacle = $listeSpectacle['idSpectacle'];
-                                        echo $listeSpectacle['titre'];
-                                    ?>
+                        <div class="row">
+                            <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>">
+                                <div class="centreCadreSpectacle">
+                                    <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                        <?php
+                                            $idSpectacle = $listeSpectacle['idSpectacle'];
+                                            $titre = $listeSpectacle['titre'];
+                                            // Limiter le texte à 15 caractères avec une ellipse (...) à la fin
+                                            echo strlen($titre) > 12 ? substr($titre, 0, 12) . '...' : $titre;
+                                        ?>
+                                    </div>
                                 </div>
-                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier</button></a>
+                            </a>
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                <div class="centreCadreFestival">
+                                    <a class="centre" name="suppression" data-id-spectacle="<?php echo $idSpectacle; ?>"><span class="fas fa-solid fa-trash icone-calendar"></span></a>
                                 </div>
-                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <button type="button" name="suppression" class="btn btn-danger fondRouge" data-id-spectacle="<?php echo $idSpectacle; ?>">Supprimer</button>
-                                </div>
-                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="submit" class="btn btn-primary fondBleu">Intervenants</button></a>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                <div class="centreCadreFestival">
+                                    <a class="centre" href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><span class="fas fa-solid fa-users icone-calendar"></span></a>
                                 </div>
                             </div>
                         </div>
@@ -100,14 +105,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     $idFestival = $festival['idFestival'];
                 ?>  
                     <div class="cadreFestival"> 
-                        <div class="centreCadreFestival">
-                            <div class="row">
-                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                        <div class="row">
+                            <div class="col-4 col-sm-3 col-lg-2">
+                                <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>">
                                     <?php
-                                    echo $festival['titre']."<br>";
+                                        echo $festival['titre']."<br>";
+
                                         // Affiche le nom de l'utilisateur responsable
                                         if ($festival['responsable']) {
-                                        echo "responsable: ".$festival['nom'];
+                                            echo "responsable: ".$festival['nom'];
                                         } else {
                                             while ($responsable = $lesResponsables->fetch()) {
                                                 if($responsable['idFestival'] == $idFestival) {
@@ -115,18 +121,17 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                                 }
                                             }
                                         }
-                                        
                                     ?>
-                                </div>
-                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-3 col-lg-2 col-xl-1">
+                                <div class="centreCadreFestival">
                                     <a class="centre" href='/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>'><span class="fas fa-solid fa-calendar-days icone-calendar"></span></a>
-                                </div>
-                                <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
-                                    <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier</button></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                
                 <?php
             }
             ?>
@@ -145,6 +150,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         }
         }
     ?>
+    </div>
     <div class="container-fluid footer">
         <div class="row">
             <div class="col-4">
