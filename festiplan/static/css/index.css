@@ -460,12 +460,17 @@ label {
 }
 
 .footerGrij {
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #EDEDED;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.ecartBottom {
+    padding-top:3%;
 }
 
 .space {
