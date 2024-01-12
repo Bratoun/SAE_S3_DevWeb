@@ -19,7 +19,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <header>
     <div class="container-fluid header">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <a href="index.php">
                     <img src="static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             <div class="col-8">
                 <h2 class="texteCentre blanc bas">Modifier un intervenant</h2>
             </div>
-            <div class="col-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
+            <div class="col-1 col-md-2 text-right"> <!-- Ajoutez la classe text-right pour aligner à droite -->
                 <!-- Icône utilisateur avec menu déroulant -->
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeNoir icone-user"></span>

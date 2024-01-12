@@ -187,6 +187,13 @@ img {
     margin-top: 13px;
 }
 
+@media (max-width: 992px) {
+    .bas {
+        font-size: 25px;
+        margin-top: 18px;
+    }
+}
+
 .centre {
     justify-content: center;
     align-items: center;
@@ -252,12 +259,6 @@ img {
 /* Lorsque qu'un champ est invalide affiche en rouge */
 #invalide {
     color: rgb(245, 0, 0);
-}
-
-/* Classes et id css relatif à la Grij.*\
-/* positionnement du formulaire de remplissage des paramètres de la planification*/
-#parametres-grij {
-    background-color:#C7C3C2;
 }
 
 /* Styles pour le menu déroulant */
@@ -467,3 +468,7 @@ label {
 .centreCadreFestival {
     margin-top: 13px;
 } 
+
+.centreCadreSpectacle {
+    margin-top: 25px;
+}
