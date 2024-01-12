@@ -41,16 +41,16 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
     </header>
     <body class="body-blanc">
-        <div class="container-fluid">
+        <div class="container-fluid space">
             <div class="row">
-                <div class="col-9">
+                <div class="col-md-9 col-12">
                     <div class="row">
                         <?php
                         // Liste des jours du festival
                         while($jour = $listeJours->fetch())
                         {
                             ?>
-                            <div class="col-xl-3 col-md-6 col-12 ">
+                            <div class="col-xl-4 col-md-6 col-12 ">
                             <div class="fondJour">
                                 <h3><?php echo $jour['dateJour'];?></h3>
                                 <?php
@@ -86,7 +86,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         ?>
                     </div>
                 </div>
-                <div class="col-sm-3 col-3">
+                <div class="col-md-3 col-12">
                     <?php
                     if ($profilSpectacle) {
                         $spectacle = $infosSpectacle->fetch();
@@ -135,20 +135,36 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                         </div>
                         <?php
                     }
-                    ?>
-                    <div class="col-12">
-                        <?php
-                        if ($listeSpectacleNonPlace == null)
+                    echo '<div class="col-12';
+                        if ($specNonPlace = $listeSpectacleNonPlace->fetch())
                         {
+                            echo '">';
                             ?>
-                            <!-- Ajouter du vert -->
-                            <h3>Tous les spectacles ont été placés</h3>
-                            <?php
-                        } else {
-                        ?>
                             <div class="row">
                                 <div class="col-12">
-                                    <h3>Liste des spectacles non placés</h3>
+                                    <h3><b>Liste des spectacles non placés</b></h3>
+                                </div>
+                                <div class="col-6">
+                                    <h4>Nom</h4>
+                                </div>
+                                <div class="col-3">
+                                    <h4>Durée</h4>
+                                </div>
+                                <div class="col-3">
+                                    <h4>Cause</h4>
+                                </div>
+                                <div class="col-12 fondSpecNonPlace">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="text-truncate titreSpecDesc"><?php echo $specNonPlace['titre'];?></h5>
+                                        </div>
+                                        <div class="col-3">
+                                            <?php echo $specNonPlace['duree'];?>
+                                        </div>
+                                        <div class="col-3">
+                                            <?php echo $specNonPlace['causeNonPlace'];?>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php 
                             while($specNonPlace = $listeSpectacleNonPlace->fetch()){
@@ -158,23 +174,34 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                             <div class="col-6">
                                                 <h5 class="text-truncate titreSpecDesc"><?php echo $specNonPlace['titre'];?></h5>
                                             </div>
-                                            <div class="col-6">
-                                                <p>Duree : <?php echo $specNonPlace['duree'];?></p>
+                                            <div class="col-3">
+                                                <?php echo $specNonPlace['duree'];?>
+                                            </div>
+                                            <div class="col-3">
+                                                <?php echo $specNonPlace['causeNonPlace'];?>
                                             </div>
                                         </div>
                                     </div>
                                 <?php
-                            }?>
+                            }
+                        } else {
+                            echo ' fondVertSpec">';
+                            ?>
+                            <h3><b>Tous les spectacles ont été placés</b></h3>
+                            
                             </div><?php
                         }?>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid footer">
+        <div class="container-fluid footerGrij">
             <div class="row">
-                <div class="col-12">
-                    <a href="/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>"><div class="btnModifierGrij">Modifier la planification</div></a>
+                <div class="col-6">
+                    <a href="/festiplan?controller=Grij&idFestival=<?php echo $idFestival;?>"><button class="btnModifierGrij">Modifier la planification</button></a>
+                </div>
+                <div class="col-6">
+                <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="submit" class="btn btn-primary fondBleu">Modifier le Festival</button></a>
                 </div>
             </div>
         </div>

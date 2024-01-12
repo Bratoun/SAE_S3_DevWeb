@@ -420,9 +420,27 @@ label {
     align-content: center;
     color:#000;
 }
+.fondVertSpec {
+    background-color: #a8e56b;
+    border-radius: 10px;
+    align-content: center;
+}
 
 .titreSpecDesc {
     line-height: 1.5;
+}
+
+.footerGrij {
+    bottom: 0;
+    width: 100%;
+    background-color: #EDEDED;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.space {
+    padding-top: 10px;
 }
 
 /* Pagination styles */
