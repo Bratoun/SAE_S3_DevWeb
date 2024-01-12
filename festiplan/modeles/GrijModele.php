@@ -94,18 +94,6 @@ class GrijModele
         return $stmt;
     }
 
-    public function recupererScenes(PDO $pdo, $idFestival)
-    {
-        $sql = "SELECT sc.taille as taille, sc.nom as nom
-        FROM Festival as f
-        JOIN SceneFestival as scf ON f.idFestival = scf.idFestival
-        JOIN Scene as sc ON sc.idScene = scf.idScene
-        WHERE f.idFestival = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival]);
-        return $stmt;
-    }
-
     public function insertSpectaclesParJour(PDO $pdo,$idFestival, $idJour, $idSpectacle, $ordre, $place, $heureDebut, $heureFin, $causeNonPlace)
     {
         $sql = "INSERT INTO SpectaclesJour VALUES (?,?,?,?,?,?,?,?)";
@@ -130,17 +118,13 @@ class GrijModele
         return $stmt;
     }
     
-    public function recuperationSceneAdequate(PDO $pdo, $idFestival, $taille)
+    public function recuperationSceneAdequate(PDO $pdo,$taille)
     {
-        $sql = "SELECT s.idScene FROM Festival as f
-                JOIN SceneFestival as sf
-                ON f.idFestival = sf.idFestival
-                JOIN Scene as s
-                ON s.idScene = sf.idScene
-                WHERE f.idFestival = ?
-                AND s.taille >= ?";
+        $sql = "SELECT idScene
+                FROM Scene
+                WHERE taille >= ?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$idFestival, $taille]);
+        $stmt->execute([$taille]);
         return $stmt;
     }
 

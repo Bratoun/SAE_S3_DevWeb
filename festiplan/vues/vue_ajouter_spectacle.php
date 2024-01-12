@@ -65,7 +65,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                 $idSpectacle = $spectacle['idSpectacle'];
                                 echo $spectacle['titre']." ".$spectacle['duree'];
                             ?>
-                            <input type="checkbox" name="Spectacles[]" value="<?php echo $spectacle['idSpectacle']; ?>" <?php
+
+                            <input type="checkbox" name="Spectacles[]" id="<?php echo $spectacle['idSpectacle']; ?>" onchange="majListe(<?php echo $spectacle['idSpectacle'].','.$idFestival.','.$pageActuelle;?>,this.checked)" <?php
 
                             // Vérifier si le festival est deja dans la liste des festivals
                             if (in_array($spectacle['idSpectacle'], $spectacleIDs)) {
@@ -82,15 +83,15 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         ?>
         <div class="pagination">
             <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                <button type="submit" class="btn btn-bleu" name="changementPage"><?php echo $page;?></button>
+                <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&page=<?php echo $page;?>&idFestival=<?php echo $idFestival;?>"><?php echo $page;?>   </a>
             <?php } ?>
         </div>        
             
         </div>
         <div class="footer">
-            <button type="submit" class="btn btn-bleu">Confirmer</button>   
-            <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">Annuler</button></a>
+            <a href="/festiplan?controller=Festival&action=afficherFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-gris">Retour</button></a>
         </div>
     </form>
+    <script src="js/script.js"></script>
 </body>
 </html>

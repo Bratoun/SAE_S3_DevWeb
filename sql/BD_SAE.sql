@@ -130,18 +130,6 @@ ADD FOREIGN KEY (taille) REFERENCES Taille(idTaille);
 ALTER TABLE Spectacle
 ADD FOREIGN KEY (tailleSceneRequise) REFERENCES Taille(idTaille);
 
-CREATE TABLE SceneFestival (
-    idFestival INT(11) NOT NULL,
-    idScene INT(11) NOT NULL,
-    PRIMARY KEY (idFestival,idScene)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE SceneFestival
-ADD FOREIGN KEY (idScene) REFERENCES Scene(idScene);
-ALTER TABLE SceneFestival
-ADD FOREIGN KEY (idFestival) REFERENCES Festival(idFestival);
-
-
 CREATE TABLE Grij (
     idGrij INT(11) NOT NULL AUTO_INCREMENT,
     heureDebut TIME NULL,
@@ -267,6 +255,3 @@ VALUES (1, 'scene1', 30, 12.12121, 12.12121),
 (3, 'scene4', 500, 12.12121, 12.12121),
 (3, 'scene5', 503, 12.12121, 12.12121);
 
-
-INSERT INTO SceneFestival (idFestival,idScene)
-VALUES (1,1),(1,2),(1,3);

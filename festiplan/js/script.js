@@ -1,7 +1,16 @@
+function majListe(checkbox,idFestival,pageActuelle,estChecked) {
+    // Vérifier si la checkbox est cochée
+    if (estChecked) {
+        window.location.href = '/festiplan?controller=Festival&action=ajouterSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival + '&pageActuelle=' + pageActuelle;
+    } else {
+        window.location.href = '/festiplan?controller=Festival&action=supprimerSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival+ '&pageActuelle=' + pageActuelle;
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Sélectionnez tous les boutons de suppression par leur classe
-    var boutonsSuppression = document.querySelectorAll('.btnModif.fondRouge');
-
+    var boutonsSuppression = document.querySelectorAll('.fa-trash');
     boutonsSuppression.forEach(function(bouton) {
         bouton.addEventListener('click', function() {
             // Récupérer l'ID du spectacle à partir de l'attribut data

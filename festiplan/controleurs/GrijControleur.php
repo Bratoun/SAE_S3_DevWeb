@@ -68,11 +68,8 @@ class GrijControleur
                 $jours = $this->grijModele->recupererJours($pdo, $idFestival);
                 // Récupération des spectacles
                 $spectacles = $this->grijModele->recupererSpectacles($pdo, $idFestival);
-                // Récupération des scenes
-                $scenes = $this->grijModele->recupererScenes($pdo, $idFestival);
-                $scenes = $scenes->fetchAll();
                 // création de la grij
-                $this->planifierSpectacles($pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
+                $this->planifierSpectacles($pdo, $idFestival,$spectacles,$heureDebut, $heureFin, $ecartEntreSpectacles, $jours);
 
                 $grij = $this->grijModele->recupererGrij($pdo, $idFestival);
                 $spectacleNonPlace = $this->grijModele->recupererSpectacleNonPlace($pdo,$idFestival);
@@ -105,7 +102,7 @@ class GrijControleur
         $vue->setVar('ecartEntreSpectacles', $ecart);
     }
 
-    private function planifierSpectacles(PDO $pdo, $idFestival,$spectacles, $scenes, $heureDebut, $heureFin, $ecartEntreSpectacles, $jours)
+    private function planifierSpectacles(PDO $pdo, $idFestival,$spectacles,$heureDebut, $heureFin, $ecartEntreSpectacles, $jours)
     {
         $dureeTotal = $this->convertirEnMinutes($heureFin) - $this->convertirEnMinutes($heureDebut);
         $ecart = $this->convertirEnMinutes($ecartEntreSpectacles);

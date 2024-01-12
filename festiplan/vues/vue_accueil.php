@@ -69,7 +69,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             </a>
                             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
                                 <div class="centreCadreFestival">
-                                    <a class="centre" name="suppression" data-id-spectacle="<?php echo $idSpectacle; ?>"><span class="fas fa-solid fa-trash icone-calendar"></span></a>
+                                    
+                                    <a class="centre" name="suppression" ><span class="fas fa-solid fa-trash icone-calendar" data-id-spectacle="<?php echo $idSpectacle; ?>"></span></a>
                                 </div>
                             </div>
                             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
@@ -164,5 +165,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             </div>
         </div>
     </div>
+    <script src="js/script.js"></script>
 </body>
 </html>
