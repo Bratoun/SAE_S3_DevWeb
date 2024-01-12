@@ -32,11 +32,14 @@ class AccueilControleur {
         // Calcul du 1er element de la page
         $premier = ($pageActuelle * 4) - 4;
         $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur,$premier);
+        // Recupere le responsable de chaque Festival
+        $lesResponsables = $this->festivalModele->listeLesResponsables($pdo);
 
         $vue = new View("vues/vue_accueil");
         $vue->setVar("afficher", false);
         $vue->setVar("nbPages", $nbPages);
         $vue->setVar("mesFestivals", $mesFestivals);
+        $vue->setVar("lesResponsables", $lesResponsables);
         return $vue;
     }
 
@@ -56,10 +59,14 @@ class AccueilControleur {
         // Calcul du 1er article de la page
         $premier = ($pageActuelle * 4) - 4;
         $mesFestivals = $this->festivalModele->listeMesFestivals($pdo,$idUtilisateur,$premier);
+        // Recupere le responsable de chaque Festival
+        $lesResponsables = $this->festivalModele->listeLesResponsables($pdo);
+
         $vue = new View("vues/vue_accueil");
         $vue->setVar("afficher", false);
         $vue->setVar("nbPages", $nbPages);
         $vue->setVar("mesFestivals", $mesFestivals);
+        $vue->setVar("lesResponsables", $lesResponsables);
         return $vue;
     }   
 

@@ -51,7 +51,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="col-12">
 
         <?php
-        // Charger tous les résultats de la liste des spectacles du fetival dans un tableau
+        // Charge tout les résultats de la liste des spectacles du fetival dans un tableau
         $spectacleIDs = array();
         while ($row = $listeSpectacleDeFestival->fetch()) {
             $spectacleIDs[] = $row['idSpectacle'];
@@ -65,12 +65,12 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                 $idSpectacle = $spectacle['idSpectacle'];
                                 echo $spectacle['titre']." ".$spectacle['duree'];
                             ?>
-                            <input type="checkbox" name="Spectacles[]" value="<?php echo $spectacle['idSpectacle']; ?>" <?php
+                            <input type="checkbox" name="<?php echo $listeCoche; ?>" value="<?php echo $spectacle['idSpectacle']; ?>" <?php
 
                             // Vérifier si le festival est deja dans la liste des festivals
                             if (in_array($spectacle['idSpectacle'], $spectacleIDs)) {
                                 echo 'checked';
-                                    
+
                             }
 
                             ?>>
@@ -80,7 +80,11 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <?php
             }
         ?>
-                
+        <div class="pagination">
+            <?php for($page = 1; $page <= $nbPages; $page++) { ?>
+                <a href="/festiplan?controller=Festival&action=pageSuivante&idFestival=<?php echo $idFestival;?>&page=<?php echo $page;?>&dajeCoche=<?php echo $spectacleIDs;?>&listeCoche=<?php echo $listeCoche;?>"><?php echo $page;?>   </a>
+            <?php } ?>
+        </div>        
             
         </div>
         <div class="footer">

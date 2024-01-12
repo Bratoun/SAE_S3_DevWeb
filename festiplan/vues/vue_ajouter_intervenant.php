@@ -48,6 +48,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="controller" value="Spectacle">
         <input type="hidden" name="action" value="nouveauIntervenant">
         <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
+        <input type="hidden" name="modifier" value="false">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -86,7 +87,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         </div>
         <div class="footer">
             <input type="submit" value="OK" class="btn btn-bleu">   
-            <a href="/festiplan?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  
+            <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-gris">Annuler</button></a>  
         </div>
     </form>
 </body>
