@@ -67,8 +67,8 @@ class SpectacleControleur {
         if (strlen($description) <= 1000 && trim($description) != "") {
             $verifDesc = true;
         }
-        // Verifie que la durée du spectacle sois supérieure a 0 est inférieure a 3600 minutes
-        if ($duree > 0 && $duree < 3600) {
+        // Verifie que la durée du spectacle sois supérieure a 00:00 est inférieure a 24h
+        if ($duree != '00:00') {
             $verifDuree = true;
         }
 
@@ -152,6 +152,7 @@ class SpectacleControleur {
     }
 
     public function supprimerSpectacle(PDO $pdo) : View {
+        session_start();
         $idSpectacle = HttpHelper::getParam('idSpectacle');
         $idUtilisateur = $_SESSION['id_utilisateur'];
 

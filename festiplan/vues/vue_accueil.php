@@ -92,7 +92,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             } else {
                 echo '<div class="col-12">';
                     echo '<div class="centre">';
-                        echo 'Pas de spectacle crée pour le moment';
+                        echo '<h1>Pas de spectacle crée pour le moment</h1>';
                     echo '</div>';
                 echo '</div>';
             }   
@@ -145,7 +145,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         } else {
             echo '<div class="col-12">';
                 echo '<div class="centre">';
-                    echo 'Pas de festival crée pour le moment';
+                    echo '<h1>Pas de festival crée pour le moment</h1>';
                 echo '</div>';
             echo '</div>';
         }
