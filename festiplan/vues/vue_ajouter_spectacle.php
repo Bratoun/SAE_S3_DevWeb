@@ -43,11 +43,21 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     </div>
 </header>
 <body class="body-blanc">
+
+    <form action="index.php" method="post">
+        <input type="hidden" name="controller" value="Festival">
+        <input type="hidden" name="action" value="rechercheSpectacle">
+        <input type="hidden" name="idFestival" value="<?php echo $idFestival;?>">
+        <input type="text" name="recherche" value="<?php echo $derniereRecherche;?>">
+        <input type="submit" value="Rechercher">
+    </form>
+
     <form action="index.php" method="post">
           
         <input type="hidden" name="controller" value="Festival">
         <input type="hidden" name="action" value="modifierListeSpectacle">
-        <input type="hidden" name="idFestival" value="<?php echo $idFestival?>">
+        
+        <input type="hidden" name="idFestival" value="<?php echo $idFestival;?>">
         <div class="col-12">
 
         <?php
@@ -65,8 +75,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                                 $idSpectacle = $spectacle['idSpectacle'];
                                 echo $spectacle['titre']." ".$spectacle['duree'];
                             ?>
-
-                            <input type="checkbox" name="Spectacles[]" id="<?php echo $spectacle['idSpectacle']; ?>" onchange="majListe(<?php echo $spectacle['idSpectacle'].','.$idFestival.','.$pageActuelle;?>,this.checked)" <?php
+                            
+                            <input type="checkbox" name="spectacle" id="<?php echo $spectacle['idSpectacle']; ?>" onchange="majListe(<?php echo $spectacle['idSpectacle'].','.$idFestival.','.$pageActuelle.',\''.$derniereRecherche.'\'';?>,this.checked)"  <?php
 
                             // Vérifier si le festival est deja dans la liste des festivals
                             if (in_array($spectacle['idSpectacle'], $spectacleIDs)) {
@@ -83,7 +93,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         ?>
         <div class="pagination">
             <?php for($page = 1; $page <= $nbPages; $page++) { ?>
-                <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&page=<?php echo $page;?>&idFestival=<?php echo $idFestival;?>"><?php echo $page;?>   </a>
+                <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&page=<?php echo $page;?>&idFestival=<?php echo $idFestival;?>&derniereRecherche=<?php echo $derniereRecherche;?>"><?php echo $page;?>   </a>
             <?php } ?>
         </div>        
             

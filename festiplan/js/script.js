@@ -1,9 +1,10 @@
-function majListe(checkbox,idFestival,pageActuelle,estChecked) {
+function majListe(checkbox,idFestival,pageActuelle,derniereRecherche,estChecked) {
+    alert("aaaaa");
     // Vérifier si la checkbox est cochée
     if (estChecked) {
-        window.location.href = '/festiplan?controller=Festival&action=ajouterSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival + '&pageActuelle=' + pageActuelle;
+        window.location.href = '/festiplan?controller=Festival&action=ajouterSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival + '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
     } else {
-        window.location.href = '/festiplan?controller=Festival&action=supprimerSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival+ '&pageActuelle=' + pageActuelle;
+        window.location.href = '/festiplan?controller=Festival&action=supprimerSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival+ '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
     }
 }
 

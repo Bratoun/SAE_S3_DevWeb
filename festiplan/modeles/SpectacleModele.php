@@ -128,10 +128,12 @@ class SpectacleModele
      * Calcule le nombre total de spectacle d'un festival.
      * @param pdo un objet PDO connecté à la base de données.
      */
-    public function nombreSpectacles ($pdo) 
+    public function nombreSpectacles ($pdo,$recherche) 
     {
-        $sql = "SELECT Count(idSpectacle) AS nbSpectacle FROM Spectacle ";
+        $sql = "SELECT Count(idSpectacle) AS nbSpectacle FROM Spectacle WHERE titre LIKE :terme";
         $stmt = $pdo->prepare($sql);
+        $terme = '%'.$recherche.'%';
+        $stmt->bindParam('terme', $terme);
         $stmt->execute();
         // Récupérer le résultat du COUNT
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -162,10 +164,12 @@ class SpectacleModele
      * @param pdo un objet PDO connecté à la base de données.
      * @return searchStmt l'ensemble des festivals.
      */
-    public function listeSpectacles(PDO $pdo, $premier) 
+    public function listeSpectacles(PDO $pdo, $premier, $recherche) 
     {
-        $sql = "SELECT Spectacle.titre,Spectacle.idSpectacle,Spectacle.duree FROM Spectacle LIMIT 4 OFFSET :nPage ";
+        $sql = "SELECT Spectacle.titre,Spectacle.idSpectacle,Spectacle.duree FROM Spectacle WHERE titre LIKE :terme LIMIT 4 OFFSET :nPage ";
         $stmt = $pdo->prepare($sql);
+        $terme = '%'.$recherche.'%';
+        $stmt->bindParam('terme', $terme);
         $stmt->bindParam("nPage",$premier,PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
