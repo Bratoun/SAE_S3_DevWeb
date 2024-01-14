@@ -49,7 +49,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($search_stmt->rowCount() > 0) {
             
     ?>
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered table-scrollable">
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>

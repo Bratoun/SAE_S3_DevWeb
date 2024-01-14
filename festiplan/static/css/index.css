@@ -546,3 +546,8 @@ label {
         margin-top: 120px;
     }
 }
+
+.table-scrollable {
+    max-height: 300px; /* Définissez la hauteur maximale pour laquelle la barre de défilement apparaîtra */
+    overflow-y: auto; /* Ajoutez la barre de défilement verticale uniquement si nécessaire */
+}
