@@ -50,12 +50,12 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <input type="hidden" name="idSpectacle" value="<?php echo $idSpectacle?>">
         <input type="hidden" name="existePas" value="<?php echo $existePas?>">
         <input type="hidden" name="modifier" value="false">
-        <?php
-            if ($existePas) {
-                echo '<h1>Votre intervenant existe déja</h1>';
-            }
-        ?>
         <div class="padding">
+            <?php
+                if ($existePas) {
+                    echo '<h3 id="invalide">Votre intervenant existe déja</h3>';
+                }
+            ?>
             <div class="row">
                 <div class="col-12">
                     <label name="nom">Nom de l'intervenant :</label><br>

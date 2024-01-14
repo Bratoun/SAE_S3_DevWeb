@@ -304,6 +304,15 @@ img {
     color: black;
 }
 
+.iconeGrandi {
+    font-size: 1.4em;
+    transition: font-size 0.3s ease;
+}
+
+.iconeGrandi:hover {
+    font-size: 2em;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -522,7 +531,6 @@ label {
 
 .icone-calendar:hover {
     font-size: 2.1em;
-    background-position: 100% 0; /* Déplace le gradient vers la droite au survol */
 }
 
 .centreCadreFestival {

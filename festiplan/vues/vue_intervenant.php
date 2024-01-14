@@ -56,7 +56,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <th>Métier</th>
                     <th>Statuts</th>
                     <th>Modifier</th>
-                    <th>supprimer</th>
+                    <th>Supprimer</th>
                 </tr>
                 <?php while ($row = $search_stmt->fetch()) { ?>
                 <tr>
@@ -64,8 +64,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <td><?php echo $row['prenom'] ?></td>
                     <td><?php echo $row['metier'] ?></td>
                     <td><?php if ($row['surScene'] == 0) { echo "Sur scène"; } else { echo "Hors scène";} ?></td>
-                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>"><span class="fas fa-solid fa-pen-to-square"></span></a></td>
-                    <td><a data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant"><span class="fas fa-solid fa-trash"></span></a></td>
+                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>"><span class="fas fa-solid fa-pen-to-square iconeGrandi iconeNoir"></span></a></td>
+                    <td><a data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant"><span class="fas fa-solid fa-trash iconeGrandi iconeNoir"></span></a></td>
                 </tr>
                 <?php } ?>
             </table>
