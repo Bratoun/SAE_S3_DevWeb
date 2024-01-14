@@ -49,7 +49,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($search_stmt->rowCount() > 0) {
             
     ?>
-            <table class="table table-striped table-bordered table-scrollable">
+        <div class="table-scrollable">
+            <table class="table table-striped table-bordered">
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
@@ -70,6 +71,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <?php } ?>
             </table>
             </div>
+        </div>
     <?php
         } else{
             
