@@ -49,7 +49,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         if ($search_stmt->rowCount() > 0) {
             
     ?>
-            <table>
+            <table class="table table-striped table-bordered">
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
@@ -64,8 +64,8 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     <td><?php echo $row['prenom'] ?></td>
                     <td><?php echo $row['metier'] ?></td>
                     <td><?php if ($row['surScene'] == 0) { echo "Sur scène"; } else { echo "Hors scène";} ?></td>
-                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>">Modifier</a></td>
-                    <td><a data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant">Supprimer</a></td>
+                    <td><a href="/festiplan?controller=Spectacle&action=modifierIntervenant&idIntervenant=<?php echo $row['idIntervenant'];?>&idSpectacle=<?php echo $row['idSpectacle'];?>"><span class="fas fa-solid fa-pen-to-square"></span></a></td>
+                    <td><a data-id-intervenant="<?php echo $row['idIntervenant'];?>" data-id-spectacle="<?php echo $row['idSpectacle'];?>" class="suppIntervenant"><span class="fas fa-solid fa-trash"></span></a></td>
                 </tr>
                 <?php } ?>
             </table>
@@ -82,17 +82,14 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     </div>
     <div class="container-fluid footer">
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><span class="fas fa-solid fa-arrow-left-long"></span></button></a>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <a href="/festiplan?controller=Spectacle&action=ajouterIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Intervenant</b></button></a>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <button type="button" class="btn btn-success btnModif fondVert"><span class="fas fa-solid fa-plus"></span><b> Lot Intervenant</b></button>
-            </div>
-            <div class="col-3">
-                <a href="/festiplan?controller=Home"><button type="button" class="btn btn-primary btnModif fondBleu"><span class="fas fa-solid fa-check"></span></button></a>
             </div>
         </div>
     </div>

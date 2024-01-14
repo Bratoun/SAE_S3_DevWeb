@@ -11,7 +11,7 @@ function majListe(checkbox,idFestival,pageActuelle,derniereRecherche,estChecked)
 
 document.addEventListener('DOMContentLoaded', function() {
     // Sélectionnez tous les boutons de suppression par leur classe
-    var boutonsSuppression = document.querySelectorAll('.fa-trash');
+    var boutonsSuppression = document.querySelectorAll('.suppSpectacle');
     boutonsSuppression.forEach(function(bouton) {
         bouton.addEventListener('click', function() {
             // Récupérer l'ID du spectacle à partir de l'attribut data

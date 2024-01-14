@@ -70,7 +70,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
                                 <div class="centreCadreFestival">
                                     
-                                    <a class="centre" name="suppression" ><span class="fas fa-solid fa-trash icone-calendar" data-id-spectacle="<?php echo $idSpectacle; ?>"></span></a>
+                                    <a class="centre suppSpectacle" name="suppression" ><span class="fas fa-solid fa-trash icone-calendar" data-id-spectacle="<?php echo $idSpectacle; ?>"></span></a>
                                 </div>
                             </div>
                             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">

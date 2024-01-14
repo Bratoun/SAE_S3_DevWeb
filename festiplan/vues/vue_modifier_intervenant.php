@@ -98,10 +98,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="container-fluid footer">
             <div class="row">
                 <div class="col-6">
-                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-secondary btnModif btnGris">Annuler</button></a>  
+                    <a href="/festiplan?controller=Spectacle&action=afficherIntervenant&idSpectacle=<?php echo $idSpectacle;?>"><button type="button" class="btn btn-secondary btnModif fondGris"><span class="fas fa-solid fa-arrow-left-long"></button></a>  
                 </div>
                 <div class="col-6">
-                    <button type="submit" class="btn btn-primary btnModif fondBleu">Confirmer</button>   
+                    <button type="submit" class="btn btn-primary btnModif fondBleu"><span class="fas fa-solid fa-check"></span></button>   
                 </div>
             </div>
         </div>
