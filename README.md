@@ -18,11 +18,13 @@ Rayan Ibrahime    ==> Bratoun
 **Sprint 0**
 
 Product Owner : Girardin Nathan
+
 Scrum Master : IBRAHIME Rayan
 
 **Sprint 1**
 
 Product Owner : BRUGIER Alix
+
 Scrum Master : FAUSSURIER Matéo
 
 ## Liens : 
