@@ -15,11 +15,14 @@ Mateo Faussurier ==> Mateofsr
 
 Rayan Ibrahime    ==> Bratoun
 
-**Sprint 0 :**
+**Sprint 0**
 
-Product Owner : Nathan Girardin
+Product Owner : Girardin Nathan
 Scrum Master : IBRAHIME Rayan
-Equipe de developpement : Mateo Faussurier, Nathan Girardin, Rayan Ibrahime, Alix Brugier
+
+**Sprint 1**
+Product Owner : BRUGIER Alix
+Scrum Master : FAUSSURIER Matéo
 
 ## Liens : 
 Lien github : https://github.com/Bratoun/SAE_S3_DevWeb.git
