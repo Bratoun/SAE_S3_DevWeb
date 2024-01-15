@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Festiplan;
-CREATE DATABASE IF NOT EXISTS Festiplan DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE Festiplan;
+DROP DATABASE IF EXISTS festiplanbfgi_sae;
+CREATE DATABASE IF NOT EXISTS festiplanbfgi_sae DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE festiplanbfgi_sae;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 

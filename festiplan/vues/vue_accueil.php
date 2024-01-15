@@ -113,11 +113,11 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 
                                         // Affiche le nom de l'utilisateur responsable
                                         if ($festival['responsable']) {
-                                            echo "responsable: ".$festival['nom'];
+                                            echo "Responsable: ".$festival['nom'];
                                         } else {
                                             while ($responsable = $lesResponsables->fetch()) {
                                                 if($responsable['idFestival'] == $idFestival) {
-                                                    echo "responsable: ".$responsable['nom'];
+                                                    echo "Responsable: ".$responsable['nom'];
                                                 }
                                             }
                                         }

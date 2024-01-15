@@ -168,7 +168,7 @@ class GrijControleur
             
             //On entre un spectcale
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
-                $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $unSpectacle['taille']);
                 $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                 $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
@@ -190,7 +190,7 @@ class GrijControleur
                     $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                     $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
-                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $unSpectacle['taille']);
                     $scenesOk = $scenesAdequates->fetchAll();
                     if ($scenesOk) {
                         $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle,null);
