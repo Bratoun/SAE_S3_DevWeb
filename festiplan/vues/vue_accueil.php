@@ -55,13 +55,13 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     ?>
                     <div class="cadreFestival"> 
                         <div class="row">
-                            <div class="centreCadreSpectacle">
-                                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                                <div class="centreCadreSpectacle">
                                     <a href="?controller=Spectacle&action=afficherSpectacle&idSpectacle=<?php echo $idSpectacle;?>">
                                         <?php
                                             $titre = $listeSpectacle['titre'];
                                             // Limiter le texte à 15 caractères avec une ellipse (...) à la fin
-                                            echo strlen($titre) > 12 ? substr($titre, 0, 12) . '...' : $titre;
+                                            echo strlen($titre) > 16 ? substr($titre, 0, 16) . '...' : $titre;
                                         ?>
                                     </a>
                                 </div>

@@ -182,6 +182,8 @@ class GrijControleur
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null,3);
                     $duree -= $this->convertirEnMinutes($unSpectacle['duree']);
                 }
+            }else {
+                $leJourContinue = false;
             }
 
             //Boucle s'il y a d'autre spectacles
