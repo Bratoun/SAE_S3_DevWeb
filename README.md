@@ -3,7 +3,7 @@
 ## Description : 
 
 Nous sommes un groupe d'étudiants réalisant un projet Web dans le cadre de notre deuxième année de BUT informatique.
-Ce projet a pour but de créer une application Web éponyme pour la startup Festiplan. Cette application permettra la création et la gestion de festival et de spectacle. Notre site permettra aussi la planification des spectacles sur les différentes scènes mises à dispositions par les organisateurs du festival.
+Ce projet a pour but de créer une application Web éponyme pour la startup Festiplan. Cette application permet la création et la gestion de festival et de spectacle. Notre site permet aussi la planification des festivals, les spectacles choisis par les organisateurs du festival seront planifier sur les différentes scènes mises à dispositions .
 
 ## Equipe & Rôles : 
 
