@@ -168,7 +168,7 @@ class GrijControleur
             
             //On entre un spectcale
             if (($this->convertirEnMinutes($unSpectacle['duree'])+ $duree) <= $dureeTotal) {
-                $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $unSpectacle['taille']);
                 $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                 $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                 $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
@@ -182,6 +182,8 @@ class GrijControleur
                     $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null,3);
                     $duree -= $this->convertirEnMinutes($unSpectacle['duree']);
                 }
+            }else {
+                $leJourContinue = false;
             }
 
             //Boucle s'il y a d'autre spectacles
@@ -190,7 +192,7 @@ class GrijControleur
                     $heureDebutSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
                     $duree += $this->convertirEnMinutes($unSpectacle['duree']);
                     $heureFinSpectacle = $this->convertirMinutesEnHeuresMySQL($duree + $this->convertirEnMinutes($heureDebut));
-                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $idFestival,$unSpectacle['taille']);
+                    $scenesAdequates = $this->grijModele->recuperationSceneAdequate($pdo, $unSpectacle['taille']);
                     $scenesOk = $scenesAdequates->fetchAll();
                     if ($scenesOk) {
                         $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, $jour['idJour'],$unSpectacle['id'], $ordre, 1,$heureDebutSpectacle,$heureFinSpectacle,null);

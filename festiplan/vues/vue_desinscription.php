@@ -1,6 +1,5 @@
 <?php
 // Vérifier si l'utilisateur est connecté
-session_start();
 if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == false) {
     header("Location: ../index.php");
 }
@@ -41,7 +40,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
     <div class="container">
         <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
-                <h2 class="grand">Desinscription</h2>
+                <h2 class="grand">Désinscription</h2>
                 <br>
                 <p>Attention cette action supprimera toutes vos donnees !</p>
                 <br>
@@ -68,7 +67,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                 <br><br>
                 <div class="texteCentre">
-                    <button type="submit" class="btn btn-danger fondRouge boutonTerminer">Se desinscrire</button></a>
+                    <button type="submit" class="btn btn-danger fondRouge boutonTerminer">Se désinscrire</button></a>
                 </div>
             </form>
         </div>

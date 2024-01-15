@@ -9,7 +9,7 @@ Ce projet a pour but de créer une application Web éponyme pour la startup Fest
 
 Alix Brugier     ==> alixB31  ==> alix.brugier@iut-rodez.fr
 
-Nathan Girardin  ==> Natou    ==> nathan.girardin@iut-rodez.fr
+Nathan Girardin  ==> nathan-girardin    ==> nathan.girardin@iut-rodez.fr
 
 Mateo Faussurier ==> Mateofsr ==> mateo.faussurier@iut-rodez.fr
 

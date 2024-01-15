@@ -18,7 +18,7 @@ class SpectacleControleur {
         $this->spectacleModele = $spectacleModele;
         $this->festivalModele = $festivalModele;
     }
-
+    
     public function index(PDO $pdo): View {
         session_start();
         // Met tout les champs en rouge lorsqu'on arrive sur la page

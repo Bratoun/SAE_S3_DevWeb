@@ -59,7 +59,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <div class="col-12">
                     <label id="<?php if(!$descOk){echo 'invalide';}?>">Description :</label>  
                     <br> 
-                    <textarea name="description" placeholder="(max 1000 caractère)" required class="textarea-style"><?php if($descOk){echo $ancienneDesc;}?></textarea>
+                    <textarea name="description" placeholder="(1000 caractères maximum)" required class="textarea-style"><?php if($descOk){echo $ancienneDesc;}?></textarea>
                 </div>
                 <div class="col-12">
                     <label id="<?php if(!$dureeOk){echo 'invalide';}?>">Durée du spectacle :</label>

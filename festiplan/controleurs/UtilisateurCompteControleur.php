@@ -165,6 +165,7 @@ class UtilisateurCompteControleur
     }
 
     public function pageDesinscription() {
+        session_start();    
         $verifLogin = true;
         $verifMdp = true;
         $vue = new View("vues/vue_desinscription");
@@ -174,9 +175,9 @@ class UtilisateurCompteControleur
     }
 
     public function supprimerProfil(PDO $pdo) {
+        session_start();
         $login = HttpHelper::getParam('login');
         $mdp = HttpHelper::getParam('mdp');
-        session_start();
         $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
         $utilisateur = $utilisateur->fetch();
         if ($login === $utilisateur['login'] && $mdp == $utilisateur['mdp']) {
@@ -186,15 +187,26 @@ class UtilisateurCompteControleur
             $vue = new View("vues/vue_connexion");
             $vue->setVar("loginOuMdpOk", $verifLoginOuMdp);
             return $vue;
-        } else if ($login != $utilisateur['login']) {
+        } else if ($login != $utilisateur['login'] && $mdp != $utilisateur['mdp']){
             $verifLogin = false;
+            $verifMdp = false;
             $vue = new View("vues/vue_desinscription");
+            $vue->setVar("loginOk", $verifLogin);
+            $vue->setVar("mdpOk", $verifMdp);
+            return $vue;
+        } else if ($mdp != $utilisateur['mdp']){
+            $verifMdp = false;
+            $verifLogin = true;
+            $vue = new View("vues/vue_desinscription");
+            $vue->setVar("mdpOk", $verifMdp);
             $vue->setVar("loginOk", $verifLogin);
             return $vue;
         } else {
-            $verifMdp = false;
+            $verifMdp = true;
+            $verifLogin = false;
             $vue = new View("vues/vue_desinscription");
             $vue->setVar("mdpOk", $verifMdp);
+            $vue->setVar("loginOk", $verifLogin);
             return $vue;
         }
     }
