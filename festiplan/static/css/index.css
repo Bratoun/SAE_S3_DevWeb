@@ -551,3 +551,45 @@ label {
     max-height: 576px; /* Définissez la hauteur maximale pour laquelle la barre de défilement apparaîtra */
     overflow-y: auto; /* Ajoutez la barre de défilement verticale uniquement si nécessaire */
 }
+
+/* Styles de base pour les cases à cocher avec la classe checkBoxs */
+.checkBoxs {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #3498db;
+    background-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  
+  /* Style au survol de la case à cocher */
+  .checkBoxs:hover {
+    border-color: #2078b3;
+  }
+  
+  /* Style lorsque la case à cocher est cochée */
+  .checkBoxs:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+  
+  /* Style du marqueur à l'intérieur de la case à cocher */
+  .checkBoxs:checked::before {
+    content: "\2713";
+    font-size: 12px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+/* Styles de base pour la barre de recherche avec la classe searchBar */
+.barreRecherche {
+    margin-left:30px;
+}

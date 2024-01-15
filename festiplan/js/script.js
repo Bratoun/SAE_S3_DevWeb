@@ -1,10 +1,9 @@
 function majListe(checkbox,idFestival,pageActuelle,derniereRecherche,estChecked) {
-    alert("aaaaa");
     // Vérifier si la checkbox est cochée
     if (estChecked) {
-        window.location.href = '/festiplan?controller=Festival&action=ajouterSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival + '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
+        window.location.href = '?controller=Festival&action=ajouterSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival + '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
     } else {
-        window.location.href = '/festiplan?controller=Festival&action=supprimerSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival+ '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
+        window.location.href = '?controller=Festival&action=supprimerSpectacleDeFestival&spectacle=' + checkbox +'&idFestival=' + idFestival+ '&pageActuelle=' + pageActuelle + '&derniereRecherche=' + derniereRecherche;
     }
 }
 
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // L'utilisateur a cliqué sur "OK"
                 alert("Spectacle supprimé !");
                 // Rediriger vers la page de suppression avec l'ID du spectacle
-                window.location.href = '/festiplan?controller=Spectacle&action=supprimerSpectacle&idSpectacle=' + idSpectacle;
+                window.location.href = '?controller=Spectacle&action=supprimerSpectacle&idSpectacle=' + idSpectacle;
             } 
         });
     });
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // L'utilisateur a cliqué sur "OK"
             alert("Festival supprimé !");
             // Rediriger vers la page de suppression avec l'ID du spectacle
-            window.location.href = '/festiplan?controller=Festival&action=supprimerFestival&idFestival=' + idFestival;
+            window.location.href = '?controller=Festival&action=supprimerFestival&idFestival=' + idFestival;
         } 
     });
 });
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (confirmation) {
                 // L'utilisateur a cliqué sur "OK"
                 alert("Intervenant supprimé !");
-                window.location.href = '/festiplan?controller=Spectacle&action=supprimerIntervenant&idIntervenant='+ idIntervenant + '&idSpectacle=' + idSpectacle;
+                window.location.href = '?controller=Spectacle&action=supprimerIntervenant&idIntervenant='+ idIntervenant + '&idSpectacle=' + idSpectacle;
             }
         });
     });

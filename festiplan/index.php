@@ -7,11 +7,11 @@ use yasmf\DataSource;
 use yasmf\Router;
 
 $dataSource = new DataSource(
-    $host = 'SAE_S3_DevWeb_db',
+    $host = 'mysql-festiplanbfgi.alwaysdata.net',
     $port = '3306', 
-    $db = 'Festiplan', 
-    $user = 'users', 
-    $pass = 'sae', 
+    $db = 'festiplanbfgi_sae', 
+    $user = '343265', 
+    $pass = 'pligraHEpru6', 
     $charset = 'utf8mb4'
 );
 

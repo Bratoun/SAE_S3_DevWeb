@@ -1,7 +1,6 @@
 <?php
 // Vérifier si l'utilisateur est connecté
-session_start();
-if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == true) {
+if (isset($_SESSION['utilisateur_connecte'])) {
     header("Location: index.php");
 }
 ?>
@@ -11,15 +10,15 @@ if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'
 <head>
     <meta charset="utf-8">
     <title>Page de Connexion</title>
-    <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/index.css"/>
-    <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
+    <link href="festiplan/static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="festiplan/static/css/index.css"/>
+    <link href="festiplan/static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container centreVertical">
         <div class="cadreUtilisateur connexion">
             <form action="index.php" method="post">
-                <img src="static/images/logo_blanc.png" alt="Festiplan Logo">
+                <img src="festiplan/static/images/logo_blanc.png" alt="Festiplan Logo">
                 <br><br>
                 <h2 class="grand">Connexion</h2>
                 <br>
@@ -59,7 +58,7 @@ if (isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'
                 </div>
                 <br><br>
             </form>
-            <p class="petit">Vous n'avez pas de compte ?  <a class="petit" href="/festiplan?controller=UtilisateurCompte&action=pageInscription">CREER UN COMPTE</a></p>
+            <p class="petit">Vous n'avez pas de compte ?  <a class="petit" href="?controller=UtilisateurCompte&action=pageInscription">CREER UN COMPTE</a></p>
         </div>
     </div>
 </body>

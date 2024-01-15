@@ -1,6 +1,5 @@
 <?php
 // Vérifier si l'utilisateur est connecté
-session_start();
 if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte'] == false) {
     header("Location: ../index.php");
 }
@@ -10,9 +9,9 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
 <head>
     <meta charset="UTF-8">
     <title>Modifier un festival </title>
-    <link href="static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/index.css"/>
-    <link href="static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
+    <link href="festiplan/static/bootstrap-4.6.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="festiplan/static/css/index.css"/>
+    <link href="festiplan/static/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet">
 </head>
 
 <!-- En tête -->
@@ -21,7 +20,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="row">
             <div class="col-3 col-md-2">
                 <a href="index.php">
-                    <img src="static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
+                    <img src="festiplan/static/images/logo_noir.png" alt="Logo Festiplan" class="logo-festiplan">
                 </a>
             </div>
             <div class="col-8">
@@ -32,10 +31,10 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                 <div class="dropdown">
                     <span class="fas fa-solid fa-user dropdown-btn iconeBlanc icone-user"></span>
                     <div class="dropdown-content">
-                        <a href="/festiplan?controller=UtilisateurCompte&action=pageProfil">Profil</a>
-                        <a href="/festiplan?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
-                        <a href="/festiplan?controller=UtilisateurCompte&action=pageDesinscription">Désinscription</a>
-                        <a href="/festiplan?controller=UtilisateurCompte&action=deconnexion">Déconnexion</a>
+                        <a href="?controller=UtilisateurCompte&action=pageProfil">Profil</a>
+                        <a href="?controller=UtilisateurCompte&action=pageModifierProfil">Modifier Profil</a>
+                        <a href="?controller=UtilisateurCompte&action=pageDesinscription">Désinscription</a>
+                        <a href="?controller=UtilisateurCompte&action=deconnexion">Déconnexion</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +109,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                             
                             }
                         if($estResponsable) {?>
-                            <a href="/festiplan?controller=Festival&action=gestionOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn fondGris">Ajouter des organisateurs</button></a>  
+                            <a href="?controller=Festival&action=gestionOrganisateur&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn fondGris">Ajouter des organisateurs</button></a>  
                         <?php } ?>
                     </div>
                 </div>
@@ -119,7 +118,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
         <div class="container-fluid footer">
             <div class="row">
                 <div class="col-3">
-                    <a href="/festiplan?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><span class="fas fa-solid fa-arrow-left-long"></span></button></a> 
+                    <a href="?controller=Home"><button type="button" class="btn btn-secondary btnModif fondGris"><span class="fas fa-solid fa-arrow-left-long"></span></button></a> 
                 </div> 
                 <?php if($estResponsable) {?>
                     <div class="col-3">
@@ -127,7 +126,7 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
                     </div>
                 <?php } ?>
                 <div class="col-3">
-                    <a href="/festiplan?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-info btnModif"><span class="fas fa-solid fa-pen-to-square"></span> Liste spectacles</button></a>
+                    <a href="?controller=Festival&action=modifierListeSpectacleFestival&idFestival=<?php echo $idFestival;?>"><button type="button" class="btn btn-info btnModif"><span class="fas fa-solid fa-pen-to-square"></span> Liste spectacles</button></a>
                 </div>
                 <div class="col-3">
                     <button type="submit" class="btn btn-primary btnModif fondBleu"><span class="fas fa-solid fa-check"></span></button>   
@@ -135,6 +134,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || $_SESSION['utilisateur_connecte
             </div>
         </div>
     </form>
-    <script src="js/script.js"></script>
+    <script src="festiplan/js/script.js"></script>
 </body>
 </html>

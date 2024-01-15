@@ -58,6 +58,7 @@ class UtilisateurCompteControleur
 
             $vue = new View("vues/vue_accueil");
             $vue->setVar("nbPages", $nbPages);
+            $vue->setVar("afficher", false);
             $vue->setVar("mesFestivals", $mesFestivals);
             $vue->setVar("lesResponsables", $lesResponsables);
             return $vue;
@@ -82,16 +83,13 @@ class UtilisateurCompteControleur
     }
 
     public function creerCompteUtilisateur(PDO $pdo) {
+
         $nom = HttpHelper::getParam('nom');
         $prenom = HttpHelper::getParam('prenom');
         $email = HttpHelper::getParam('email');
         $login = HttpHelper::getParam('login');
         $mdp = HttpHelper::getParam('mdp');
         $confirmMdp = HttpHelper::getParam('confirmMdp');
-
-        session_start();
-        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
-        $utilisateur = $utilisateur->fetch();
 
         $verifNom = (strlen($nom) <= 35);
         $verifPrenom = (strlen($prenom) <= 30);
@@ -107,7 +105,7 @@ class UtilisateurCompteControleur
                 $verifLoginOuMdp = true;
                 $vue = new View("vues/vue_connexion");
                 $vue->setVar("loginOuMdpOk", $verifLoginOuMdp);
-        return $vue;
+                return $vue;
             } else {
                 $vue = new View("vues/vue_inscription");
                 $vue->setVar("nomOk", $verifNom);
@@ -155,7 +153,8 @@ class UtilisateurCompteControleur
 
     public function pageProfil(PDO $pdo) {
         session_start();
-        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $_SESSION['id_utilisateur']);
+        $idUtilisateur = $_SESSION['id_utilisateur'];
+        $utilisateur = $this->userModele->recupererInformationsProfil($pdo, $idUtilisateur);
         $utilisateur = $utilisateur->fetch();
         $vue = new View("vues/vue_profil");
         $vue->setVar("ancienNom", $utilisateur['nom']);

@@ -110,7 +110,7 @@ class GrijControleur
                 $this->initialiseHeuresSelectionnees($vue, $heureDebut, $heureFin, $ecartEntreSpectacles);
             }
         }
-
+        $vue->setVar('profilSpectacle', null);
         $vue->setVar('idFestival', $idFestival);
         $vue->setVar('message', $message);
         return $vue;

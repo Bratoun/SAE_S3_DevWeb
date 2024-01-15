@@ -95,7 +95,13 @@ class FestivalControleur {
             $searchStmt = $this->festivalModele->listeCategorieFestival($pdo);
             // Renvoie a la vue de modification ou de création selon le cas
             if ($modifier == 'true') {
+                $idOrganisateur = $_SESSION['id_utilisateur'];
+                $idFestival = HttpHelper::getParam('idFestival');
+                $estResponsable = $this->festivalModele->estResponsable($pdo,$idFestival,$idOrganisateur);
+                $listeOrganisateur = $this->festivalModele->listeOrganisateurFestival($pdo,$idFestival);
                 $vue = new View("vues/vue_modifier_festival");
+                $vue->setVar("estResponsable", $estResponsable['responsable']);
+                $vue->setVar("listeOrganisateur", $listeOrganisateur);
             } else {
                 $vue = new View("vues/vue_creer_festival");
             }

@@ -136,11 +136,6 @@ class UserModele
         $sqlHuit = "DELETE FROM Grij WHERE idGrij NOT IN (SELECT idGrij FROM Jour)";
         $deleteStmtHuit = $pdo->prepare($sqlHuit);
         $deleteStmtHuit->execute();
-    
-        // Supprimer de SceneFestival
-        $sqlSept = "DELETE FROM SceneFestival WHERE idFestival NOT IN (SELECT idFestival FROM Festival)";
-        $deleteStmtSept = $pdo->prepare($sqlSept);
-        $deleteStmtSept->execute();
 
         // Supprimer de Festival (où l'utilisateur est responsable)
         $sqlSix = "DELETE FROM Festival WHERE idFestival IN (SELECT idFestival FROM EquipeOrganisatrice WHERE idUtilisateur = ? AND responsable = 1)";
