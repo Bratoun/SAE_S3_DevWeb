@@ -179,7 +179,7 @@ class GrijControleur
                     $ordre++;
                     $duree += $ecart;
                 } else {
-                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null);
+                    $this->grijModele->insertSpectaclesParJour($pdo,$idFestival, null,$unSpectacle['id'], $ordre, 0,null,null,3);
                     $duree -= $this->convertirEnMinutes($unSpectacle['duree']);
                 }
             }
